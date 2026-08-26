@@ -1,10 +1,11 @@
-## Post-window context (July 2026)
+## Post-window context (August 2026)
 
-*The corpus extends to 2026-07-27; July is a partial month with a possible ingestion
-tail-off — context, not analysis-grade.*
+*The corpus extends to 2026-08-24; August 1–24 is a partial month with a possible ingestion
+tail-off — context, not analysis-grade. July 2026 is now inside the analysis window.*
 
-- Doha became a working venue of the US–Iran de-escalation process (a Doha round June 26,
-  following the June 14 ceasefire MOU), and on the back of it **Iran edged past Turkey as
-  Qatar's top corroborated engager among the four assessed actors** (903 vs 865 docs,
-  full-corpus basis) — a flip from the in-window ranking. The U.S. remains Qatar's overall
-  leader on the registered basis.
+- **Iran's lead over Turkey on Qatar is now an in-window fact**, not post-window context: on
+  the full-corpus corroborated basis Iran 907 vs Turkey 865 through July 31 (Doha having become
+  a working venue of the US–Iran process — the June 26 Doha round and the July "Nuclear
+  Disarmament Talks"). Both files went quiet in August 1–24 (Iran 18, Turkey 12 corroborated
+  docs) as the US–Iran channel narrowed to the Strait of Hormuz and Muscat. The U.S. remains
+  Qatar's overall leader on the registered basis.

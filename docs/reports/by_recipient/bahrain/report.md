@@ -1,7 +1,7 @@
 # Who Courts Bahrain? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -15,7 +15,7 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 - **Division of labor by instrument:** Economic→**China**, Social→**China**, Military→**U.S.**, Diplomacy→**U.S.**. **(H)**
 - The classic division of labor is on display: **China supplies the economics and the U.S. the security** — the Gulf-hedge pattern at the country level. **(M)**
 - **Signature initiative:** Completion Review of Phase II of Sitra Housing City Project in Bahrain (China). **(M)**
-- **18.1% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
+- **17.6% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
 
 ![Who courts Bahrain](assets/01_suitor_leaderboard.png)
 
@@ -25,11 +25,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 796 | 34% |
-| China | 590 | 25% |
-| Russia | 453 | 19% |
-| Turkey | 326 | 14% |
-| Iran | 166 | 7% |
+| U.S. | 825 | 35% |
+| China | 603 | 25% |
+| Russia | 458 | 19% |
+| Turkey | 332 | 14% |
+| Iran | 169 | 7% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -54,7 +54,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Bahrain is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-110 peripheral events (where Bahrain was only mentioned in
+111 peripheral events (where Bahrain was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Completion Review of Phase II of Sitra Housing City Project in Bahrain** — China, material 8.00 (2025-12)
@@ -75,7 +75,7 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Trajectory:** see the monthly series for who is gaining or losing ground in Bahrain; activity tracks
   the region's inflection points (Israel-Hezbollah escalation Sept 2024, Assad's fall Dec 2024, the
   June 2025 Israel-Iran war). **(M)**
-- **Adversarial framing:** 18.1% of the U.S.'s coverage in Bahrain is carried by Iranian media — its image here is partly written by its adversary. **(M)**
+- **Adversarial framing:** 17.6% of the U.S.'s coverage in Bahrain is carried by Iranian media — its image here is partly written by its adversary. **(M)**
 - **Caveat:** this measures *reported* influence; the soft-power lens under-captures hard power, and
   dollar figures are announced, not verified. 
 

@@ -1,17 +1,17 @@
 # Who Courts Yemen? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
-> **Hedging profile: contested.** Lead actor: **U.S.** (25% of external attention).
+> **Hedging profile: contested.** Lead actor: **U.S.** (24% of external attention).
 
 ---
 
 ## 1. Key Findings (BLUF)
 
-- **Yemen is genuinely contested:** U.S. leads with only 25%, with China close behind (23%). **(H)**
+- **Yemen is genuinely contested:** U.S. leads with only 24%, with China close behind (23%). **(H)**
 - **Division of labor by instrument:** Economic→**China**, Social→**China**, Military→**Iran**, Diplomacy→**U.S.**. **(H)**
 - **Signature initiative:** Inauguration of Anatolian Residential Complex for Displaced in Marib, Yemen (Turkey). **(M)**
 
@@ -23,11 +23,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 1,030 | 25% |
-| China | 972 | 24% |
-| Russia | 868 | 21% |
-| Iran | 633 | 15% |
-| Turkey | 592 | 14% |
+| U.S. | 1,039 | 25% |
+| China | 1,005 | 24% |
+| Russia | 883 | 21% |
+| Iran | 685 | 16% |
+| Turkey | 610 | 14% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -82,12 +82,13 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 *Visuals plot corroborated/registered influence; underlying numbers in sibling CSVs under `assets/`.
 Index: [`../README.md`](../README.md). Method: `docs/INSIGHT_REPORT_PROMPT.md`.*
 
-## Post-window context (July 2026)
+## Post-window context (August 2026)
 
-*The corpus extends to 2026-07-27; July is a partial month with a possible ingestion
-tail-off — context, not analysis-grade.*
+*The corpus extends to 2026-08-24; August 1–24 is a partial month with a possible ingestion
+tail-off — context, not analysis-grade. July 2026 is now inside the analysis window.*
 
-- **Iran began re-entering Yemen** — corroborated docs rose 3 (May) → 15 (June) → 52 (July),
-  the first sustained movement since the November 2024 collapse (the dataset's sharpest
-  break, z=11.4). Yemen's status as the theater's abandoned market, unclaimed by any actor
-  since that break, is ending; which instrument Iran leads with is the item to watch.
+- **Iran's re-entry into Yemen registered inside the window — and then stalled.** Corroborated
+  docs rose 3 (May) → 19 (June) → 65 (July), the first sustained movement since the November
+  2024 collapse (the dataset's sharpest break, z=11.4), but fell back to 5 in August 1–24.
+  Whether July was a Hormuz-crisis spillover or the start of a durable return is the item to
+  watch; no other actor has moved on the file.

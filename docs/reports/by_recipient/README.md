@@ -12,19 +12,20 @@ crisis/alliance files (Iran, Israel, Palestine, Lebanon, Syria) reflects involve
 | [Palestine](palestine/report.md) | **U.S.** (48%) | single-patron (United States-dominated) | E:U.S S:Tur M:U.S D:U.S |
 | [Israel](israel/report.md) | **U.S.** (70%) | single-patron (United States-dominated) | E:U.S S:U.S M:U.S D:U.S |
 | [Syria](syria/report.md) | **Turkey** (42%) | contested | E:Tur S:Tur M:Rus D:Tur |
-| [Lebanon](lebanon/report.md) | **U.S.** (57%) | single-patron (United States-dominated) | E:U.S S:Ira M:U.S D:U.S |
+| [Lebanon](lebanon/report.md) | **U.S.** (58%) | single-patron (United States-dominated) | E:U.S S:Ira M:U.S D:U.S |
 | [Egypt](egypt/report.md) | **China** (37%) | balancing (multi-patron) | E:Chi S:Chi M:Tur D:Chi |
-| [Iraq](iraq/report.md) | **Turkey** (36%) | balancing (multi-patron) | E:Tur S:Ira M:U.S D:Tur |
-| [Saudi Arabia](saudi_arabia/report.md) | **U.S.** (37%) | balancing (multi-patron) | E:Chi S:Chi M:U.S D:U.S |
-| [Jordan](jordan/report.md) | **China** (29%) | contested | E:Chi S:Chi M:U.S D:U.S |
+| [Iraq](iraq/report.md) | **Turkey** (36%) | contested | E:Tur S:Ira M:U.S D:Tur |
+| [Saudi Arabia](saudi_arabia/report.md) | **U.S.** (38%) | balancing (multi-patron) | E:Chi S:Chi M:U.S D:U.S |
+| [Jordan](jordan/report.md) | **China** (30%) | contested | E:Chi S:Chi M:U.S D:U.S |
 | [United Arab Emirates](united_arab_emirates/report.md) | **U.S.** (40%) | balancing (multi-patron) | E:Chi S:Chi M:U.S D:U.S |
 | [Qatar](qatar/report.md) | **U.S.** (49%) | single-patron (United States-dominated) | E:U.S S:Chi M:U.S D:U.S |
-| [Yemen](yemen/report.md) | **U.S.** (25%) | contested | E:Chi S:Chi M:Ira D:U.S |
+| [Yemen](yemen/report.md) | **U.S.** (24%) | contested | E:Chi S:Chi M:Ira D:U.S |
 | [Turkey](turkey/report.md) | **U.S.** (61%) | single-patron (United States-dominated) | E:U.S S:U.S M:U.S D:U.S |
-| [Oman](oman/report.md) | **Iran** (37%) | balancing (multi-patron) | E:Chi S:Chi M:Ira D:Ira |
-| [Libya](libya/report.md) | **Turkey** (48%) | single-patron (Turkey-dominated) | E:Tur S:Tur M:Tur D:Tur |
+| [Oman](oman/report.md) | **Iran** (40%) | balancing (multi-patron) | E:Chi S:Chi M:Ira D:Ira |
+| [Libya](libya/report.md) | **Turkey** (47%) | single-patron (Turkey-dominated) | E:Tur S:Tur M:Tur D:Tur |
 | [Kuwait](kuwait/report.md) | **China** (43%) | balancing (multi-patron) | E:Chi S:Chi M:Tur D:Chi |
 | [Bahrain](bahrain/report.md) | **U.S.** (34%) | contested | E:Chi S:Chi M:U.S D:U.S |
+| [Cyprus](cyprus/report.md) | **U.S.** (52%) | single-patron (United States-dominated) | E:U.S S:Tur M:U.S D:U.S |
 
 ## The pattern
 - **China leads the Economic and Social lanes in almost every Gulf/Arab state** — the
@@ -34,6 +35,6 @@ crisis/alliance files (Iran, Israel, Palestine, Lebanon, Syria) reflects involve
 - **Iran leads only where the Resistance arc runs** (the Oman back-channel; Lebanon/Iraq social) and
   is marginal once its self-reporting is stripped.
 
-**Single-patron files:** Iran (U.S.), Palestine (U.S.), Israel (U.S.), Lebanon (U.S.), Qatar (U.S.), Turkey (U.S.), Libya (Turkey).  
-**Contested:** Syria (Turkey), Jordan (China), Yemen (U.S.), Bahrain (U.S.).  
-**Balancing (multi-patron):** Egypt (China), Iraq (Turkey), Saudi Arabia (U.S.), United Arab Emirates (U.S.), Oman (Iran), Kuwait (China).
+**Single-patron files:** Iran (U.S.), Palestine (U.S.), Israel (U.S.), Lebanon (U.S.), Qatar (U.S.), Turkey (U.S.), Libya (Turkey), Cyprus (U.S.).  
+**Contested:** Syria (Turkey), Iraq (Turkey), Jordan (China), Yemen (U.S.), Bahrain (U.S.).  
+**Balancing (multi-patron):** Egypt (China), Saudi Arabia (U.S.), United Arab Emirates (U.S.), Oman (Iran), Kuwait (China).

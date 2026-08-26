@@ -1,7 +1,7 @@
 # Who Courts Iran? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -24,10 +24,10 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 25,208 | 50% |
-| Russia | 11,623 | 23% |
-| China | 8,506 | 17% |
-| Turkey | 4,934 | 10% |
+| U.S. | 25,946 | 50% |
+| Russia | 11,780 | 23% |
+| China | 8,848 | 17% |
+| Turkey | 5,081 | 10% |
 
 ![Share of attention](assets/04_dominance_share.png)
 

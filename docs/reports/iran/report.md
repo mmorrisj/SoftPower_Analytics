@@ -1,7 +1,7 @@
 # Iran's Soft-Power Influence in the Middle East & North Africa
 ### A Strategic Influence Assessment for Policy Analysis
 
-*Observation window: 2024-08-01 to 2026-06-30 (open-source media corpus). Prepared from the
+*Observation window: 2024-08-01 to 2026-07-31 (open-source media corpus; refreshed 2026-08-25). Prepared from the
 Soft Power Analytics database; method, scope, and caveats per `docs/INSIGHT_REPORT_PROMPT.md`.
 Intensity is measured in **third-party-corroborated** documents (coverage not originating from
 Iranian state media) unless noted. Confidence tags: **(H)** high, **(M)** moderate, **(L)** low.*
@@ -11,12 +11,12 @@ Iranian state media) unless noted. Confidence tags: **(H)** high, **(M)** modera
 ## 1. Key Findings (BLUF)
 
 - **Iran's apparent dominance of MENA influence is largely a media artifact.** Iran posts the
-  largest *raw* footprint of any actor (79,243 documents) but **83% of it originates from
+  largest *raw* footprint of any actor (83,017 documents) but **83% of it originates from
   Iranian state media** (IRIB, Fars, Mehr, IRNA, Tasnim). On third-party-corroborated volume
-  Iran ranks **last of the four** assessed actors — 13,257 docs, versus Turkey's 35,496,
-  Russia's 24,999, and China's 25,252. **(H)**
+  Iran ranks **last of the four** assessed actors — 13,854 docs, versus Turkey's 36,518,
+  China's 26,005, and Russia's 25,267. **(H)**
 - **Iran's genuine regional traction is concentrated in the Shia "Axis of Resistance"
-  geography** — Lebanon (4,065 corroborated docs), Iraq (2,762), and Syria (1,621). Outside
+  geography** — Lebanon (4,156 corroborated docs), Iraq (2,934), and Syria (1,624). Outside
   this arc its independently-reported footprint thins sharply. **(H)**
 - **Iran's distinctive instrument is religious-social soft power**, not economics. Its
   highest-materiality non-strategic events are *Arbaeen pilgrimage* infrastructure projects —
@@ -27,7 +27,7 @@ Iranian state media) unless noted. Confidence tags: **(H)** high, **(M)** modera
   influence event** in-window, underscoring that Iran's most consequential moves are about
   securing *external* great-power alignment (China, Russia) to offset isolation. **(M)**
 - **Iran's network is intensely personalized around its diplomats** — Foreign Minister **Abbas
-  Araghchi** is by far the dominant node (3,311 documents), with President **Pezeshkian**, the
+  Araghchi** is by far the dominant node (3,358 documents), with President **Pezeshkian**, the
   **Supreme National Security Council** (Ali Larijani), and Hezbollah's **Hassan Nasrallah**
   forming the core. **(H)**
 - **Iran loses the head-to-head contest in most of MENA.** It leads only in Lebanon; it trails
@@ -68,8 +68,8 @@ beyond Iranian media corroborates only a fraction of it.
 
 ## 3. Categorical Breakdown
 
-**Diplomacy (52.6%).** Dominated by *Multilateral/Bilateral Commitments* (6,406 corroborated
-docs), *International Negotiations* (3,427), and *Conflict Resolution* (1,143). Much of this is
+**Diplomacy (52.2%).** Dominated by *Multilateral/Bilateral Commitments* (6,615 corroborated
+docs), *International Negotiations* (3,613), and *Conflict Resolution* (1,178). Much of this is
 Iran positioning on Gaza and managing its nuclear-diplomacy posture; FM Araghchi co-occurs most
 with the "Gaza Strip" and the UN Security Council. **(H)**
 
@@ -105,9 +105,9 @@ confessional:
 
 | Tier | Recipients (corroborated docs) | Read |
 |------|-------------------------------|------|
-| **Lead** | Lebanon (4,065), Iraq (2,762) | The Hezbollah and Iraqi-Shia cores of the Resistance Axis |
-| **Strong** | Syria (1,621), Oman (1,297), Saudi Arabia (1,207) | Syria (legacy ally); Oman/Saudi reflect détente diplomacy |
-| **Moderate** | Palestine (983), Egypt (883), Israel (862) | Issue-driven (Gaza), not relationship depth |
+| **Lead** | Lebanon (4,156), Iraq (2,934) | The Hezbollah and Iraqi-Shia cores of the Resistance Axis |
+| **Strong** | Syria (1,624), Oman (1,509), Saudi Arabia (1,250) | Syria (legacy ally); Oman/Saudi reflect détente diplomacy |
+| **Moderate** | Palestine (1,009), Qatar (907), Egypt (901), Israel (874) | Issue-driven (Gaza), not relationship depth |
 | **Thin** | Jordan, Bahrain, Gulf states | Marginal credible presence |
 
 - **Lebanon is Iran's one clear stronghold** — the Hezbollah relationship is the densest
@@ -167,22 +167,28 @@ security (June 25). Iran's corroborated volume spiked to **1,151 docs in June �
 May's 293** — driven by this diplomacy plus a Lebanon surge (Iran→Lebanon posted 566
 corroborated docs in June alone). **(H)**
 
-### Post-window context (July 2026)
+### July 2026 (now in-window) and post-window context (August 1–24)
 
-*The corpus extends to July 27, 2026, but July is a partial month with a possible ingestion
-tail-off; the items below are context, not analysis-grade findings.*
+*The analysis window now closes 2026-07-31; the corpus extends to 2026-08-24, and August is a
+partial month with possible ingestion tail-off — context, not analysis-grade.*
 
-- The US-Iran process advanced to **"Nuclear Disarmament Talks"** (July, materiality 9.0,
-  179 articles); **China and Pakistan launched a joint mediation track** (July 14, 84 articles).
-- **Iran-Oman Strait of Hormuz navigation negotiations** (July 4, 106 articles; July 14,
-  59 articles) — the Muscat channel is active again, consistent with Oman's rise to Iran's
-  #4 corroborated recipient (1,297).
-- **Iran re-entered Yemen**: corroborated docs rose from 3 (May) to 15 (June) to 52 (July) —
-  a reversal of the post-November-2024 abandonment.
-- In July **Iran edged past Turkey as Qatar's top corroborated engager** among the four
-  actors (903 vs. 865, full-corpus basis) on the back of the Doha talks.
-- The annual **Arbaeen pilgrimage ramp** began (July) — seasonal and, as in prior years,
-  overwhelmingly self-reported.
+- **July, in-window:** the US-Iran process advanced to **"Nuclear Disarmament Talks"**
+  (materiality 9.0, 179 articles); **China and Pakistan launched a joint mediation track**
+  (July 14, 84 articles); **Iran-Oman Strait of Hormuz navigation negotiations** (July 4 and
+  14) lifted Iran→Oman to 243 corroborated docs — a record for the pair — and Oman is now
+  Iran's #3 corroborated recipient (1,509). Iran's corroborated tempo settled to 746 docs from
+  June's 1,322 crisis peak; Lebanon fell 639 → 111. Khamenei funeral diplomacy (114 articles)
+  ran into the **Arbaeen ramp** (1,161 docs in July, 5% third-party — the standing bias case).
+  Corroborated initiative flow: 41 gated initiatives in July after 97 in Q2.
+- **Iran re-entered Yemen inside the window** — 3 (May) → 19 (June) → 65 (July) corroborated
+  docs — but the return did not hold: 5 in August 1–24.
+- **August pivots to Iraq.** Seven of Iran's ten largest August events are Arbaeen logistics
+  (816 docs, 44 third-party); the one substantive economic item is the **Shalamcheh-Basra
+  railway** (parliamentary meeting Aug 19, 244 articles, materiality 6.5). The Muscat channel
+  held (199 corroborated docs; an Iran-Oman Hormuz negotiation Aug 2, 64 articles), while
+  Lebanon (22) and Qatar (18) went quiet.
+- **Qatar:** Iran's lead over Turkey as Qatar's top corroborated four-actor engager (907 vs
+  865) is now an in-window fact.
 
 ---
 

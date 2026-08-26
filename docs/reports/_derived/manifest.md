@@ -21,6 +21,16 @@ recommendation**. DDL is migration-ready — lift into `alembic/versions/` to pr
 > distinct-document basis (it previously summed per-recipient rows, over-counting
 > multi-recipient docs).
 >
+> **2026-08-25 refresh:** window re-based to `date < 2026-08-01` (July 2026 = 24th full month;
+> August 1–24 = post-window context) on the 796K-doc corpus (extends to 2026-08-24). All objects
+> rebuilt: report_base 315,284 rows, provenance_intensity 5,624, us_report_base 115,230,
+> subcat_clean 4,060 labels, initiative_ledger 38,956 (3,844 gated). The new documents were
+> processed incrementally (Stage-1 overlap week 07-21→07-27 rolled back and re-clustered;
+> Stage-2 consolidation on the new window only with re-validation of every master that gained
+> children; materiality scored). Live layer: 59,547 consolidated canonical events (12,407
+> multi-day). Funnel/ledger magnitudes are continuous with the 2026-08-03 measurement (same
+> grain and scoring), only extended by one month.
+>
 > **2026-08-03 events-layer re-consolidation:** the July refresh had re-run Stage-1 daily
 > event detection, leaving `canonical_events` as 76,728 unconsolidated daily fragments.
 > Stage-2 was then completed in full: `consolidate_all_events` (host run for Iran/Turkey/

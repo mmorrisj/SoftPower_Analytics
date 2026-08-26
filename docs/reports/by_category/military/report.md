@@ -1,7 +1,7 @@
 # The Military Influence Contest in MENA
 ### A Cross-Actor Category Assessment (China · Iran · Russia · Turkey · United States) — for Policy Analysis
 
-*Observation window: 2024-08-01 to 2026-06-30 (open-source media corpus). Category filter:
+*Observation window: 2024-08-01 to 2026-07-31 (open-source media corpus; refreshed 2026-08-25). Category filter:
 **Military** only — arms sales, defense diplomacy, joint exercises, training, basing, and
 security partnerships. Method/caveats per `docs/INSIGHT_REPORT_PROMPT.md`. Intensity =
 **third-party-corroborated** documents (U.S. = registered coverage; no state media in corpus).
@@ -16,8 +16,8 @@ Confidence: **(H)/(M)/(L)**.*
 
 ## 1. Key Findings (BLUF)
 
-- **The United States is the military-influence hegemon of MENA** — 3,702 registered documents,
-  more than double the next actor (Turkey 1,561, Russia 1,401, Iran 811, China 428). Where China
+- **The United States is the military-influence hegemon of MENA** — 3,917 registered documents,
+  more than double the next actor (Turkey 1,669, Russia 1,402, Iran 816, China 454). Where China
   dominates the economic file, the U.S. dominates the security file. This is the single most
   important cross-category finding. **(H)**
 - **U.S. military influence runs on arms, aid, and missile defense** — the **US-Qatar $96B** and
@@ -31,7 +31,7 @@ Confidence: **(H)/(M)/(L)**.*
   Base** in Syria and arms/defense ties to **Iran and Syria**, the two recipients it leads. **(M)**
 - **Turkey is a defense-diplomacy exporter** — leading the military file in **Libya, Iraq, Egypt,
   and Palestine**, advancing **Bayraktar TB2 drones** and Ministry-of-Defense partnerships. **(M)**
-- **China is militarily absent** — just 428 documents, confined to symbolic **PLA Navy** port
+- **China is militarily absent** — just 454 documents, confined to symbolic **PLA Navy** port
   calls. China deliberately does not compete for security influence, the mirror of its economic
   dominance. **(H)**
 
@@ -41,15 +41,15 @@ Confidence: **(H)/(M)/(L)**.*
 
 ## 2. The Leaderboard: the U.S. Mirror Image of China
 
-On provenance-corrected volume the military order is **United States (3,702) › Turkey (1,561) ›
-Russia (1,401) › Iran (811) › China (428)**. This is almost the exact inverse of the economic
+On provenance-corrected volume the military order is **United States (3,917) › Turkey (1,669) ›
+Russia (1,402) › Iran (816) › China (454)**. This is almost the exact inverse of the economic
 leaderboard, where China led and the U.S. trailed. The two categories together are the headline:
 **the U.S. and China occupy opposite poles of the influence spectrum** — security vs. capital —
 and the region's states engage both. **(H)**
 
 ![Iran's military self-inflation](assets/05_iran_mirage.png)
 
-Iran again shows a self-reporting gap (raw 2,546 → 811 corroborated, ~68%), though smaller than its
+Iran again shows a self-reporting gap (raw 2,584 → 816 corroborated, ~68%), though smaller than its
 economic mirage — its military activity draws more independent coverage because its proxies are
 genuinely consequential. **(M)**
 
@@ -154,10 +154,11 @@ captures the economic returns. **(H)**
   hedging dynamic for U.S. policymakers to manage.
 - **Announced ≠ delivered.** Arms-deal dollar figures ($96B Qatar, $17.9B Israel) are reported
   commitments; track deliveries and end-use.
-- **Post-window note (July 2026):** the mid-June 2026 U.S.–Iran ceasefire MOU (June 14) and
-  subsequent de-escalation talks (Switzerland, Doha; July's "Nuclear Disarmament Talks") shift the
-  military file toward diplomacy — watch for knock-on effects on U.S. force-posture coverage
-  (THAAD/Patriot deployments) in H2-2026.
+- **July 2026 (in-window) / August post-window note:** the mid-June 2026 U.S.–Iran ceasefire MOU
+  (June 14), July's "Nuclear Disarmament Talks" and the August Strait of Hormuz negotiations shift
+  the military file toward diplomacy — watch for knock-on effects on U.S. force-posture coverage
+  (THAAD/Patriot deployments) in H2-2026. Hormuz coverage held at ~840 docs/month (600
+  third-party) for a third straight month in August.
 
 ---
 

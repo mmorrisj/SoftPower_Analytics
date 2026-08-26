@@ -1,7 +1,7 @@
 # How U.S. Soft-Power Efforts Register in the Middle East & North Africa
 ### A Relational Assessment Against China, Iran, Russia & Turkey — for Policy Analysis
 
-*Observation window: 2024-08-01 to 2026-06-30 (open-source media corpus). Method, scope, and
+*Observation window: 2024-08-01 to 2026-07-31 (open-source media corpus; refreshed 2026-08-25). Method, scope, and
 caveats per `docs/INSIGHT_REPORT_PROMPT.md`. Confidence tags: **(H)** high, **(M)** moderate,
 **(L)** low.*
 
@@ -32,14 +32,14 @@ caveats per `docs/INSIGHT_REPORT_PROMPT.md`. Confidence tags: **(H)** high, **(M
   The adversary lens is **not** spread across the Levant — it concentrates on the **U.S.–Iran
   bilateral itself (46.5% Iranian-framed)** and on **Oman (39.9%), the U.S.–Iran mediator.** **(H)**
 - **The U.S.–Iran antagonism is the single axis that organizes both actors' footprints.** Iran
-  is the U.S.'s most-covered counterpart (25,208 docs) and the U.S. is Iran's most-covered target
-  (21,592). Each is substantially defined, in this corpus, by its confrontation with the other.
+  is the U.S.'s most-covered counterpart (25,946 docs) and the U.S. is Iran's most-covered target
+  (21,951). Each is substantially defined, in this corpus, by its confrontation with the other.
   **(H)**
 - **That confrontation pivoted to a brokered de-escalation in mid-June 2026** — a June 14
   ceasefire Memorandum of Understanding (187 articles, materiality 8.0), U.S.–Iran negotiations
   at Bürgenstock, Switzerland (June 17), a Doha meeting (June 26), and GCC–U.S. joint diplomatic
   engagement on regional security (June 25). This is the strongest confirmation yet of the
-  "crisis manager" thesis — and the driver of the U.S.–Iran counterpart file's growth to 25,208
+  "crisis manager" thesis — and the driver of the U.S.–Iran counterpart file's growth to 25,946
   registered docs. The death of Ayatollah Khamenei in mid-June 2026 reshapes the channel's
   context; succession is an open question. **(M)**
 - **U.S. economic engagement is small in share but large in the deals that do register** — the
@@ -79,14 +79,14 @@ theaters** — but those are precisely the files defined *by* U.S. involvement:
 
 | Recipient | U.S. registers | Leading rival | Who leads |
 |-----------|---------------:|---------------|-----------|
-| Iran | 25,208 | Russia 11,623 | **U.S.** |
-| Israel | 17,808 | Turkey 3,728 | **U.S.** (dominant) |
-| Palestine | 12,321 | Turkey 8,696 | **U.S.** |
-| Lebanon | 9,451 | Iran 4,065 | **U.S.** |
-| Saudi Arabia | 3,632 | China 2,428 | **U.S.** |
-| **Syria** | 6,853 | **Turkey 8,903** | Turkey |
-| **Iraq** | 2,511 | **Turkey 3,928** | Turkey |
-| **Egypt** | 2,710 | **China 5,934** | China |
+| Iran | 25,946 | Russia 11,780 | **U.S.** |
+| Israel | 18,365 | Turkey 3,816 | **U.S.** (dominant) |
+| Palestine | 12,623 | Turkey 8,957 | **U.S.** |
+| Lebanon | 10,228 | Iran 4,156 | **U.S.** |
+| Saudi Arabia | 3,742 | China 2,484 | **U.S.** |
+| **Syria** | 7,008 | **Turkey 9,007** | Turkey |
+| **Iraq** | 2,747 | **Turkey 4,073** | Turkey |
+| **Egypt** | 2,746 | **China 6,003** | China |
 
 ![Alignment geometry](assets/03_hedging_scatter.png)
 
@@ -107,8 +107,8 @@ The alignment geometry sorts the region into three groups:
 ## 4. Thread 3 — The U.S.–Iran Counterbalancing Axis
 
 The corpus makes the **U.S.–Iran confrontation the gravitational center** of both actors'
-regional presence. The U.S.'s single most-covered relationship is Iran (25,208 docs — adversarial,
-not cooperative), and Iran's single most-covered target is the U.S. (21,592). The shared
+regional presence. The U.S.'s single most-covered relationship is Iran (25,946 docs — adversarial,
+not cooperative), and Iran's single most-covered target is the U.S. (21,951). The shared
 interlocutor that bridges the two networks is Iranian FM **Abbas Araghchi**, who appears as a top
 entity in *both* the U.S. and Iran records — the diplomatic conduit of the antagonism (nuclear
 talks, prisoner/sanctions diplomacy, Gaza-war messaging). **Oman** surfaces as the structural
@@ -143,7 +143,7 @@ engages Iran**, not a generalized regional condition. **(H)**
 ![Who targets the U.S.](assets/05_target_bar.png)
 
 The U.S. is not only an actor but a **target**. Among the four, **Iran directs by far the most
-influence at the U.S. (21,592 docs)** — an anti-U.S. narrative that is itself one of Iran's
+influence at the U.S. (21,951 docs)** — an anti-U.S. narrative that is itself one of Iran's
 largest single "soft-power" outputs — followed by **China (7,431)**, **Russia (5,705)**, and
 **Turkey (3,274)**. For Iran, antagonizing Washington is a core influence activity; for China and
 Russia, the U.S. is a great-power reference point in their messaging. **(M)**
@@ -175,23 +175,28 @@ Memorandum of Understanding (187 articles, materiality 8.0), U.S.–Iran negotia
 Bürgenstock, Switzerland (June 17), a Doha meeting (June 26), and GCC–U.S. joint diplomatic
 engagement on regional security (June 25). The sequence is the strongest confirmation yet of
 the crisis-manager thesis — and the driver of the U.S.–Iran counterpart file's growth to
-25,208 registered docs. The context of that channel was simultaneously reshaped by the death
+25,946 registered docs. The context of that channel was simultaneously reshaped by the death
 of **Ayatollah Khamenei** in mid-June 2026, with funeral ceremonies extending from late June
 into July; succession remains an open question. **(M)**
 
-### Post-window context (July 2026)
+### July 2026 (now in-window) and post-window context (August 1–24)
 
-*The refreshed corpus extends to July 27, 2026; July is a partial month with possible ingestion
-tail-off. Treat the following as context, not analysis-grade findings.*
+*The analysis window now closes 2026-07-31; the corpus extends to 2026-08-24, and August is a
+partial month with possible ingestion tail-off — treat the August items as context, not
+analysis-grade findings.*
 
-- **U.S.-mediated Lebanon–Israel Agreement Framework negotiations** became the single largest
-  new event in the corpus (365 articles), including a Rome negotiation round July 6.
-  U.S.→Lebanon registered coverage grew roughly 24% in six weeks — Lebanon is now the U.S.'s
-  fourth-largest counterpart file at 9,451 docs.
-- The U.S.–Iran process advanced to **"Nuclear Disarmament Talks"** in July (materiality 9.0,
-  179 articles), while **China and Pakistan launched a joint mediation track** for U.S.–Iran
-  conflict resolution (July 14, 84 articles) — rival brokers are institutionalizing around the
-  U.S. file.
+- **July, in-window:** the **U.S.-mediated Lebanon–Israel Agreement Framework negotiations**
+  were the single largest event in the corpus (271 articles; a Rome round July 6, 85 articles);
+  the U.S.–Iran process advanced to **"Nuclear Disarmament Talks"** (materiality 9.0, 179
+  articles) while **China and Pakistan launched a joint mediation track** (July 14, 84
+  articles) — rival brokers institutionalizing around the U.S. file; an **Iraq–U.S. Strategic
+  Economic Partnership** (July 12, 64 articles) is the rare economic item; and on July 31
+  **"Gaza Ceasefire and Reconstruction Diplomacy"** opened (212 articles, materiality 8.0).
+- **August:** the U.S.–Iran channel narrowed to the **Strait of Hormuz** — "US-Iran Strait of
+  Hormuz Negotiation" (81 articles, materiality 7.5), a second Hormuz negotiation event (56)
+  and a "Proposal to reopen the Strait of Hormuz" (47) — with a "Gaza Agreement" (52) and
+  "second phase of President Trump's plan" (39) on the Gaza file. The Lebanon–Israel framework
+  track cooled sharply (735 → 397 → 107 third-party docs, Jun→Aug).
 
 ---
 

@@ -1,19 +1,21 @@
 # MENA Soft-Power Influence Assessments — China, Iran, Russia, Turkey (+ U.S.)
 ### Cross-Actor Synthesis for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30 (23 full months; refreshed 2026-08 — the
-corpus extends to 2026-07-27, and July is quoted only as post-window context). Method, scope,
+*Open-source media corpus, 2024-08-01 to 2026-07-31 (24 full months; refreshed 2026-08-25 — the
+corpus extends to 2026-08-24, and August 1–24 is quoted only as post-window context). Method, scope,
 and caveats per [`../INSIGHT_REPORT_PROMPT.md`](../INSIGHT_REPORT_PROMPT.md). All intensity
 figures are **third-party-corroborated** (excluding the initiator's own state media),
 distinct-document basis.*
 
-> **2026-08 refresh — what changed:** the window's final fortnight and the July post-window
-> data carry major developments absent from earlier editions: **Ayatollah Khamenei's death
-> (mid-June 2026)** and funeral mobilization; the **US–Iran de-escalation process** (June 14
-> ceasefire MOU → Bürgenstock/Doha talks → July "Nuclear Disarmament Talks"); **US-mediated
-> Lebanon–Israel framework negotiations** (July); Iran's **re-entry into Yemen**; and a
-> **rank flip — China (25,252) now narrowly ahead of Russia (24,999)** on corroborated volume.
-> Details in each report's "Post-window context (July 2026)" section and the
+> **2026-08-25 refresh — what changed:** July 2026 is now a full in-window month (the
+> **US–Iran "Nuclear Disarmament Talks"**, the **China–Pakistan mediation track**, the
+> **Iran–Oman Hormuz negotiations**, the **US-mediated Lebanon–Israel framework** and the
+> **Khamenei funeral diplomacy** are all in-window events), and August 1–24 is the new
+> post-window context: the US–Iran channel narrowing to the **Strait of Hormuz**, Iran's
+> August pivot to Iraq/Arbaeen and the **Shalamcheh–Basra railway**, a **China–Jordan strategic
+> partnership**, Turkey's Egypt/Saudi momentum, and **Iran overtaking Turkey on Qatar** now
+> inside the window. Corroborated ranking unchanged (Turkey > China > Russia > Iran). Details in
+> each report's "Post-window context (August 2026)" section and the
 > [theater watchboard](mena_theater/report.md).
 
 > **Scope note:** These are AI-assisted analytical products generated from open-source media
@@ -24,7 +26,7 @@ distinct-document basis.*
 - **[MENA Theater Assessment](mena_theater/report.md)** — the cross-actor synthesis: initiative-grain
   analysis (corroboration-gated), empirical recipient blocs, substitution/handoff detection,
   changepoint tempo, network wiring, and the H2-2026 early-warning watchboard. *Newest product;
-  window through 2026-06-30.*
+  window through 2026-07-31.*
 - [China](china/report.md) — economic statecraft, Gulf + Egypt strongholds
 - [Iran](iran/report.md) — religious projection, Resistance-axis traction (media-inflated)
 - [Russia](russia/report.md) — great-power diplomacy, the Iran axis + El Dabaa
@@ -57,14 +59,14 @@ the order inverts completely:
 
 | Actor | Raw docs | Corroborated docs | Self-report share | Rank shift |
 |-------|---------:|------------------:|:-----------------:|:----------:|
-| **Turkey** | 41,931 | **35,496** | 0.15 | — (leads) |
-| **China** | 29,358 | **25,252** | 0.14 | ▲ |
-| **Russia** | 27,413 | **24,999** | 0.09 | ▲ |
-| **Iran** | 79,243 | **13,257** | **0.83** | ▼▼▼ (last) |
+| **Turkey** | 43,098 | **36,518** | 0.15 | — (leads) |
+| **China** | 30,279 | **26,005** | 0.14 | ▲ |
+| **Russia** | 27,706 | **25,267** | 0.09 | ▲ |
+| **Iran** | 83,017 | **13,854** | **0.83** | ▼▼▼ (last) |
 
 Iran posts roughly double the raw volume of any rival but ranks **last** on corroborated
-influence: 83% of its footprint is Iranian state media. (The 2026-08 refresh flipped the #2
-slot: China now edges Russia by ~250 docs, where the prior margin was 8 the other way.) The self-report ratio is a genuine narrative-projection
+influence: 83% of its footprint is Iranian state media. (China holds the #2 slot it took in
+the previous refresh, now ~740 docs ahead of Russia.) The self-report ratio is a genuine narrative-projection
 signal **only for Iran** (82 Iran-geofocus outlets in the corpus) and weakly China (2 outlets);
 Russia and Turkey have **zero** domestic-geofocus outlets ingested, so their low self-report
 shares reflect corpus composition, not validation — for them, corroborated volume is simply the
@@ -76,19 +78,20 @@ Each actor leads a distinct set of recipients (corroborated leader by recipient)
 
 | Recipient | Leader | Runner-up |
 |-----------|--------|-----------|
-| Iran | **Russia** (11,623) | China |
-| Syria | **Turkey** (8,903) | Russia |
-| Palestine | **Turkey** (8,696) | Russia |
-| Egypt | **China** (5,934) | Russia/Turkey (tied) |
-| Lebanon | **Iran** (4,065) | Turkey |
-| Iraq | **Turkey** (3,928) | Iran |
-| Israel | **Turkey** (3,728) | Russia |
-| Saudi Arabia | **China** (2,428) | Russia |
-| Jordan | **China** (1,784) | Turkey |
-| Libya | **Turkey** (1,563) | — |
+| Iran | **Russia** (11,780) | China |
+| Syria | **Turkey** (9,007) | Russia |
+| Palestine | **Turkey** (8,957) | Russia |
+| Egypt | **China** (6,003) | Turkey |
+| Lebanon | **Iran** (4,156) | Turkey |
+| Iraq | **Turkey** (4,073) | Iran |
+| Israel | **Turkey** (3,816) | Russia |
+| Saudi Arabia | **China** (2,484) | Russia |
+| Jordan | **China** (1,902) | Turkey |
+| Libya | **Turkey** (1,597) | — |
 
-*(Post-window note: in July 2026 Iran edged past Turkey as Qatar's top corroborated four-actor
-engager — see the [Qatar report](by_recipient/qatar/report.md).)*
+*(Now in-window: Iran leads Turkey as Qatar's top corroborated four-actor engager, 907 vs 865
+— see the [Qatar report](by_recipient/qatar/report.md). Oman is Iran's #3 recipient after the
+Hormuz negotiations.)*
 
 **Five influence models (the U.S. on a separate, incidental-capture basis):**
 - **China — the economic patron.** Diplomacy/economics-led, ~0% military. Owns the **Gulf
