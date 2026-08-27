@@ -145,6 +145,7 @@ COPY services/pipeline/ ./services/pipeline/
 COPY scripts/create_admin.py ./scripts/create_admin.py
 COPY scripts/generate_report.py ./scripts/generate_report.py
 COPY scripts/db_import.py ./scripts/db_import.py
+COPY scripts/db_delta_import.py ./scripts/db_delta_import.py
 COPY alembic/ ./alembic/
 COPY alembic.ini .
 

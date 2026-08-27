@@ -19,6 +19,7 @@
 - **[../DEPLOYMENT.md](../DEPLOYMENT.md)** - Start here: decision tree routing to the right deployment doc
 - **[deployment/PRODUCTION_INSTALL.md](deployment/PRODUCTION_INSTALL.md)** - Production Docker deployment (no compose)
 - **[../PRODUCTION_DOCKER_RUN.md](../PRODUCTION_DOCKER_RUN.md)** - Enterprise / hardened-daemon deployment (raw docker run)
+- **[ENTERPRISE_DELTA_RUNBOOK.md](ENTERPRISE_DELTA_RUNBOOK.md)** - Text-only incremental data transfer (gzipped CSV bundle) when pg_dump files cannot be moved
 - **[ENTERPRISE_CUTOVER_RUNBOOK.md](ENTERPRISE_CUTOVER_RUNBOOK.md)** - Point-in-time runbook: embedding-fix cutover + full rebuild (archive after cutover)
 - **[DOCKERHUB_README.md](DOCKERHUB_README.md)** - Docker Hub image documentation
 - **[../DOCKER_WORKFLOW.md](../DOCKER_WORKFLOW.md)** - Docker build and workflow reference
