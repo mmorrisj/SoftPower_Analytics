@@ -224,8 +224,12 @@ def get_intel_evidence(
     """Trace a named initiative back to its canonical event and source documents.
 
     Resolution: exact canonical_name match first (scoped to the actor when
-    given), then a contains-match fallback. Documents come via
-    daily_event_mentions.doc_ids — the event→document traceability chain.
+    given), then a contains-match, then alternative_names (renames from
+    merges land there), then best pg_trgm match >= 0.45 — report prose cites
+    event names from the edition it was written against, and periodic
+    re-consolidation renames/splits events, so a strict lookup goes stale.
+    Documents come via daily_event_mentions.doc_ids — the event→document
+    traceability chain.
     """
     with get_session() as s:
         params = {"name": name, "actor": actor}
@@ -247,6 +251,28 @@ def get_intel_evidence(
                 WHERE canonical_name ILIKE '%' || :name || '%'
                   AND (:actor IS NULL OR initiating_country = :actor)
                 ORDER BY total_articles DESC LIMIT 1
+            """), params).fetchone()
+        if ev is None:
+            ev = s.execute(text("""
+                SELECT id, canonical_name, initiating_country, consolidated_description,
+                       material_score, material_justification,
+                       first_mention_date, last_mention_date, primary_recipients
+                FROM canonical_events
+                WHERE :name = ANY(alternative_names)
+                  AND (:actor IS NULL OR initiating_country = :actor)
+                ORDER BY total_articles DESC LIMIT 1
+            """), params).fetchone()
+        if ev is None:
+            ev = s.execute(text("""
+                SELECT id, canonical_name, initiating_country, consolidated_description,
+                       material_score, material_justification,
+                       first_mention_date, last_mention_date, primary_recipients
+                FROM canonical_events
+                WHERE canonical_name % :name
+                  AND similarity(canonical_name, :name) >= 0.45
+                  AND (:actor IS NULL OR initiating_country = :actor)
+                ORDER BY similarity(canonical_name, :name) DESC, total_articles DESC
+                LIMIT 1
             """), params).fetchone()
         if ev is None:
             raise HTTPException(status_code=404, detail="No matching event found")
