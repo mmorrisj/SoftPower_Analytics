@@ -101,6 +101,31 @@ class EventBatchClusterer:
         from shared.utils.model_cache import load_embedding_model
         self.embedding_model = load_embedding_model()
 
+    def warn_unrenamed_generics(self, session, country, start_date, end_date):
+        """Pre-flight: loudly flag windows still carrying recurring umbrella names.
+
+        Clustering generic labels ("Belt and Road Initiative") fragments the
+        event layer into same-name duplicate masters. The event_rename batch
+        job exists to specialize them — run it BEFORE clustering a new window
+        (see docs/PIPELINE_REFRESH_RUNBOOK.md)."""
+        row = session.execute(text("""
+            SELECT count(*) FILTER (WHERE re.specific_event_name IS NULL
+                       AND re.event_name IN (SELECT event_name FROM raw_events
+                                             GROUP BY 1 HAVING count(*) >= 10)),
+                   count(*)
+            FROM raw_events re JOIN documents d ON d.doc_id = re.doc_id
+            WHERE d.initiating_country ILIKE :c AND d.date BETWEEN :s AND :e
+        """), {"c": f"%{country}%", "s": start_date, "e": end_date}).fetchone()
+        generic, total = row or (0, 0)
+        if total and generic / total > 0.05:
+            print("=" * 70)
+            print(f"  WARNING: {generic:,}/{total:,} raw events in this window carry")
+            print("  un-renamed RECURRING event names (umbrella labels). Clustering them")
+            print("  will create same-name duplicate events. Run the event_rename batch")
+            print("  first:  batch_prepare.py --job-type event_rename --recurring-min 10 \")
+            print(f"          --start-date {start_date} --end-date {end_date}")
+            print("=" * 70)
+
     def normalize_event_name(self, name: str) -> str:
         """
         Normalize event name for better clustering.
@@ -578,6 +603,12 @@ Examples:
         else:
             countries = [args.country]
             print(f"\nProcessing single country: {args.country}")
+
+    # Pre-flight: flag un-renamed umbrella labels before clustering a window
+    if args.start_date and args.end_date:
+        with get_session() as session:
+            for c in countries:
+                clusterer.warn_unrenamed_generics(session, c, args.start_date, args.end_date)
 
     # Process each country and date
     overall_stats = {

@@ -25,6 +25,7 @@
 - **[../DOCKER_WORKFLOW.md](../DOCKER_WORKFLOW.md)** - Docker build and workflow reference
 
 ## Pipeline & Services
+- **[PIPELINE_REFRESH_RUNBOOK.md](PIPELINE_REFRESH_RUNBOOK.md)** - The canonical ordered refresh sequence for new document batches
 - **[../services/pipeline/events/README_EVENT_SUMMARIES.md](../services/pipeline/events/README_EVENT_SUMMARIES.md)** - Event summary generation
 - **[../services/pipeline/embeddings/README_BACKUP_RESTORE.md](../services/pipeline/embeddings/README_BACKUP_RESTORE.md)** - Embedding backup/restore (Parquet)
 - **[../services/publication/README.md](../services/publication/README.md)** - Word-document publication service

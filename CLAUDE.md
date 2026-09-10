@@ -60,6 +60,11 @@ docker exec -it softpower_db psql -U $POSTGRES_USER -d $POSTGRES_DB
 ```
 
 ### Pipeline Processing Scripts
+
+> **Refreshing with a new document batch?** Follow `docs/PIPELINE_REFRESH_RUNBOOK.md` —
+> the complete ordered stage list (including the easily-missed `event_rename`,
+> single-name backfill, validation-reset and materiality stages). Do not reconstruct the
+> sequence from this file's per-script examples.
 ```bash
 # Document ingestion
 # Raw ATOM CSV exports: salience gate + initial extraction -> results.json + Postgres

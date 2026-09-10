@@ -2963,6 +2963,9 @@ def load_raw_events_for_rename(
     session,
     country: str = None,
     limit: int = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    recurring_min: Optional[int] = None,
 ) -> List[Dict]:
     """
     Load raw_events that need more specific event names.
@@ -2979,6 +2982,18 @@ def load_raw_events_for_rename(
     if country:
         filters.append("d.initiating_country ILIKE :country")
         params['country'] = f"%{country}%"
+    if start_date:
+        filters.append("d.date >= :start_date")
+        params['start_date'] = start_date
+    if end_date:
+        filters.append("d.date <= :end_date")
+        params['end_date'] = end_date
+    if recurring_min:
+        # Only umbrella labels that recur — the names that fragment the event
+        # layer into same-name duplicates. One-off specific names are skipped.
+        filters.append("""re.event_name IN (
+            SELECT event_name FROM raw_events GROUP BY 1 HAVING count(*) >= :recurring_min)""")
+        params['recurring_min'] = recurring_min
 
     limit_clause = f"LIMIT {limit}" if limit else ""
 
@@ -3532,6 +3547,8 @@ def main():
     parser.add_argument('--limit', type=int, default=10_000_000,
                         help='[proposition_extract] Cap on docs to include')
 
+    parser.add_argument('--recurring-min', type=int, default=None,
+                        help='event_rename only: target only event names occurring >= N times corpus-wide (umbrella labels)')
     parser.add_argument('--output', type=str, help='Output JSONL file path (optional, auto-generated if not provided)')
     parser.add_argument('--dry-run', action='store_true', help='Preview without creating files or database records')
     parser.add_argument('--verbose', action='store_true', default=True, help='Verbose output')
@@ -3738,8 +3755,12 @@ def main():
                 session,
                 args.country,
                 limit=args.min_articles if args.min_articles != 3 else None,
+                start_date=args.start_date,
+                end_date=args.end_date,
+                recurring_min=args.recurring_min,
             )
-            print(f"Found {len(records)} raw events for rename")
+            scope = f"{args.start_date or 'corpus start'}..{args.end_date or 'corpus end'}"
+            print(f"Found {len(records)} raw events for rename ({scope}, recurring_min={args.recurring_min})")
 
         elif args.job_type == JOB_TYPE_PROPOSITION_EXTRACT:
             # S3-driven loader; no DB query. session arg is unused for this path.
