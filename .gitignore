@@ -125,3 +125,7 @@ _data/
 !_data/*/.gitkeep
 tmpclaude-*-cwd
 softpower-production-20260220.tar.gz
+
+# Database transfer bundles (pg_dump chunks / delta CSV bundles)
+db_export_*/
+db_delta_*/

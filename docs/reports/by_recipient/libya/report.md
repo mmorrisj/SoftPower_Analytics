@@ -1,7 +1,7 @@
 # Who Courts Libya? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -14,7 +14,7 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 - **Libya is a single-patron file — Turkey-dominated (48%)**, with no rival close. **(H)**
 - **Division of labor by instrument:** Economic→**Turkey**, Social→**Turkey**, Military→**Turkey**, Diplomacy→**Turkey**. **(H)**
 - **Turkey is the across-the-board lead** — economics, social, and diplomacy — the reconstruction-patron model. **(M)**
-- **Signature initiative:** Libya Unified Budget Diplomatic Support (Turkey). **(M)**
+- **Signature initiative:** Turkish-Libyan Diplomatic and Military Cooperation Meetings (Turkey). **(M)**
 
 ![Who courts Libya](assets/01_suitor_leaderboard.png)
 
@@ -24,11 +24,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| Turkey | 1,563 | 49% |
-| U.S. | 672 | 21% |
-| Russia | 477 | 15% |
-| China | 465 | 14% |
-| Iran | 36 | 1% |
+| Turkey | 1,702 | 49% |
+| U.S. | 755 | 22% |
+| China | 512 | 15% |
+| Russia | 494 | 14% |
+| Iran | 37 | 1% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -53,17 +53,17 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Libya is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-43 peripheral events (where Libya was only mentioned in
+42 peripheral events (where Libya was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
+- **Turkish-Libyan Diplomatic and Military Cooperation Meetings** — Turkey, material 8.50 (2026-08)
+- **U.S. Embassy Reopening in Libya** — U.S., material 8.50 (2026-07)
 - **Libya Unified Budget Diplomatic Support** — Turkey, material 8.50 (2026-04)
 - **Libya-Turkey Energy Partnership Meeting at Libya Energy and Economy Summit 2026** — Turkey, material 8.50 (2026-01)
 - **Flintlock 2026 military exercises** — U.S., material 8.00 (2026-06)
 - **Unified Budget for Libya** — U.S., material 8.00 (2026-04)
 - **Turkey-Libya Mitiga Airport Security Agreement, September 2025** — Turkey, material 8.00 (2025-09)
 - **Turkey-Italy Fourth Intergovernmental Summit on Libya Stability, September 2025** — Turkey, material 8.00 (2025-09)
-- **Libya-Turkey Trade Cooperation Meeting on Reconstruction Projects, April 2025** — Turkey, material 8.00 (2025-05)
-- **Turkey-Libya Energy Investment Commitment at 2025 Libyan Energy and Economic Summit** — Turkey, material 8.00 (2025-01)
 
 ---
 

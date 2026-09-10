@@ -21,7 +21,7 @@ MENA = ('Bahrain', 'Cyprus', 'Egypt', 'Iraq', 'Israel', 'Jordan', 'Kuwait', 'Leb
         'Libya', 'Oman', 'Palestine', 'Qatar', 'Saudi Arabia', 'Syria',
         'United Arab Emirates', 'UAE', 'Yemen', 'Iran', 'Turkey')
 START = '2024-08-01'
-END = '2026-07-01'   # exclusive — last full month is June 2026 (avoid partial-month artifacts)
+END = '2026-09-01'   # exclusive — last full month is August 2026 (avoid partial-month artifacts)
 
 
 def build(session):

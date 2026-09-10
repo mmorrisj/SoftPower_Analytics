@@ -89,11 +89,15 @@ def load_config(config_path: str = 'shared/config/config.yaml') -> dict:
 
 def load_all_canonical_events(
     session,
-    country: str
+    country: str,
+    start_date: str = None
 ) -> List[Dict]:
     """
     Load ALL canonical events for a specific country.
     Only loads events that don't already have a master_event_id set.
+    If start_date is given, only events with first_mention_date >= start_date are
+    loaded (incremental runs: set it to new-window-start minus max_days_gate so every
+    event that can pass the temporal gate is still a candidate).
 
     Returns:
         List of dicts with canonical event info plus aggregated mention stats
@@ -116,10 +120,12 @@ def load_all_canonical_events(
         LEFT JOIN daily_event_mentions dem ON ce.id = dem.canonical_event_id
         WHERE ce.initiating_country = :country
           AND ce.master_event_id IS NULL
+          AND (CAST(:start_date AS date) IS NULL OR ce.first_mention_date >= CAST(:start_date AS date))
         GROUP BY ce.id
         ORDER BY total_articles DESC NULLS LAST
     '''), {
-        'country': country
+        'country': country,
+        'start_date': start_date
     }).fetchall()
 
     events = []
@@ -319,7 +325,8 @@ def consolidate_country(
     min_cluster_size: int = 2,
     dry_run: bool = False,
     verbose: bool = True,
-    force: bool = False
+    force: bool = False,
+    start_date: str = None
 ) -> Dict[str, int]:
     """
     Consolidate all events for a specific country.
@@ -370,7 +377,7 @@ def consolidate_country(
         session.commit()
 
     # Load ALL canonical events for this country
-    events = load_all_canonical_events(session, country)
+    events = load_all_canonical_events(session, country, start_date=start_date)
 
     if len(events) == 0:
         if verbose:
@@ -483,6 +490,9 @@ def main():
     # Options
     parser.add_argument('--dry-run', action='store_true', help='Show what would be consolidated without saving')
     parser.add_argument('--force', action='store_true', help='Reset existing consolidations before running (prevents accumulation)')
+    parser.add_argument('--start-date', type=str, default=None,
+                        help='Incremental mode: only consider master events with first_mention_date >= this date '
+                             '(YYYY-MM-DD). Use new-window-start minus --max-days-gate.')
     parser.add_argument('--verbose', action='store_true', default=True, help='Print detailed progress')
 
     args = parser.parse_args()
@@ -530,6 +540,7 @@ def main():
                 dry_run=args.dry_run,
                 verbose=args.verbose,
                 force=args.force,
+                start_date=args.start_date,
             )
 
             overall_stats['total_events'] += stats['events']

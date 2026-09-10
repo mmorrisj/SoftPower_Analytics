@@ -1,12 +1,12 @@
-## Post-window context (July 2026)
+## Post-window context (September 2026)
 
-*The corpus extends to 2026-07-27; July is a partial month with a possible ingestion
-tail-off — context, not analysis-grade.*
+*The corpus extends to 2026-09-09; September is nine days of data — context, not
+analysis-grade. August 2026 is now inside the analysis window.*
 
-- **US-mediated Lebanon–Israel Agreement Framework negotiations** became the single largest
-  post-window event in the corpus (365 articles; a Rome round July 6). U.S. registered
-  coverage of Lebanon grew ~24% in six weeks — Lebanon is now the U.S.'s fourth-largest
-  counterpart file.
-- Iran's Lebanon surge crested in June (566 corroborated docs, its largest single-month
-  Lebanon figure on record) before easing to 88 in July — Lebanon is where the US-brokered
-  de-escalation and Iran's Resistance-arc re-engagement now intersect.
+- **The US-mediated Lebanon–Israel track re-warmed in Rome in early September** — a
+  US-brokered detainee release and a push to resume the Rome dialogue are the file's live
+  items after the framework's August cooling; the track is moving in stop-start rounds
+  rather than dying.
+- Iran's Lebanon file stayed quiet in August (25 corroborated docs, from the 639-doc June
+  crest); Turkey's UNIFIL-cooperation and South-Lebanon-reconstruction initiatives remain
+  the live non-U.S. items.

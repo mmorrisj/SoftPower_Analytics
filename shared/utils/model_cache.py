@@ -255,8 +255,13 @@ def get_hf_embeddings():
     Uses task-aware prompt prefixes (search_document / search_query) as
     recommended by nomic-ai for optimal retrieval quality.
     """
-    model = load_embedding_model()
-    return _NomicEmbeddings(model)
+    global _EMBEDDINGS_SINGLETON
+    if _EMBEDDINGS_SINGLETON is None:
+        _EMBEDDINGS_SINGLETON = _NomicEmbeddings(load_embedding_model())
+    return _EMBEDDINGS_SINGLETON
+
+
+_EMBEDDINGS_SINGLETON = None
 
 
 def embed_for_storage(texts):

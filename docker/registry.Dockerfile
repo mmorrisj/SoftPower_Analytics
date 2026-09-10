@@ -18,7 +18,7 @@
 # ============================================
 # Target: Rocky 9+ (kernel 5.14+, glibc 2.34+).
 # Node 22 is the current LTS (supported through April 2027).
-FROM node:22-bookworm-slim@sha256:f32b81066cde10a75dbac96646099533316d94bac4150c55da1636e1f0ffdc46 AS frontend-builder
+FROM node:22-bookworm-slim@sha256:83f487e0a63425e5b4d146fb5e5be574bcbe1b7b843d3ebafdd95eaf7767a7e5 AS frontend-builder
 
 WORKDIR /app/client
 
@@ -35,7 +35,7 @@ RUN npm run build \
 # ============================================
 # Target: Rocky 9+ (kernel 5.14+, glibc 2.34+).
 # Trixie (Debian 13, glibc 2.38) is safe — clone3 syscall requires kernel 5.3+.
-FROM python:3.13-slim-trixie@sha256:6771159cd4fa5d9bba1258caf0b82e6b73458c694d178ad97c5e925c2d0e1a91
+FROM python:3.13-slim-trixie@sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285
 
 WORKDIR /app
 
@@ -145,6 +145,7 @@ COPY services/pipeline/ ./services/pipeline/
 COPY scripts/create_admin.py ./scripts/create_admin.py
 COPY scripts/generate_report.py ./scripts/generate_report.py
 COPY scripts/db_import.py ./scripts/db_import.py
+COPY scripts/db_delta_import.py ./scripts/db_delta_import.py
 COPY alembic/ ./alembic/
 COPY alembic.ini .
 

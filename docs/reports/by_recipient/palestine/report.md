@@ -1,7 +1,7 @@
 # Who Courts Palestine? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -24,11 +24,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 12,321 | 48% |
-| Turkey | 8,696 | 34% |
-| Russia | 2,033 | 8% |
-| China | 1,641 | 6% |
-| Iran | 983 | 4% |
+| U.S. | 12,862 | 48% |
+| Turkey | 9,201 | 34% |
+| Russia | 2,049 | 8% |
+| China | 1,691 | 6% |
+| Iran | 1,014 | 4% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -53,17 +53,17 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Palestine is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-28 peripheral events (where Palestine was only mentioned in
+30 peripheral events (where Palestine was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **2026 US-EU Gaza Reconstruction Funding Initiative in Brussels** — U.S., material 9.00 (2026-02)
-- **2026 Peace Council Meeting on Gaza Reconstruction in Washington** — Turkey, material 9.00 (2026-02)
 - **2026 Board of Peace Summit Contributions to Gaza Reconstruction** — U.S., material 9.00 (2026-02)
+- **2026 Peace Council Meeting on Gaza Reconstruction in Washington** — Turkey, material 9.00 (2026-02)
 - **2026 Gaza Peace Council Initiative Launch with $10B US Commitment** — U.S., material 9.00 (2026-02)
 - **Turkey Hosts Gaza Peace Negotiations with Israel and Palestine, October 2025** — Turkey, material 9.00 (2025-10)
-- **Gaza Peace Plan Diplomatic Initiative** — Turkey, material 8.50 (2026-05)
-- **Gaza Reconstruction and Aid Diplomacy Initiative** — U.S., material 8.50 (2026-05)
-- **Gaza Reconstruction Initiative** — U.S., material 8.50 (2026-05)
+- **Morocco Joins Gaza Stabilization Force as $7 Billion Reconstruction Pledges Back Ceasefire Roadmap** — Turkey, material 8.50 (2026-08)
+- **China-Palestine Humanitarian Aid and Diplomatic Engagement** — China, material 8.50 (2026-08)
+- **Sharm El-Sheikh Agreement** — Turkey, material 8.50 (2026-08)
 
 ---
 
@@ -74,7 +74,7 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Trajectory:** see the monthly series for who is gaining or losing ground in Palestine; activity tracks
   the region's inflection points (Israel-Hezbollah escalation Sept 2024, Assad's fall Dec 2024, the
   June 2025 Israel-Iran war). **(M)**
-- **Adversarial framing:** 12.8% of the U.S.'s coverage in Palestine is carried by Iranian media — its image here is partly written by its adversary. **(M)**
+- **Adversarial framing:** 12.4% of the U.S.'s coverage in Palestine is carried by Iranian media — its image here is partly written by its adversary. **(M)**
 - **Caveat:** this measures *reported* influence; the soft-power lens under-captures hard power, and
   dollar figures are announced, not verified. For Palestine, a high U.S. share reflects crisis/alliance involvement rather than economic courtship.
 

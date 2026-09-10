@@ -343,30 +343,35 @@ Per initiator (China, Iran, Russia, Turkey), the agent runs this loop:
 
 ## PART F — Verified Ground Truth & /goal Execution Brief
 
-*Probed against the live DB (re-verified 2026-08-02; corpus spans 2024-07-03 → 2026-07-27,
-~24.5 months — the report analysis window clamps to full months, date < 2026-07-01, with July
-quoted as post-window context only). Use these numbers to sanity-check the autonomous run; if
+*Probed against the live DB (re-verified 2026-09-09; corpus spans 2024-07-03 → 2026-09-09,
+~25.5 months — the report analysis window clamps to full months, date < 2026-08-01, with
+August 1–24 quoted as post-window context only). Use these numbers to sanity-check the autonomous run; if
 a query returns wildly different magnitudes, something is mis-scoped.*
 
 ### Verified inventory
-- documents: **779,075**; source_name 100% populated (599 distinct), source_geofocus ~92%.
+- documents: **803,519** (2026-09-09; +7,506 from the 08-24 → 09-09 DSR export); source_name
+  100% populated, source_geofocus ~92%.
 - Docs by initiator (normalized table): **Iran 271,767 · China 67,347 · Turkey 55,802 ·
   Russia 44,580** — Iran is ~4× the next actor. The top 8 sources are ALL Iranian state
   media (IRIB, Fars, Mehr, IRNA, Tasnim, ISNA…). This is the bias, quantified.
-- canonical_entities **10,999** (re-consolidated 2026-07, down from 13,534 via merges;
-  embedding_vector still 100%; country_affiliations now sparser — Iran 2,460 · China 883 ·
-  Turkey 743 · Russia 439 tagged); entity_relationships **11,464**; daily_entity_mentions
-  **37,924**.
+- canonical_entities **16,101** (2026-09-09: extended incrementally from the new window and re-validated, with
+  merged after LLM validation; embedding_vector 100%; country_affiliations now sparser — Iran 2,460 · China 883 ·
+  Turkey 743 · Russia 439 tagged); entity_relationships **21,342** (co-occurrence graph rebuilt 2026-09-09; 6,231 typed);
+  daily_entity_mentions **54,353**.
 - Summary tables: bilateral_relationship_summaries 91 · country_category_summaries 20 ·
-  bilateral_category_summaries 308 · event_summaries 14,965 · aiddata_projects 20,985.
+  bilateral_category_summaries 308 · event_summaries 16,358 · aiddata_projects 20,985.
 - **Events layer (re-consolidated 2026-08-03):** after the July refresh re-ran Stage-1,
   Stage-2 was completed in full (consolidate → LLM deconflict [12,071 groups; OpenAI Batch
   `canonical_deconflict` job type for the bulk] → merge [21,426 children absorbed] →
-  `score_materiality` batch [5,688 events]). `canonical_events` = **55,302** consolidated
-  events (11,554 multi-day, max span 67 days), 0 unvalidated groups, embeddings 100%.
+  `score_materiality` batch [5,688 events]). **2026-08-25 incremental extension:** the new
+  window (07-21 → 08-24) was clustered, LLM-deconflicted and consolidated against the existing
+  layer (`consolidate_all_events --start-date 2026-06-21`; 2,688 candidate groups, 1,313 split;
+  every master that gained children re-validated before merge; new/changed events re-scored).
+  `canonical_events` = **60,881** consolidated events (2026-09-09 layer), 0
+  unvalidated groups, embeddings 100%.
   Note: this layer's extraction grain is finer than the pre-July snapshot (17,933), so
   initiative-grain metrics computed on it are a new measurement, not continuous with
-  pre-refresh figures. `event_summaries` (14,965) is a separate, stable spine.
+  pre-refresh figures. `event_summaries` (16,358; regenerated for the new window 2026-09-09) is a separate spine.
 
 ### MANDATORY scope filters (non-negotiable — the run is wrong without them)
 1. `initiating_country IN ('China','Iran','Russia','Turkey')`.
@@ -516,10 +521,10 @@ are the index and the draft; the raw data is the evidence.
 39 tables. The analytically relevant ones, with what the scan revealed:
 
 ### Volumes (raw vs. clean)
-- `documents` 779,075 · `event_summaries` 14,965 · `canonical_events` **55,302**
-  (re-consolidated 2026-08-03; 11,554 multi-day — finer extraction grain than the pre-July
-  17,933, see Part-F events-layer note) · `canonical_entities` 10,999 ·
-  `entity_relationships` 11,464 · `daily_entity_mentions` 37,924 · `daily_event_mentions`
+- `documents` 803,519 (2026-09-09) · `canonical_events` **60,881** (see the
+  extended incrementally 2026-08-25 on the 2026-08-03 re-consolidated layer, see Part-F
+  events-layer note) · `canonical_entities` 16,101 ·
+  `entity_relationships` 21,342 · `daily_entity_mentions` 54,353 · `daily_event_mentions`
   87,207 post-merge · `event_source_links` 150,662 (every event linked → full event→document
   traceability).
 - Raw flatteners are huge: `raw_events` 1.49M, `recipient_countries` 1.27M, `raw_entities`

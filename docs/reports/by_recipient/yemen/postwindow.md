@@ -1,9 +1,10 @@
-## Post-window context (July 2026)
+## Post-window context (September 2026)
 
-*The corpus extends to 2026-07-27; July is a partial month with a possible ingestion
-tail-off — context, not analysis-grade.*
+*The corpus extends to 2026-09-09; September is nine days of data — context, not
+analysis-grade. August 2026 is now inside the analysis window.*
 
-- **Iran began re-entering Yemen** — corroborated docs rose 3 (May) → 15 (June) → 52 (July),
-  the first sustained movement since the November 2024 collapse (the dataset's sharpest
-  break, z=11.4). Yemen's status as the theater's abandoned market, unclaimed by any actor
-  since that break, is ending; which instrument Iran leads with is the item to watch.
+- **Iran's re-entry reversed — the Yemen vacancy stands.** Corroborated docs ran 15 (June)
+  → 52 (July) → 13 (August): the July movement now reads as Strait-of-Hormuz crisis
+  spillover, not a durable return to the file Iran abandoned in November 2024 (the dataset's
+  sharpest break, z=11.4). No other actor has moved on Yemen; it remains the region's most
+  conspicuous influence vacuum.

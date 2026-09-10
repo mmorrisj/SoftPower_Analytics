@@ -1,7 +1,7 @@
 # Russia's Soft-Power Influence in the Middle East & North Africa
 ### A Strategic Influence Assessment for Policy Analysis
 
-*Observation window: 2024-08-01 to 2026-06-30 (open-source media corpus). Prepared from the
+*Observation window: 2024-08-01 to 2026-07-31 (open-source media corpus; refreshed 2026-08-25). Prepared from the
 Soft Power Analytics database; method, scope, and caveats per `docs/INSIGHT_REPORT_PROMPT.md`.
 Intensity is measured in **third-party-corroborated** documents unless noted. Confidence tags:
 **(H)** high, **(M)** moderate, **(L)** low.*
@@ -13,9 +13,9 @@ Intensity is measured in **third-party-corroborated** documents unless noted. Co
 - **Russia's MENA influence is diplomacy-dominated and highly credible.** Diplomacy alone is
   62.6% of its profile — the most diplomacy-heavy posture of the four actors — and its coverage
   is overwhelmingly third-party (self-report share just 0.09, as virtually no Russian-geofocus
-  media is in the corpus). Russia's corroborated footprint (24,999 docs) is the third-largest
-  in MENA, narrowly behind China (25,252) and well behind Turkey. **(H)**
-- **Iran is Russia's single most important MENA relationship by a wide margin** — 11,623
+  media is in the corpus). Russia's corroborated footprint (25,267 docs) is the third-largest
+  in MENA, behind China (26,005) and well behind Turkey (36,518). **(H)**
+- **Iran is Russia's single most important MENA relationship by a wide margin** — 11,780
   corroborated docs at a 0.95 corroboration share, exceeding even China's engagement with
   Tehran. Russia, not China, is the dominant external partner in the Iran influence space. **(H)**
 - **The El Dabaa Nuclear Power Plant is Russia's flagship strategic anchor in the region.** It
@@ -57,8 +57,8 @@ Syria and Egypt — where it can convert diplomatic and energy ties into lasting
 
 ## 3. Categorical Breakdown
 
-**Diplomacy (62.6%).** *Multilateral/Bilateral Commitments* (13,157 corroborated docs),
-*International Negotiations* (5,463), and *Conflict Resolution* (2,819) dominate. Russia
+**Diplomacy (62.6%).** *Multilateral/Bilateral Commitments* (13,241 corroborated docs),
+*International Negotiations* (5,484), and *Conflict Resolution* (2,832) dominate. Russia
 positions as a mediator on Gaza and a partner-of-choice for states seeking alternatives to
 Western alignment; the Russian MFA and Lavrov co-occur heavily with the UNSC and the Gaza
 file. **(H)**
@@ -87,9 +87,9 @@ diplomacy. **(M)**
 
 | Tier | Recipients (corroborated docs) | Read |
 |------|-------------------------------|------|
-| **Lead** | **Iran (11,623)** | Russia's #1 MENA relationship; 0.95 corroboration share |
-| **Strong** | Syria (3,183), Egypt (3,133) | Legacy ally (Syria) + flagship energy partner (Egypt) |
-| **Moderate** | Palestine (2,033), Israel (1,830), Saudi Arabia (1,394) | Great-power balancing across the divide |
+| **Lead** | **Iran (11,780)** | Russia's #1 MENA relationship; 0.95 corroboration share |
+| **Strong** | Syria (3,189), Egypt (3,177) | Legacy ally (Syria) + flagship energy partner (Egypt) |
+| **Moderate** | Palestine (2,041), Israel (1,833), Saudi Arabia (1,402) | Great-power balancing across the divide |
 | **Light** | UAE (987), Yemen (868), Gulf | Opportunistic |
 
 - **The Russia-Iran axis is the defining feature** — denser and more corroborated than any other
@@ -127,13 +127,16 @@ file persists into 2026 (e.g., the April 2026 Ismat–Rosatom engagement), confi
 nuclear partnership as a *standing* rather than episodic driver. Russia's calendar is set by
 summitry (St. Petersburg Forum) and its Iran/Egypt files. **(M)**
 
-**Post-window context (July 2026).** The refreshed corpus extends to 2026-07-27; July is a
-partial month with possible ingestion tail-off, so the following is context, not trend data.
-Russia's corroborated tempo fell to 243 docs in July — its lowest month on record even allowing
-for the partial month — consistent with, and reinforcing, the structural-decay finding. No
-Russian role registered in the July U.S.–Iran mediation round, which ran through Switzerland,
-Doha, Muscat and a China–Pakistan track — a notable absence for the actor that owned the Iran
-file. **(M)**
+**August 2026 (now in-window).** The decay set a **second consecutive record low**: 268
+corroborated docs in July (revised on the re-measured layer), then **222 in August** — the
+two weakest full months in the dataset. Russia→Iran, the flagship channel, slid to 55
+corroborated docs in August (from 167 in July), no Russian role registered in any U.S.–Iran
+mediation round (Switzerland, Doha, Muscat, the China–Pakistan track), and no August event on
+the Russian file cleared the 40-article mark. The structural-decay finding (KJ4) is no longer
+a trend to watch — it is the file's steady state. **(M)**
+
+**Post-window context (September 1–9, 2026).** Nine days of data: no Russian event above 10
+articles — the pattern extends. **(M)**
 
 ---
 

@@ -1,10 +1,10 @@
-## Post-window context (July 2026)
+## Post-window context (September 2026)
 
-*The corpus extends to 2026-07-27; July is a partial month with a possible ingestion
-tail-off — context, not analysis-grade.*
+*The corpus extends to 2026-09-09; September is nine days of data — context, not
+analysis-grade. August 2026 is now inside the analysis window.*
 
-- The Muscat channel reactivated in earnest: **Iran–Oman Strait of Hormuz navigation
-  negotiations** (July 4, 106 articles; July 14, 59 articles) followed the June US–Iran
-  ceasefire MOU and Bürgenstock/Doha talks. Iran's corroborated Oman file grew ~13% in six
-  weeks — Oman is now Iran's #4 corroborated recipient (1,297 docs in-window), and FM Badr
-  al-Busaidi remains the region's most contested intermediary.
+- **The Muscat channel is holding, not fading**: Iran→Oman ran 201 → 212 → 192 corroborated
+  docs Jun→Aug (an Iran–Oman Hormuz navigation round Aug 2; a proposed Hormuz shipping
+  route was August's most-corroborated new Iranian initiative at 0.82). **Oman is now
+  Iran's #3 corroborated recipient (1,701 in-window)** — behind only Lebanon and Iraq,
+  ahead of Syria — and FM Badr al-Busaidi remains the region's most contested intermediary.

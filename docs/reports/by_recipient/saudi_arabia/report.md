@@ -1,7 +1,7 @@
 # Who Courts Saudi Arabia? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-06-30. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -15,7 +15,7 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 - **Division of labor by instrument:** Economic→**China**, Social→**China**, Military→**U.S.**, Diplomacy→**U.S.**. **(H)**
 - The classic division of labor is on display: **China supplies the economics and the U.S. the security** — the Gulf-hedge pattern at the country level. **(M)**
 - **Signature initiative:** Lenovo's Major Investment in Saudi Arabia (China). **(M)**
-- **19.5% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
+- **19.4% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
 
 ![Who courts Saudi Arabia](assets/01_suitor_leaderboard.png)
 
@@ -25,11 +25,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 3,632 | 38% |
-| China | 2,428 | 25% |
-| Russia | 1,394 | 15% |
-| Iran | 1,207 | 13% |
-| Turkey | 935 | 10% |
+| U.S. | 3,783 | 38% |
+| China | 2,511 | 25% |
+| Russia | 1,415 | 14% |
+| Iran | 1,273 | 13% |
+| Turkey | 1,087 | 11% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -75,7 +75,7 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Trajectory:** see the monthly series for who is gaining or losing ground in Saudi Arabia; activity tracks
   the region's inflection points (Israel-Hezbollah escalation Sept 2024, Assad's fall Dec 2024, the
   June 2025 Israel-Iran war). **(M)**
-- **Adversarial framing:** 19.5% of the U.S.'s coverage in Saudi Arabia is carried by Iranian media — its image here is partly written by its adversary. **(M)**
+- **Adversarial framing:** 19.4% of the U.S.'s coverage in Saudi Arabia is carried by Iranian media — its image here is partly written by its adversary. **(M)**
 - **Caveat:** this measures *reported* influence; the soft-power lens under-captures hard power, and
   dollar figures are announced, not verified. 
 

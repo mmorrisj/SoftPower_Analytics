@@ -42,7 +42,7 @@ ALIASES.update({
     'Gaza Strip': 'Palestine',
     'West Bank': 'Palestine',
 })
-START, END = '2024-08-01', '2026-07-01'
+START, END = '2024-08-01', '2026-09-01'
 
 
 # --------------------------------------------------------------------------- helpers
@@ -238,7 +238,7 @@ def build_changepoints(s):
         LEFT JOIN analytics.recipient_alias ra ON ra.alias = pi.recipient_country
         GROUP BY 1, 2, 3
     """), s.connection())
-    months = pd.date_range(START, '2026-06-01', freq='MS').date
+    months = pd.date_range(START, '2026-08-01', freq='MS').date
     out = []
     for (init, recip), g in sorted(df.groupby(['initiating_country', 'recipient'])):
         for metric in ('third_party_docs', 'raw_docs'):

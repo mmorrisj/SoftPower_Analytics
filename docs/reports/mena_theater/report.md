@@ -1,51 +1,60 @@
 # MENA Theater Assessment — Cross-Actor Soft-Power Competition
 ### China · Iran · Russia · Turkey | Strategic Influence in the Middle East & North Africa
 
-*Observation window 2024-08-01 → 2026-06-30 (23 full months). Open-source media corpus, 779K
-documents (refreshed 2026-08; corpus extends to 2026-07-27 — July is treated as **post-window
-context only**, see §7); method, lineage, and scope per [`../../INSIGHT_REPORT_PROMPT.md`](../../INSIGHT_REPORT_PROMPT.md).
+*Observation window 2024-08-01 → 2026-08-31 (25 full months). Open-source media corpus, 804K
+documents (refreshed 2026-09-09; corpus extends to 2026-09-09 — September 1–9 is treated as
+**post-window context only**, see §7); method, lineage, and scope per [`../../INSIGHT_REPORT_PROMPT.md`](../../INSIGHT_REPORT_PROMPT.md).
 Unit of analysis: the **corroborated initiative** (named canonical event with ≥50% third-party
 coverage from ≥3 independent outlets), not the article. Every figure's underlying numbers are
 persisted as a sibling CSV in [`assets/`](assets/). Produced by a five-thread agentic
 investigation with two-lens adversarial verification of every finding (57 findings: 38
 workflow-verified, 19 re-verified inline; 0 refuted, 14 revised with corrections applied).*
 
+> **2026-09-09 edition note:** window advanced one month (August 2026 is now the 25th full
+> month; September 1–9 is post-window context). The events/entities layers were extended
+> incrementally and re-validated; per-pair figures quoted in §7 are re-measured on this layer
+> and can differ modestly from the prior edition's. Substantive changes in this edition:
+> China's record 2026 month on Gulf-core summitry (Jordan), the reversal of Iran's Yemen
+> re-entry, Russia's second consecutive record-low month, and the Qatar flip confirmed
+> in-window.
+
 ---
 
 ## 1. Key Findings
 
-1. **Raw media volume inverts the truth of this theater.** Iran generates 138,082 scoped
-   document-rows — 2× any rival — but 82% is its own state media, and only **1.9% of its 16,628
+1. **Raw media volume inverts the truth of this theater.** Iran generates 144,278 scoped
+   document-rows — 2× any rival — but 85% is its own state media, and only **1.9% of its 18,144
    extracted initiatives survive the corroboration gate** (≥50% third-party, ≥3 outlets), versus
    15–19% for China, Russia, and Turkey — an ~8–10× survival gap. At the high-material tier Iran
-   holds 14 initiatives against China's 89, Turkey's 75, and Russia's 71 — a ~5–6× deficit. Iran
-   is a narrative giant and an initiative dwarf. *(High confidence; funnel re-measured 2026-08
-   on the re-consolidated events layer — absolute counts differ from earlier editions, the gap
-   does not.)*
+   holds 15 initiatives against China's 93, Turkey's 84, and Russia's 72 — a ~5–6× deficit. Iran
+   is a narrative giant and an initiative dwarf. *(High confidence; funnel re-measured 2026-08-25
+   on the events layer extended through July 2026 — absolute counts differ from earlier editions,
+   the gap does not.)*
 
 2. **Turkey is the theater's largest credible influence actor.** It leads corroborated volume
-   (57,690 docs) and gated initiatives (1,281) — though on the re-scored high-material tier it
-   now sits in a near-tie behind China (75 vs China's 89, Russia's 71) — and it owns the
+   (59,562 docs) and gated initiatives (1,406) — though on the high-material tier it sits
+   second behind China (84 vs China's 93, Russia's 72) — and it owns the
    corpus's highest-substance events: the Oct 2025 Gaza ceasefire architecture (Cairo signing:
    1,199 articles, 231 distinct outlets), the Jul 2025 PKK disarmament ceremony (95 outlets),
-   and the Syria file, where it holds **342 of 505 corroborated initiatives (68%)**. Its playbook
+   and the Syria file, where it holds **357 of 527 corroborated initiatives (68%)**. Its playbook
    converts conflict adjacency into mediation equity, then mediation equity into economics
    (the $7B Syria energy MOU; the Feb 2026 Saudi/Egypt normalization wave). *(High confidence)*
 
 3. **China is the economic patron, and its money is concentrated and real — in Egypt.** China
-   holds 526 corroborated economic initiatives (2.2× Russia, ~9× Iran) and sweeps every qualifying
+   holds 559 corroborated economic initiatives (2.3× Russia, ~8× Iran) and sweeps every qualifying
    civilian lane in Egypt, Kuwait, UAE, Saudi Arabia, and Bahrain. Its verifiable announced
    money clusters in the Suez Canal Economic Zone / Ain Sokhna corridor: **~$24B across ~27
    deals** after noise removal — a corridor whose Chinese-financed lineage AidData traces to a
    2009 China Eximbank/CDB credit for the TEDA zone. In 2026 China layered a new asset on top:
-   an institutionalized US–Iran mediator role marketed to Gulf audiences (5 high-material
-   mediation events, 28–64 outlets each). *(High confidence)*
+   an institutionalized US–Iran mediator role marketed to Gulf audiences (6 high-material
+   mediation events, 28–78 outlets each, the Beijing–Islamabad track added in July). *(High confidence)*
 
 4. **Russia is the structural loser of the window.** Five of its relationships decayed 64–88%
    from baseline (Syria 272→46 docs/mo, Turkey −88%, Egypt −64%, UAE −69%, Palestine −68%), its
    flagship Iran channel halved after the June 2025 war (cp 2025-08, z=3.45), and its
    high-material initiative pipeline shrank from 21/quarter (Q4-2024 — still the highest
-   actor-quarter in the re-measured ledger) to 4 (Q2-2026). What
+   actor-quarter in the ledger) to 4 (Q2-2026) and 1 in July; July 2026 (293 corroborated docs)
+   is its lowest full month on record. What
    remains is narrow and physical: El Dabaa NPP in Egypt — the corpus's most durable project
    (37 events across 17 months) — Bushehr, BRICS convening, and a hedged Syria posture in which
    it is the only actor whose network bridges both the deposed Assad and successor al-Sharaa
@@ -54,14 +63,14 @@ workflow-verified, 19 re-verified inline; 0 refuted, 14 revised with corrections
 5. **The theater reset in Nov–Dec 2024, and the data timestamps it.** Fourteen of the fifty
    largest changepoints fall in those two months — all declines: the Lebanon ceasefire and
    Assad's fall ended the "Axis of Resistance" coverage regime (Iran→Yemen z=11.4, the sharpest
-   break in the dataset — unreplaced by any actor through the window's end, though July 2026
-   post-window data shows Iran itself beginning to re-enter; see §7), killed the Astana venue within seven
+   break in the dataset — unreplaced by any other actor; Iran itself began re-entering in
+   June–July 2026, 19 → 65 corroborated docs/mo; see §7), killed the Astana venue within seven
    weeks, and opened the Syria vacuum that Turkey filled (11.5 → 21.7 corroborated
    initiatives/month). *(High confidence)*
 
 6. **The dominant early-warning complex for H2 2026 is a four-way mediation race around the
    US–Iran/Hormuz crisis.** Iran's corroborated initiative flow surged ~6× in six months (16 in
-   Q4-2025 → 42 in Q1-2026 → 94 in Q2-2026, 6 high-material) behind a genuine, third-party-attested pivot to
+   Q4-2025 → 42 in Q1-2026 → 97 in Q2-2026, 6 high-material; 41 in July alone) behind a genuine, third-party-attested pivot to
    GCC détente and Lebanon ceasefire brokerage; China institutionalized the US–Iran broker role;
    and Turkey pre-positioned on the Tehran file at cp Nov-2025 (z=3.95, Fidan's Tehran visit →
    the Jan 2026 Ankara US–Iran trilateral, 95 outlets) — **the only true lead indicator found in
@@ -72,8 +81,10 @@ workflow-verified, 19 re-verified inline; 0 refuted, 14 revised with corrections
    two weeks — a June 14 US–Iran ceasefire MOU, negotiations at Bürgenstock (Switzerland), a
    Doha round (June 26), and GCC–US engagement (June 25) — venues that ran through Switzerland,
    Doha, and Muscat rather than Ankara or Beijing alone. **Ayatollah Khamenei died in mid-June
-   2026** (funeral ceremonies late June–July; 41% third-party-corroborated coverage), adding
-   succession uncertainty to every judgment in this complex. July post-window context in §7.
+   2026** (funeral ceremonies late June–July; ~40% third-party-corroborated coverage), adding
+   succession uncertainty to every judgment in this complex. In July — now inside the window —
+   the process advanced to "Nuclear Disarmament Talks" and a US-mediated Lebanon–Israel
+   framework; August post-window context in §7.
 
 7. **The four networks are wired differently, and the wiring is the strategy.** China is
    institution-wired (organizations carry 47% of top-node weight; brokerage funnels through an
@@ -119,15 +130,15 @@ every China/Russia/Turkey relationship sits above 0.69. The y-axis is the honest
 for everything that follows. (High confidence; n=63 relationships ≥200 docs.)*
 
 ![Corroborated leaderboard](assets/02_corroborated_leaderboard.png)
-*Fig 2 — On the corroborated basis the ranking inverts: Turkey 57,690 > China 44,761 > Russia
-40,985 > Iran 20,750. Iran's raw lead (138K) is 85% self-reported.*
+*Fig 2 — On the corroborated basis the ranking inverts: Turkey 59,562 > China 46,003 > Russia
+41,396 > Iran 21,721. Iran's raw lead (144K) is 85% self-reported.*
 
 ![Initiative gate](assets/03_initiative_gate.png)
 *Fig 3 — The initiative funnel: total extracted → corroborated (≥50% third-party, ≥3 outlets) →
-high-material (score ≥6). Iran: 16,628 → 309 → 14. Turkey: 7,556 → 1,281 → 75. (Re-measured
-2026-08 on the re-consolidated, re-scored events layer — extraction grain is finer than the
-2026-07 snapshot, so absolute funnel counts are not comparable to earlier editions; the
-relative story is unchanged.)*
+high-material (score ≥6). Iran: 18,144 → 353 → 15. Turkey: 8,080 → 1,406 → 84. China:
+8,287 → 1,245 → 93. Russia: 4,445 → 840 → 72. (Re-measured 2026-08-25 on the events layer
+extended through July 2026; absolute funnel counts are not comparable to pre-August editions,
+the relative story is unchanged.)*
 
 ---
 
@@ -138,7 +149,7 @@ in the second instrument and in what survives to the initiative grain:
 
 - **China builds.** Instrument over-representation vs. theater average: Industrial 2.6×,
   Technology 2.5×, Education 2.0×, Infrastructure 1.6× — ratios that *strengthen* when all
-  Iran-geofocus outlets are excluded. 526 corroborated economic initiatives. Note the
+  Iran-geofocus outlets are excluded. 559 corroborated economic initiatives. Note the
   dependency: 71% of China's industrial coverage is Egypt-focused.
 - **Turkey delivers and mediates.** Aid/Donation 14.8% of mix (1.4×, n=7,340 docs) and Conflict
   Resolution 1.3× — robust to excluding aligned Qatari and Iranian outlets.
@@ -188,8 +199,8 @@ narrowed to Iran, Turkey, and the Syrian military file. *(High confidence)*
 
 ## 4. Contested Terrain, Collisions, and Handoffs
 
-**Egypt is the premier contested market.** Third-largest corroborated-initiative base (624),
-top-4 on quarter-by-category collision cells. China leads on initiative count (333, 53%) and
+**Egypt is the premier contested market.** Third-largest corroborated-initiative base (551),
+top-4 on quarter-by-category collision cells. China leads on initiative count (263, 48%) and
 every civilian lane; Russia leads per-initiative weight (El Dabaa); Turkey leads momentum
 (Economic docs 40→77/mo into 2026-H1; 18 agreements signed Feb 2026; the 2026 Business Forum
 with Erdoğan and el-Sisi, 75 outlets). *(High confidence)*
@@ -199,8 +210,8 @@ with Erdoğan and el-Sisi, 75 outlets). *(High confidence)*
 ![Syria substitution](assets/06_syria_substitution.png)
 *Fig 7 — Iran: ~198 → 15 → 8 third-party docs/mo (−95%, zero-doc months by 2026). Turkey:
 doubled through 2025 (233→477/mo), still ~5.5× Russia in 2026-H1, with a civilian mix (post-2025:
-Diplomacy 4,883 / Social 1,935 / Economic 1,545 / Military 218 docs) and 327 corroborated
-initiatives launched vs 49 pre-Assad. Russia decayed in two steps but did not exit.*
+Diplomacy 4,883 / Social 1,935 / Economic 1,545 / Military 218 docs) and 318 corroborated
+initiatives launched vs 39 pre-Assad. Russia decayed in two steps but did not exit.*
 
 **Three subtler dynamics** *(moderate-to-high confidence)*:
 - **Russia→Turkey rotation on the Iran file.** After the Jun 2025 war, Russia→Iran suffered the
@@ -215,8 +226,9 @@ initiatives launched vs 49 pre-Assad. Russia decayed in two steps but did not ex
 - **Lebanon: collective disengagement, then a re-entry race.** All four actors collapsed 66–82%
   after the Nov 2024 ceasefire (z=3.0–6.1, survives excluding Lebanese outlets). In 2026-H1 Iran
   rebounded hardest (to 240 docs/mo, 74% Diplomacy — its ceasefire-brokerage role), with a
-  synchronized China+Turkey re-entry in Apr 2026. **Yemen was never re-entered by anyone**: after
-  the z=11.4 break it is now the region's least patron-concentrated market on both metrics.
+  synchronized China+Turkey re-entry in Apr 2026. **Yemen was not re-entered by any rival**: after
+  the z=11.4 break it is the region's least patron-concentrated market on both metrics — until
+  Iran itself began returning in June–July 2026 (§7).
 
 ---
 
@@ -259,7 +271,7 @@ docs are excluded — retained only as a projection measure.)
 
 ## 6. The Initiative Ledger — What Was Actually Done
 
-*(The report's evidentiary core: 3,564 gated initiatives (re-measured 2026-08); full ranked list with event IDs in
+*(The report's evidentiary core: 3,844 gated initiatives (re-measured 2026-08-25); full ranked list with event IDs in
 [`assets/10_initiative_ledger.csv`](assets/10_initiative_ledger.csv).)*
 
 ![Initiative ledger](assets/10_initiative_ledger.png)
@@ -293,9 +305,9 @@ same-project match for any 2024–26 headline project (expected — AidData ends
 meaningful corroboration is locational lineage — record 41017 (2009 Eximbank/CDB credit for the
 TEDA Suez zone) documents two decades of Chinese financing under today's reported corridor.
 
-**Durability must be read as family recurrence, not span**: the pipeline caps median event span
-at 1 day (only 9 of 8,555 events span ≥30 days), so persistence = the same named initiative
-recurring across canonical events, as tabulated above.
+**Durability is best read as family recurrence, not span**: the median event still spans a
+single day (300 of 38,956 ledger events span ≥30 days; the longest 67), so persistence = the
+same named initiative recurring across canonical events, as tabulated above.
 
 **Excluded as extraction noise** (verified mis-tags, removed from all top-tier claims): the
 China–Nigeria $1B railway (Egypt mis-tag), the Norway-led $1.8B "Energy Valley" credited to
@@ -334,63 +346,78 @@ segmentation, |z|≥2.5) against the trigger calendar.*
    (June 25). The same fortnight, **Ayatollah Khamenei died** (~June 10–15; funeral ceremonies
    late June–July, ~303 docs at 41% third-party corroboration — genuine international attention,
    including announced attendance by Pakistan's prime minister and projected one-million-strong
-   Iraqi participation). Iran's corroborated volume spiked to 1,151 docs in June (≈4× May),
-   driven by the de-escalation diplomacy and a Lebanon surge (566 corroborated docs).
-   Succession signals are ambiguous; the corpus does not support naming a successor.
+   Iraqi participation). Iran's corroborated volume spiked to 1,322 docs in June (≈4× May),
+   driven by the de-escalation diplomacy and a Lebanon surge (639 corroborated docs), then
+   settled to 746 in July as the file moved from crisis to process: the **US–Iran "Nuclear
+   Disarmament Talks"** (materiality 9.0, 179 articles), a **China–Pakistan joint mediation
+   track** (July 14), **Iran–Oman Strait of Hormuz navigation negotiations** (July 4 and 14;
+   Iran→Oman 243 corroborated docs in July, a record for the pair), and the **US-mediated
+   Lebanon–Israel Agreement Framework** (271 articles; Rome round July 6). Khamenei funeral
+   diplomacy (114 articles) ran into the seasonal Arbaeen ramp (1,161 docs in July, 5%
+   third-party). Succession signals are ambiguous; the corpus does not support naming a
+   successor. **August 2026 extends the pattern in two directions**: the US–Iran channel
+   narrowed to the **Strait of Hormuz** (the month's largest US-file events are two Hormuz
+   negotiation rounds, 85 and 81 articles, and a reopening proposal, 47) while a **"Gaza
+   Agreement"** (materiality 8.0) entered the mediation file; and **China produced its
+   strongest corroborated month of 2026 (1,214 docs, +61% on July)** on head-of-state
+   summitry — **King Abdullah II's Beijing state visit** (24 bilateral agreements signed,
+   materiality 8.0, corroboration 1.00; China→Jordan 72 → 118 → 705 corroborated docs
+   Jun→Aug) plus the **SDIC acquisition of a 28% stake in Arab Potash** — a Jordan surge
+   large enough to lift Jordan past Saudi Arabia into third place among China's corroborated
+   recipients (2,607 vs 2,511). Turkey's August also brought the **Mecca Joint Defense
+   Agreement** (36 docs, 30 outlets, corroboration 1.00), formalizing the
+   Turkey–Saudi–Pakistan defense triangle.
 
 ![Narrative themes](assets/11_narrative_themes.png)
 *Fig 10 — Semantically-clustered initiative families spanning ≥3 recipients. The live 2026
 clusters (Hormuz mediation, US–Iran MOU, permanent-ceasefire brokerage) are the mediation race;
 the durable ones (Arbaeen, Hejaz railway, Huawei ICT competitions) are standing campaigns.*
 
-**H2-2026 watchboard** *(moderate confidence — leading-edge items by design; July-2026
-post-window status appended per item, partial-month caveat applies)*:
+**H2-2026 watchboard** *(moderate confidence — leading-edge items by design; August is now a
+full in-window month; September 1–9 post-window status appended where it moves)*:
 - **Turkey's Hejaz Railway revival** (Syria–Jordan–Saudi corridor; first mention Jun 2 2026, 18
   outlets, corr 1.0) — infrastructure that would physically wire Turkey's Levant position into
-  the Gulf. *July status: still active (54 post-June-15 docs mention the project); no
+  the Gulf. *Aug status: still active (last mention Aug 13); no
   confirmation yet of progress past MOU.*
 - **Turkey–Egypt/Saudi economic normalization wave** (Economic docs 5→32/mo toward Riyadh,
-  40→77/mo toward Cairo). *July status: split verdict — Cairo momentum **confirmed** (89
-  corroborated docs, Turkey's strongest Egypt month on record, against a corpus-wide July
-  tail-off); Riyadh cooled (86 → 30).*
+  40→77/mo toward Cairo). *Aug verdict: **confirmed on both legs** — Turkey→Egypt set a third consecutive
+  record on the re-measured layer (48 → 94 → 151 corroborated docs, Jun→Aug); the Turkey→Saudi
+  August rebound held. On the re-consolidated September layer the wave is Turkey's clearest
+  growth vector.*
 - **The reactivated Muscat channel** (Iran–Oman nuclear talks resurging after the mid-2025
-  strike pause; al-Busaidi the pivot). *July status: **confirmed** — Iran–Oman Strait of Hormuz
-  navigation negotiations (July 4, 106 articles; July 14, 59 articles); Oman is now Iran's #4
-  corroborated recipient.*
+  strike pause; al-Busaidi the pivot). *Aug verdict: **confirmed and holding** — 201 → 212 → 192 corroborated docs/mo
+  Jun→Aug on the re-measured layer; Oman is now Iran's **#3 corroborated recipient (1,701)**,
+  behind only Lebanon and Iraq and ahead of Syria.*
 - **China's Libya re-entry** (cp Apr 2026, z=3.65; consulate reopening + strategic-partnership
-  mechanism = the standard Chinese re-entry opening sequence). *July status: **sustained** at
-  ~30 corroborated docs/month.*
+  mechanism = the standard Chinese re-entry opening sequence). *Aug verdict: **stalled** — 33 → 32 → 15 corroborated docs Jun→Aug;
+  the re-entry sequence paused without a follow-on project announcement.*
 - **China→Iraq silence** after the $4B Basra desalination launch — an unexplained
-  project-pipeline pause worth a collection question. *July status: **persists** (~19
-  corroborated docs).*
+  project-pipeline pause worth a collection question. *Aug verdict: **easing** — 16 → 26 → 28 corroborated docs Jun→Aug, a slow
+  recovery from the post-Basra pause; still no new headline project.*
 - **Decay watch:** Russia broadly (KJ4); Iran→Yemen still unreplaced; China→Saudi cooling.
-  *July status: Russia's decay **deepened** — 243 corroborated docs, its lowest month on record,
-  and no registered Russian role in the July US–Iran mediation round; Iran→Yemen is **no longer
-  unreplaced** — Iran itself re-entered (3 → 15 → 52 corroborated docs/mo, May→July).*
+  *Aug verdict: Russia's decay **deepened again** — successive record-low full months
+  (268 in July, 222 in August on the re-measured layer) and still no registered Russian role in
+  any mediation round; **Iran's Yemen re-entry reversed** — 15 → 52 → 13 corroborated docs
+  Jun→Aug, so July now reads as Hormuz-crisis spillover, not a durable return, and the file is
+  back to unreplaced.*
 
-### Post-window developments (July 2026) — context, not analysis-grade
+### Post-window developments (September 1–9, 2026) — context, not analysis-grade
 
-*The corpus extends to 2026-07-27. July is a partial month with a possible ingestion tail-off
-(all four actors' July volumes dip), so the items below are context for H2-2026 monitoring,
-not findings on the corroborated-metric basis of this report.*
+*The corpus extends to 2026-09-09. September is nine days of data, so the items below are
+context for H2-2026 monitoring, not findings on the corroborated-metric basis of this report.*
 
-- **The US–Iran process advanced to "Nuclear Disarmament Talks"** (materiality 9.0, 179
-  articles) — the highest-materiality event in the post-window data — while **China and
-  Pakistan launched a joint mediation track** (July 14, 84 articles). The §8 watch question
-  "who staffs the US–Iran channel" is resolving as *plural*: Switzerland, Doha, Muscat, and a
-  Beijing–Islamabad track — with Ankara, despite its Jan-2026 trilateral, not visibly at the
-  July table.
-- **US-mediated Lebanon–Israel Agreement Framework negotiations** became the largest single
-  post-window event (365 articles; Rome round July 6). Iran's Lebanon file surged in parallel
-  (566 corroborated docs in June; 88 in July) — Lebanon is where the mediation race and the
-  Resistance-arc file now intersect.
-- **Khamenei funeral diplomacy** continued into July (diplomatic engagement at the funeral,
-  114 articles), blending into the seasonal **Arbaeen ramp** (overwhelmingly self-reported, as
-  in prior years).
-- **Qatar flip:** Iran edged past Turkey as Qatar's top corroborated four-actor engager (903
-  vs 865, full-corpus basis) on the back of the Doha talks.
-
----
+- **Xi Jinping's state visit to Egypt is the post-window story** — the corpus's largest
+  September events are all one trip: the Grand Egyptian Museum visit (263 articles), the
+  Cairo round upgrading the comprehensive strategic partnership (125 articles, materiality
+  7.5), a Belt-and-Road cooperation plan aligned with Egypt Vision 2030, and "Sustainable
+  Panda Bonds" (27 articles) — Egypt-denominated RMB financing. Taken with August's Jordan
+  state visit, September opens as a second consecutive month of Chinese head-of-state
+  summitry in the Arab core.
+- **The Lebanon–Israel track re-warmed in Rome**: a US-brokered detainee release and a push
+  to resume the Rome dialogue (Sept 1–9) after the framework's August cooling — the US file's
+  only sizable September events.
+- Iran's September opens quiet (Arbaeen ramp-down; Hormuz channel steady); no Russian
+  September event clears 10 articles — the decay pattern extends.
 
 ## 8. Data Gaps & Coverage Priorities
 
@@ -427,9 +454,9 @@ US–Iran process together?
 
 ## 9. Method & Verification Appendix
 
-- **Data:** `analytics` schema rebuilt 2026-08 on the refreshed corpus (779K docs, extending to
-  2026-07-27), window clamped to full months (2024-08-01 ≤ date < 2026-07-01); July is quoted
-  only as post-window context. Derived objects and migration-ready DDL:
+- **Data:** `analytics` schema rebuilt 2026-08-25 on the refreshed corpus (796K docs, extending to
+  2026-08-24), window clamped to full months (2024-08-01 ≤ date < 2026-08-01); August 1–24 is
+  quoted only as post-window context. Derived objects and migration-ready DDL:
   [`../_derived/manifest.md`](../_derived/manifest.md); builders
   `build_analytics.py`, `build_theater.py`; charts `analyze_theater.py` (deterministic, seeded).
 - **Events-layer note (2026-08-03):** the July data refresh re-ran Stage-1 daily event
@@ -445,6 +472,14 @@ US–Iran process together?
   tables (event counts per named family) still reflect the 2026-07-09 snapshot narrative;
   their third-party doc and outlet counts are doc-grain and remain valid. Document-grain
   figures (Figs 1–2, 4–9) are current as of the 2026-08 rebuild.
+- **Events-layer note (2026-08-25):** the August refresh (16,938 new documents, 2026-07-21 →
+  08-24) was processed incrementally: the overlap week 07-21 → 07-27 was rolled back and
+  re-clustered with the fuller export; Stage-2 consolidation ran on the new window only
+  (`consolidate_all_events --start-date 2026-06-21`, 2,688 candidate groups → 1,313 split by
+  the LLM validator; 3,285 children merged) with every master that gained children re-validated
+  before merge; materiality scored for all new/changed events. Live layer: **59,547 consolidated
+  canonical events (12,407 multi-day, max span 67 days)**. Initiative-grain and document-grain
+  figures in this edition are current as of that rebuild.
 - **Process:** five parallel investigation threads (signature, competition, network, tempo,
   ledger) with raw SQL/embedding/graph access → every finding adversarially verified by two
   independent lenses (data-integrity re-query; bias-artifact attack) → completeness pass →

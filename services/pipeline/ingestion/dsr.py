@@ -49,7 +49,7 @@ def load_dsr(directory=None,relocate=True):
         directory = cfg.dsr_data
         # Resolve the full directory path relative to this script
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    directory = os.path.abspath(os.path.join(base_dir, '..', '..', directory))
+    directory = os.path.abspath(os.path.join(base_dir, '..', '..', '..', directory))  # project root
     print(f"Looking for files in: {directory}")
     dsr = []
     for filename in os.listdir(directory):
@@ -62,7 +62,7 @@ def load_dsr(directory=None,relocate=True):
                 dsr.append(data)
                 print(f'loaded {file}...')
             if relocate:
-                move_file(file,os.path.join(directory,'processed'))
+                move_file(file, os.path.join(directory, 'processed', filename))
     print(f'{len(dsr)} documents loaded...')
     return dsr
 
