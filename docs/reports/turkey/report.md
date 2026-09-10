@@ -127,20 +127,22 @@ council. Turkey's calendar is driven by the region's two central conflict files 
 precisely where and when the Levant's crises peak, consistent with a mediator that derives
 influence from being present at every inflection point. **(M)**
 
-**July 2026 (now in-window).** Turkey's corroborated tempo held at 1,167 docs. (a)
-Turkey→Egypt momentum continued — 113 corroborated docs, Economic docs 9 → 37/mo Jun→Jul.
-(b) Turkey→Saudi Arabia cooled after the February 2026 surge (99 in June → 43 in July).
-(c) Iran overtook Turkey as Qatar's top corroborated four-actor engager inside the window
-(907 vs 865 through July 31). (d) The mediation franchise re-engaged on Lebanon — "Lebanese–
-Turkish Bilateral Engagement and UNIFIL Cooperation" (July 30, 77 articles) and "Reconstruction
-of South Lebanon" (33 outlets) — while the U.S.–Iran process itself ran through Switzerland,
-Doha and Muscat, not Ankara. On July 31 "Gaza Ceasefire and Reconstruction Diplomacy" opened
-(138 articles on the Turkey file, materiality 8.0). **(M)**
+**August 2026 (now in-window).** Turkey's corroborated tempo rose to **1,118 docs** — with
+China's summitry surge (1,214) it made August the window's first month with two actors above
+1,100. (a) **Turkey→Egypt set a third consecutive record** — 48 → 94 → 151 corroborated docs
+Jun→Aug — now Turkey's clearest growth vector. (b) The **Mecca Joint Defense Agreement** (36
+docs, 30 outlets, corroboration 1.00) formalized the Turkey–Saudi–Pakistan defense triangle,
+capping the Saudi rebound. (c) **Iran's Qatar lead held through August** (934 vs 882 among
+the four actors; both files quiet in the month itself). (d) "Gaza Ceasefire and Reconstruction
+Diplomacy" (materiality 8.0) stayed live on the mediation franchise, alongside the Lebanon
+re-engagement (UNIFIL cooperation, South-Lebanon reconstruction). On the full window,
+**Palestine (9,201) edged past Syria (9,169) as Turkey's largest corroborated file** — the
+Gaza track overtaking the Syria-reconstruction anchor. **(M)**
 
-**Post-window context (August 1–24, 2026).** The corpus extends to 2026-08-24; August is a
-partial month with possible ingestion tail-off. Turkey is the only actor whose corroborated
-tempo did not dip (1,137 docs in 24 days vs 1,167 in all of July): Egypt 158 (Turkey's strongest
-Egypt month since February), Syria 148, and a Saudi rebound to 135 from July's 43. **(M)**
+**Post-window context (September 1–9, 2026).** Nine days of data: the Gaza and Lebanon
+mediation threads carry over (a US-brokered Lebanon–Israel detainee release and a Rome
+dialogue push are the file's live items); no new Turkish initiative above ~30 articles yet.
+**(M)**
 
 ---
 

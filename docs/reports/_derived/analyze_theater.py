@@ -129,7 +129,7 @@ def fig01(d):
     ax.legend(loc='center left', ncol=1, fontsize=9)
     despine(ax)
     save(fig, '01_provenance_quadrant', pair.sort_values(['initiating_country', 'recipient']),
-         'Each dot = one initiator→recipient relationship (raw ≥200 docs). y = share of coverage NOT from the initiator\'s own media. 2024-08→2026-07.')
+         'Each dot = one initiator→recipient relationship (raw ≥200 docs). y = share of coverage NOT from the initiator\'s own media. 2024-08→2026-08.')
 
 
 # ---------------------------------------------------------------- 02 leaderboard
@@ -155,7 +155,7 @@ def fig02(d):
     ax.legend(loc='upper right', fontsize=9)
     despine(ax)
     save(fig, '02_corroborated_leaderboard', ag,
-         'Distinct docs per initiator across MENA recipients, 2024-08→2026-07. Colored bar = coverage not from the initiator\'s own media ecosystem.')
+         'Distinct docs per initiator across MENA recipients, 2024-08→2026-08. Colored bar = coverage not from the initiator\'s own media ecosystem.')
 
 
 # ---------------------------------------------------------------- 03 initiative gate
@@ -187,7 +187,7 @@ def fig03(d):
     ax.legend(fontsize=8.5)
     despine(ax)
     save(fig, '03_initiative_gate', df,
-         'Canonical events (named initiatives) per initiator, MENA scope 2024-08→2026-07, from analytics.initiative_ledger.')
+         'Canonical events (named initiatives) per initiator, MENA scope 2024-08→2026-08, from analytics.initiative_ledger.')
 
 
 # ---------------------------------------------------------------- 04 category signature
@@ -212,7 +212,7 @@ def fig04(d):
                  x=0.01, ha='left', fontsize=12.5, fontweight='bold')
     fig.subplots_adjust(top=0.8)
     save(fig, '04_category_signature', cat.sort_values(['initiating_country', 'category']),
-         'Share of each actor\'s third-party-corroborated docs by category, MENA scope 2024-08→2026-07.')
+         'Share of each actor\'s third-party-corroborated docs by category, MENA scope 2024-08→2026-08.')
 
 
 # ---------------------------------------------------------------- 05 competitive heatmap by bloc
@@ -250,14 +250,14 @@ def fig05(d):
     ax.grid(False)
     df = mat.reset_index()[['recipient', 'bloc'] + ACTORS]
     save(fig, '05_competitive_heatmap', df,
-         'Third-party-corroborated docs per initiator→recipient, 2024-08→2026-07; color = log scale; blocs from ward clustering of engagement profiles.')
+         'Third-party-corroborated docs per initiator→recipient, 2024-08→2026-08; color = log scale; blocs from ward clustering of engagement profiles.')
 
 
 # ---------------------------------------------------------------- 06 syria substitution
 def fig06(d):
     g = d['pi'][d['pi'].recipient == 'Syria'].groupby(
         ['initiating_country', 'month'], as_index=False).agg(third=('third_party_docs', 'sum'))
-    months = pd.date_range('2024-08-01', '2026-07-01', freq='MS').date
+    months = pd.date_range('2024-08-01', '2026-08-01', freq='MS').date
     fig, ax = plt.subplots(figsize=(9.6, 5))
     for a in ACTORS:
         ser = g[g.initiating_country == a].set_index('month').third.reindex(months, fill_value=0)
@@ -283,7 +283,7 @@ def fig06(d):
 def fig07(d):
     tot = d['pi'].groupby(['initiating_country', 'month'], as_index=False).agg(
         third=('third_party_docs', 'sum'))
-    months = pd.date_range('2024-08-01', '2026-07-01', freq='MS').date
+    months = pd.date_range('2024-08-01', '2026-08-01', freq='MS').date
     cps = d['cps'].sort_values('z_score', ascending=False)
     fig, axes = plt.subplots(2, 2, figsize=(11.5, 6.6), sharex=True)
     for ax, a in zip(axes.ravel(), ACTORS):

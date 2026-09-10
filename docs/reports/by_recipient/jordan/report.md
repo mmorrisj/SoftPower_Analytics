@@ -1,18 +1,18 @@
 # Who Courts Jordan? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
-> **Hedging profile: contested.** Lead actor: **China** (30% of external attention).
+> **Hedging profile: balancing (multi-patron).** Lead actor: **China** (37% of external attention).
 
 ---
 
 ## 1. Key Findings (BLUF)
 
-- **Jordan is genuinely contested:** China leads with only 30%, with U.S. close behind (28%). **(H)**
-- **Division of labor by instrument:** Economic→**China**, Social→**China**, Military→**U.S.**, Diplomacy→**U.S.**. **(H)**
+- **Jordan balances multiple patrons** — China leads (37%) but engages U.S., Turkey substantially too. **(M)**
+- **Division of labor by instrument:** Economic→**China**, Social→**China**, Military→**U.S.**, Diplomacy→**China**. **(H)**
 - The classic division of labor is on display: **China supplies the economics and the U.S. the security** — the Gulf-hedge pattern at the country level. **(M)**
 - **Signature initiative:** Hejaz Railway (Turkey). **(M)**
 
@@ -24,15 +24,15 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| China | 1,902 | 31% |
-| U.S. | 1,796 | 29% |
-| Turkey | 1,701 | 27% |
-| Russia | 545 | 9% |
-| Iran | 291 | 5% |
+| China | 2,607 | 37% |
+| U.S. | 1,820 | 26% |
+| Turkey | 1,743 | 25% |
+| Russia | 557 | 8% |
+| Iran | 294 | 4% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
-Jordan's external-influence field is **contested**. The classic division of labor is on display: **China supplies the economics and the U.S. the security** — the Gulf-hedge pattern at the country level.
+Jordan's external-influence field is **balancing (multi-patron)**. The classic division of labor is on display: **China supplies the economics and the U.S. the security** — the Gulf-hedge pattern at the country level.
 
 ---
 
@@ -42,7 +42,7 @@ Jordan's external-influence field is **contested**. The classic division of labo
 
 Read by instrument, the competition for Jordan sorts cleanly: **Economic → China**,
 **Social → China**, **Military → U.S.**, **Diplomacy →
-U.S.**. Each actor competes in the lane that fits its regional model rather
+China**. Each actor competes in the lane that fits its regional model rather
 than going head-to-head across all four. **(H)**
 
 ---
@@ -53,7 +53,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Jordan is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-61 peripheral events (where Jordan was only mentioned in
+43 peripheral events (where Jordan was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Hejaz Railway** — Turkey, material 8.50 (2026-04)

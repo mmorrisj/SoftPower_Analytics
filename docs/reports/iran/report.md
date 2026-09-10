@@ -167,28 +167,28 @@ security (June 25). Iran's corroborated volume spiked to **1,151 docs in June �
 May's 293** — driven by this diplomacy plus a Lebanon surge (Iran→Lebanon posted 566
 corroborated docs in June alone). **(H)**
 
-### July 2026 (now in-window) and post-window context (August 1–24)
+### August 2026 (now in-window) and post-window context (September 1–9)
 
-*The analysis window now closes 2026-07-31; the corpus extends to 2026-08-24, and August is a
-partial month with possible ingestion tail-off — context, not analysis-grade.*
+*The analysis window now closes 2026-08-31; the corpus extends to 2026-09-09, and September
+is nine days of data — context, not analysis-grade.*
 
-- **July, in-window:** the US-Iran process advanced to **"Nuclear Disarmament Talks"**
-  (materiality 9.0, 179 articles); **China and Pakistan launched a joint mediation track**
-  (July 14, 84 articles); **Iran-Oman Strait of Hormuz navigation negotiations** (July 4 and
-  14) lifted Iran→Oman to 243 corroborated docs — a record for the pair — and Oman is now
-  Iran's #3 corroborated recipient (1,509). Iran's corroborated tempo settled to 746 docs from
-  June's 1,322 crisis peak; Lebanon fell 639 → 111. Khamenei funeral diplomacy (114 articles)
-  ran into the **Arbaeen ramp** (1,161 docs in July, 5% third-party — the standing bias case).
-  Corroborated initiative flow: 41 gated initiatives in July after 97 in Q2.
-- **Iran re-entered Yemen inside the window** — 3 (May) → 19 (June) → 65 (July) corroborated
-  docs — but the return did not hold: 5 in August 1–24.
-- **August pivots to Iraq.** Seven of Iran's ten largest August events are Arbaeen logistics
-  (816 docs, 44 third-party); the one substantive economic item is the **Shalamcheh-Basra
-  railway** (parliamentary meeting Aug 19, 244 articles, materiality 6.5). The Muscat channel
-  held (199 corroborated docs; an Iran-Oman Hormuz negotiation Aug 2, 64 articles), while
-  Lebanon (22) and Qatar (18) went quiet.
-- **Qatar:** Iran's lead over Turkey as Qatar's top corroborated four-actor engager (907 vs
-  865) is now an in-window fact.
+- **August, in-window: Iraq and Arbaeen, not the Gulf.** Iran's corroborated tempo eased to
+  522 docs (from 597 in July and the 1,151 June crisis peak) — a normalization, not a
+  collapse. The month's dominant activity is **Arbaeen logistics** (overwhelmingly
+  self-reported — the standing bias case) and the **Shalamcheh–Basra railway** (244
+  articles, materiality 6.5), the one substantive economic item. Lebanon (25 corroborated
+  docs) and Qatar (37) stayed quiet.
+- **The Yemen re-entry reversed.** 15 (June) → 52 (July) → 13 (August) corroborated docs:
+  July now reads as Hormuz-crisis spillover rather than a durable return, and the
+  post-November-2024 Yemen vacancy stands — no actor has moved on the file.
+- **The Muscat channel held** — 201 → 212 → 192 corroborated docs Jun→Aug (an Iran–Oman
+  Hormuz navigation round Aug 2; a proposed Hormuz shipping route, 39 docs at 0.82
+  corroboration, was August's most-corroborated new Iranian initiative). **Oman is Iran's
+  #3 corroborated recipient (1,701)**, behind only Lebanon and Iraq.
+- **Qatar:** Iran's lead over Turkey as Qatar's top corroborated four-actor engager **held
+  through the full August window — 934 vs 882** (both files quiet in August itself).
+- **September opens quiet**: Arbaeen ramp-down, Hormuz channel steady, no new Iranian
+  initiative above ~40 articles in the first nine days.
 
 ---
 

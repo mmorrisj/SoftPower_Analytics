@@ -148,19 +148,25 @@ investment-package announcements, underscoring that China's calendar is driven b
 summitry and deal-making*, not by regional crises. The gentle taper through early 2026 is
 partly an artifact of the corpus's trailing edge. **(M)**
 
-**July 2026 (now in-window).** China's corroborated tempo held at 833 docs in July (819 in
-June). The month's signature item is the **China–Pakistan joint mediation track for U.S.–Iran
-conflict resolution** (July 14, 84 articles) — the sixth high-material mediation event in
-China's 2026 broker portfolio (28–78 outlets each) — alongside the post-Basra China→Iraq
-pipeline pause easing (36 corroborated docs, from ~19) and the Libya re-entry holding at ~32.
-**(M)**
+**August 2026 (now in-window) — China's strongest month of 2026.** Corroborated tempo jumped
+to **1,214 docs (+61% on July's 753)**, the best month since September 2025 — and the driver
+is exactly the thesis: head-of-state summitry, not crisis. **King Abdullah II's state visit to
+Beijing** produced **24 bilateral agreements** (materiality 8.0, corroboration 1.00) plus
+Xi–Abdullah talks on the Palestinian file, lifting China→Jordan from 118 to **705 corroborated
+docs** in a month — enough to move **Jordan past Saudi Arabia into China's #3 recipient slot
+(2,607 vs 2,511 in-window)**. The month's other substantive economic item is the **SDIC Group
+acquisition of a 28% stake in Arab Potash Company** (45 docs, 24 outlets, corroboration 1.00) —
+capital, not just communiqués. July's items held: the China–Pakistan mediation track stayed in
+the portfolio, the China→Iraq pipeline pause kept easing (26 → 28 corroborated docs), while
+the **Libya re-entry stalled** (32 → 15). **(M)**
 
-**Post-window context (August 1–24, 2026).** The corpus extends to 2026-08-24; August is a
-partial month with possible ingestion tail-off, so the following is context, not trend data.
-(a) A **China–Jordan strategic partnership** (Beijing meeting Aug 15 and 19; 58 + 42 articles,
-materiality 6.0) is China's only sizable August initiative. (b) China→Egypt held ~79
-corroborated docs; China→Saudi Arabia fell to 18 and China→Libya to 9 — the Libya re-entry is
-the item to watch for a stall. (c) Corroborated tempo eased to 682 docs. **(M)**
+**Post-window context (September 1–9, 2026).** The corpus extends to 2026-09-09; nine days of
+data — context, not trend. **Xi Jinping's state visit to Egypt** dominates: the Grand Egyptian
+Museum visit (263 articles), a Cairo round upgrading the comprehensive strategic partnership
+(125 articles, materiality 7.5), a Belt-and-Road cooperation plan aligned with Egypt Vision
+2030, and **"Sustainable Panda Bonds"** — RMB-denominated financing for Egypt. Two consecutive
+months of Chinese head-of-state summitry in the Arab core (Jordan in August, Egypt in
+September) is the pattern to watch entering Q4. **(M)**
 
 ---
 

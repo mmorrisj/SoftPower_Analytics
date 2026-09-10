@@ -1,7 +1,7 @@
 # Who Courts Syria? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -24,11 +24,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| Turkey | 9,007 | 42% |
-| U.S. | 7,008 | 33% |
-| Russia | 3,189 | 15% |
-| Iran | 1,624 | 8% |
-| China | 485 | 2% |
+| Turkey | 9,169 | 42% |
+| U.S. | 7,144 | 33% |
+| Russia | 3,235 | 15% |
+| Iran | 1,631 | 8% |
+| China | 502 | 2% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -53,17 +53,17 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Syria is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-42 peripheral events (where Syria was only mentioned in
+43 peripheral events (where Syria was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Saudi Arabia, Qatar, Turkey Commit to $216B Syria Reconstruction Agreements** — Turkey, material 9.00 (2025-10)
+- **Telecommunications projects** — U.S., material 8.50 (2026-08)
+- **Saudi-Syrian airline** — U.S., material 8.50 (2026-08)
+- **desalination plants** — U.S., material 8.50 (2026-08)
+- **Development of two airports in Aleppo** — U.S., material 8.50 (2026-08)
+- **US Delisting of Syria Spurs Saudi, Qatari, and UAE Reconstruction Commitments** — U.S., material 8.50 (2026-08)
 - **Turkey and Syria Sign Phosphate and Energy Cooperation MoU in Damascus** — Turkey, material 8.50 (2026-08)
 - **US-Brokered Secret Nuclear Material Removal Agreement** — U.S., material 8.50 (2026-08)
-- **Agreement between IAEA and Syrian government for nuclear material removal** — U.S., material 8.50 (2026-08)
-- **US-Israel-Syria Nuclear Material Securing Agreement** — U.S., material 8.50 (2026-08)
-- **Site 99** — U.S., material 8.50 (2026-08)
-- **Kirkuk-Baniyas pipeline** — U.S., material 8.50 (2026-07)
-- **Hejaz Railway** — Turkey, material 8.50 (2026-04)
 
 ---
 

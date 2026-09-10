@@ -127,17 +127,16 @@ file persists into 2026 (e.g., the April 2026 Ismat–Rosatom engagement), confi
 nuclear partnership as a *standing* rather than episodic driver. Russia's calendar is set by
 summitry (St. Petersburg Forum) and its Iran/Egypt files. **(M)**
 
-**July 2026 (now in-window).** Russia's corroborated tempo fell to 293 docs in July — its
-lowest full month on record — consistent with, and reinforcing, the structural-decay finding.
-Russia→Iran, its flagship channel, slid 268 → 246 → 167 (May→July), and no Russian role
-registered in the July U.S.–Iran mediation round, which ran through Switzerland, Doha, Muscat
-and a China–Pakistan track — a notable absence for the actor that owned the Iran file. Its
-high-material initiative pipeline produced one gated event in July. **(M)**
+**August 2026 (now in-window).** The decay set a **second consecutive record low**: 268
+corroborated docs in July (revised on the re-measured layer), then **222 in August** — the
+two weakest full months in the dataset. Russia→Iran, the flagship channel, slid to 55
+corroborated docs in August (from 167 in July), no Russian role registered in any U.S.–Iran
+mediation round (Switzerland, Doha, Muscat, the China–Pakistan track), and no August event on
+the Russian file cleared the 40-article mark. The structural-decay finding (KJ4) is no longer
+a trend to watch — it is the file's steady state. **(M)**
 
-**Post-window context (August 1–24, 2026).** The corpus extends to 2026-08-24; August is a
-partial month with possible ingestion tail-off. The decay continued: 150 corroborated docs in
-24 days, Russia→Iran down to 55, and no August event above the 40-article mark on the Russian
-file. **(M)**
+**Post-window context (September 1–9, 2026).** Nine days of data: no Russian event above 10
+articles — the pattern extends. **(M)**
 
 ---
 

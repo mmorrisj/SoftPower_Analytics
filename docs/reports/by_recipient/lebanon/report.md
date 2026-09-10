@@ -1,17 +1,17 @@
 # Who Courts Lebanon? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
-> **Hedging profile: single-patron (United States-dominated).** Lead actor: **U.S.** (58% of external attention).
+> **Hedging profile: single-patron (United States-dominated).** Lead actor: **U.S.** (57% of external attention).
 
 ---
 
 ## 1. Key Findings (BLUF)
 
-- **Lebanon is dominated by U.S. involvement (58% of external attention)** — but this reflects Lebanon's centrality to a crisis/alliance file, not development courtship. **(H)**
+- **Lebanon is dominated by U.S. involvement (57% of external attention)** — but this reflects Lebanon's centrality to a crisis/alliance file, not development courtship. **(H)**
 - **Division of labor by instrument:** Economic→**U.S.**, Social→**Iran**, Military→**U.S.**, Diplomacy→**U.S.**. **(H)**
 - The U.S. lead here is **crisis/alliance involvement, not economic courtship** — it reflects how central Washington is to this file, adversarially or as guarantor. **(M)**
 - **Signature initiative:** Grand Opera House in Dbayeh (China). **(M)**
@@ -24,11 +24,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 10,228 | 58% |
-| Iran | 4,156 | 24% |
-| Turkey | 1,552 | 9% |
-| Russia | 873 | 5% |
-| China | 796 | 5% |
+| U.S. | 10,416 | 58% |
+| Iran | 4,240 | 24% |
+| Turkey | 1,625 | 9% |
+| Russia | 881 | 5% |
+| China | 830 | 5% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -83,16 +83,15 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 *Visuals plot corroborated/registered influence; underlying numbers in sibling CSVs under `assets/`.
 Index: [`../README.md`](../README.md). Method: `docs/INSIGHT_REPORT_PROMPT.md`.*
 
-## Post-window context (August 2026)
+## Post-window context (September 2026)
 
-*The corpus extends to 2026-08-24; August 1–24 is a partial month with a possible ingestion
-tail-off — context, not analysis-grade. July 2026 is now inside the analysis window.*
+*The corpus extends to 2026-09-09; September is nine days of data — context, not
+analysis-grade. August 2026 is now inside the analysis window.*
 
-- The **US-mediated Lebanon–Israel Agreement Framework** — July's largest event in the corpus
-  (271 articles; Rome round July 6) — cooled sharply after the window closed: third-party
-  coverage of the framework fell 735 (June) → 397 (July) → 107 (Aug 1–24).
-- Iran's Lebanon surge crested in June (639 corroborated docs, its largest single-month
-  Lebanon figure on record), eased to 111 in July and 22 in August 1–24 — Iran's August
-  attention moved to Iraq (Arbaeen, the Shalamcheh–Basra railway). Turkey's July
-  "Lebanese–Turkish Bilateral Engagement and UNIFIL Cooperation" (77 articles) and "Reconstruction
-  of South Lebanon" initiatives are the live non-U.S. items on the file.
+- **The US-mediated Lebanon–Israel track re-warmed in Rome in early September** — a
+  US-brokered detainee release and a push to resume the Rome dialogue are the file's live
+  items after the framework's August cooling; the track is moving in stop-start rounds
+  rather than dying.
+- Iran's Lebanon file stayed quiet in August (25 corroborated docs, from the 639-doc June
+  crest); Turkey's UNIFIL-cooperation and South-Lebanon-reconstruction initiatives remain
+  the live non-U.S. items.

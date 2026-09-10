@@ -1,7 +1,7 @@
 # Who Courts Qatar? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -14,7 +14,7 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 - **Qatar is a single-patron file — U.S.-dominated (49%)**, with no rival close. **(H)**
 - **Division of labor by instrument:** Economic→**U.S.**, Social→**China**, Military→**U.S.**, Diplomacy→**U.S.**. **(H)**
 - **Signature initiative:** US-Qatar $96 Billion Aircraft Purchase Agreement, August 2025 (U.S.). **(M)**
-- **18.8% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
+- **19.0% of U.S. coverage here is Iranian-media-framed** — a meaningful adversarial-narrative presence around the U.S. role. **(M)**
 
 ![Who courts Qatar](assets/01_suitor_leaderboard.png)
 
@@ -24,11 +24,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 2,622 | 49% |
-| Iran | 907 | 17% |
-| Turkey | 865 | 16% |
-| China | 555 | 10% |
-| Russia | 349 | 7% |
+| U.S. | 2,653 | 49% |
+| Iran | 934 | 17% |
+| Turkey | 882 | 16% |
+| China | 566 | 10% |
+| Russia | 359 | 7% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -74,7 +74,7 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Trajectory:** see the monthly series for who is gaining or losing ground in Qatar; activity tracks
   the region's inflection points (Israel-Hezbollah escalation Sept 2024, Assad's fall Dec 2024, the
   June 2025 Israel-Iran war). **(M)**
-- **Adversarial framing:** 18.8% of the U.S.'s coverage in Qatar is carried by Iranian media — its image here is partly written by its adversary. **(M)**
+- **Adversarial framing:** 19.0% of the U.S.'s coverage in Qatar is carried by Iranian media — its image here is partly written by its adversary. **(M)**
 - **Caveat:** this measures *reported* influence; the soft-power lens under-captures hard power, and
   dollar figures are announced, not verified. 
 
@@ -83,14 +83,13 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 *Visuals plot corroborated/registered influence; underlying numbers in sibling CSVs under `assets/`.
 Index: [`../README.md`](../README.md). Method: `docs/INSIGHT_REPORT_PROMPT.md`.*
 
-## Post-window context (August 2026)
+## Post-window context (September 2026)
 
-*The corpus extends to 2026-08-24; August 1–24 is a partial month with a possible ingestion
-tail-off — context, not analysis-grade. July 2026 is now inside the analysis window.*
+*The corpus extends to 2026-09-09; September is nine days of data — context, not
+analysis-grade. August 2026 is now inside the analysis window.*
 
-- **Iran's lead over Turkey on Qatar is now an in-window fact**, not post-window context: on
-  the full-corpus corroborated basis Iran 907 vs Turkey 865 through July 31 (Doha having become
-  a working venue of the US–Iran process — the June 26 Doha round and the July "Nuclear
-  Disarmament Talks"). Both files went quiet in August 1–24 (Iran 18, Turkey 12 corroborated
-  docs) as the US–Iran channel narrowed to the Strait of Hormuz and Muscat. The U.S. remains
-  Qatar's overall leader on the registered basis.
+- **Iran's lead over Turkey on Qatar held through the full August window** — 934 vs 882
+  corroborated docs among the four assessed actors on the re-measured September layer. Both
+  files were quiet in August itself (Iran 37, Turkey 22) as the US–Iran channel stayed on
+  the Strait of Hormuz and Muscat: the Doha-venue flip of June is durable, not a one-month
+  artifact. The U.S. remains Qatar's overall leader on the registered basis.

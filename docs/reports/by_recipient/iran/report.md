@@ -1,7 +1,7 @@
 # Who Courts Iran? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -24,10 +24,10 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| U.S. | 25,946 | 50% |
-| Russia | 11,780 | 23% |
-| China | 8,848 | 17% |
-| Turkey | 5,081 | 10% |
+| U.S. | 26,412 | 50% |
+| Russia | 11,853 | 23% |
+| China | 8,923 | 17% |
+| Turkey | 5,175 | 10% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -52,7 +52,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Iran is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-26 peripheral events (where Iran was only mentioned in
+27 peripheral events (where Iran was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **US-Iran Diplomatic Conflict Resolution Effort** — U.S., material 9.00 (2026-06)

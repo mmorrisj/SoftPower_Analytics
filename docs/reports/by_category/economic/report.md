@@ -106,12 +106,15 @@ Every actor's economic activity is Trade-anchored, but the composition diverges 
   procurement) and does not amount to patronage of any single state — the clearest evidence of the
   "U.S. security + Chinese capital" division of labor in the Gulf. **(H)**
 
-*July 2026 (now in-window) and August post-window note (corpus extends to 2026-08-24): Turkey→Egypt
-economic momentum continued — Economic docs 9 → 37/mo Jun→Jul and 158 corroborated docs overall in
-August 1–24, Turkey's strongest Egypt month since February — while the China→Iraq project pipeline
-pause eased in July (36 corroborated docs) without a new project announcement; Iran's one substantive
-August economic item is the Shalamcheh–Basra railway (Aug 19, 244 articles); China's is a
-China–Jordan strategic partnership (Aug 15–19).*
+*August 2026 (now in-window) and September post-window note (corpus extends to 2026-09-09):
+August's economic story is **Chinese capital in the Hashemite core** — King Abdullah II's Beijing
+state visit (24 bilateral agreements) and the **SDIC 28% stake in Arab Potash Company** lifted
+China→Jordan to 705 corroborated docs and Jordan into China's #3 recipient slot; Turkey→Egypt set
+a third consecutive record (48 → 94 → 151 corroborated docs Jun→Aug); Iran's one substantive
+economic item remains the Shalamcheh–Basra railway; the China→Iraq pipeline pause kept easing
+(26 → 28) with still no new headline project. The September post-window opens with **Xi's Egypt
+state visit** — a strategic-partnership upgrade, a BRI cooperation plan aligned with Egypt Vision
+2030, and RMB-denominated "Sustainable Panda Bonds."*
 
 ---
 

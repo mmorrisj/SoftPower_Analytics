@@ -1,7 +1,7 @@
 # Who Courts Egypt? A Cross-Initiator Influence Assessment
 ### China · Iran · Russia · Turkey · United States — for Policy Analysis
 
-*Open-source media corpus, 2024-08-01 to 2026-07-31. Method/caveats per
+*Open-source media corpus, 2024-08-01 to 2026-08-31. Method/caveats per
 `../../INSIGHT_REPORT_PROMPT.md`. Intensity = third-party-corroborated documents (U.S. = registered
 coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)**.*
 
@@ -23,11 +23,11 @@ coverage; the U.S. has no state media in the corpus). Confidence: **(H)/(M)/(L)*
 
 | Actor | Influence (docs) | Share |
 |-------|-----------------:|------:|
-| China | 6,003 | 37% |
-| Turkey | 3,271 | 20% |
-| Russia | 3,177 | 20% |
-| U.S. | 2,746 | 17% |
-| Iran | 901 | 6% |
+| China | 6,242 | 38% |
+| Turkey | 3,422 | 21% |
+| Russia | 3,211 | 19% |
+| U.S. | 2,770 | 17% |
+| Iran | 914 | 6% |
 
 ![Share of attention](assets/04_dominance_share.png)
 
@@ -59,10 +59,10 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **El-Dabaa Nuclear Power Plant** — Russia, material 9.00 (2026-04)
 - **China-Egypt $10B Integrated Steel Production Complex Agreement** — China, material 9.00 (2026-01)
 - **Russia-Egypt El Dabaa Nuclear Power Plant Construction Agreement Signing** — Russia, material 9.00 (2025-08)
-- **Hayat Egypt Factory** — Turkey, material 8.50 (2026-07)
-- **Turkish Investment in Hayat Egypt Factory** — Turkey, material 8.50 (2026-07)
-- **El-Dabaa Nuclear Power Plant Collaboration Between Egypt and Russia** — Russia, material 8.50 (2026-07)
-- **Dabaa Nuclear Power Plant Strategic Partnership** — Russia, material 8.50 (2026-07)
+- **Egypt 2030** — China, material 8.50 (2026-09)
+- **Belt and Road Initiative** — China, material 8.50 (2026-09)
+- **Eagles of Civilization 2026** — China, material 8.50 (2026-09)
+- **Xi Jinping Cairo Visit to Advance China-Egypt Strategic Partnership and Belt and Road Cooperation** — China, material 8.50 (2026-09)
 
 ---
 
@@ -73,7 +73,7 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Trajectory:** see the monthly series for who is gaining or losing ground in Egypt; activity tracks
   the region's inflection points (Israel-Hezbollah escalation Sept 2024, Assad's fall Dec 2024, the
   June 2025 Israel-Iran war). **(M)**
-- **Adversarial framing:** 13.8% of the U.S.'s coverage in Egypt is carried by Iranian media — its image here is partly written by its adversary. **(M)**
+- **Adversarial framing:** 13.7% of the U.S.'s coverage in Egypt is carried by Iranian media — its image here is partly written by its adversary. **(M)**
 - **Caveat:** this measures *reported* influence; the soft-power lens under-captures hard power, and
   dollar figures are announced, not verified. 
 

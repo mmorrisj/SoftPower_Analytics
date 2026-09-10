@@ -89,11 +89,12 @@ scholarships) and the U.S.'s is **aid** (Gaza humanitarian). **(M)**
   Crescent — the same Resistance-arc geography as its (small) economic and (proxy) military files.
   **(H)**
 
-*July 2026 (now in-window) and August post-window note: Ayatollah Khamenei's death (mid-June 2026) triggered a
-large religious-mobilization wave — funeral ceremonies ran from late June into July with ~303 corpus
-documents at 41% third-party corroboration (well above Iran's social-category norm), including
-projected one-million-strong Iraqi participation. The annual Arbaeen ramp followed in July
-(seasonal, and overwhelmingly self-reported as in prior years).*
+*August 2026 (now in-window) note: Iran's social file in August is the **Arbaeen pilgrimage
+peak** — dominating its ten largest events of the month and overwhelmingly self-reported, as in
+prior years (the dataset's standing bias case). The Khamenei funeral-mobilization wave
+(June–July, ~303 docs at 41% third-party — genuinely above Iran's social-category norm) has
+fully receded; no comparable third-party-validated social event has replaced it, for any
+actor.*
 
 ---
 

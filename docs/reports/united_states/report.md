@@ -179,24 +179,24 @@ the crisis-manager thesis — and the driver of the U.S.–Iran counterpart file
 of **Ayatollah Khamenei** in mid-June 2026, with funeral ceremonies extending from late June
 into July; succession remains an open question. **(M)**
 
-### July 2026 (now in-window) and post-window context (August 1–24)
+### August 2026 (now in-window) and post-window context (September 1–9)
 
-*The analysis window now closes 2026-07-31; the corpus extends to 2026-08-24, and August is a
-partial month with possible ingestion tail-off — treat the August items as context, not
-analysis-grade findings.*
+*The analysis window now closes 2026-08-31; the corpus extends to 2026-09-09, and September
+is nine days of data — context, not analysis-grade.*
 
-- **July, in-window:** the **U.S.-mediated Lebanon–Israel Agreement Framework negotiations**
-  were the single largest event in the corpus (271 articles; a Rome round July 6, 85 articles);
-  the U.S.–Iran process advanced to **"Nuclear Disarmament Talks"** (materiality 9.0, 179
-  articles) while **China and Pakistan launched a joint mediation track** (July 14, 84
-  articles) — rival brokers institutionalizing around the U.S. file; an **Iraq–U.S. Strategic
-  Economic Partnership** (July 12, 64 articles) is the rare economic item; and on July 31
-  **"Gaza Ceasefire and Reconstruction Diplomacy"** opened (212 articles, materiality 8.0).
-- **August:** the U.S.–Iran channel narrowed to the **Strait of Hormuz** — "US-Iran Strait of
-  Hormuz Negotiation" (81 articles, materiality 7.5), a second Hormuz negotiation event (56)
-  and a "Proposal to reopen the Strait of Hormuz" (47) — with a "Gaza Agreement" (52) and
-  "second phase of President Trump's plan" (39) on the Gaza file. The Lebanon–Israel framework
-  track cooled sharply (735 → 397 → 107 third-party docs, Jun→Aug).
+- **August, in-window: the U.S.–Iran channel narrowed to the Strait of Hormuz.** The month's
+  largest U.S.-file events are two Hormuz negotiation rounds ("US-Iran Negotiations on
+  Strait of Hormuz," 85 articles, and "US-Iran Strait of Hormuz Negotiation," 81 — both
+  materiality 7.5) and a "Proposal to reopen the Strait of Hormuz" (47). On the Gaza file, a
+  **"Gaza Agreement"** (52 articles, materiality 8.0) and the "second phase of President
+  Trump's plan" (50) carry the ceasefire-diplomacy thread opened July 31. The
+  **Lebanon–Israel framework track cooled sharply** through August after July's peak. Iran
+  (466 registered docs), Israel (360) and Palestine (239) remain the top U.S. counterpart
+  files — the crisis-manager profile unchanged.
+- **September post-window: the Lebanon–Israel track re-warmed in Rome** — a US-brokered
+  **detainee release** and a push to resume the **Rome dialogue** are the U.S. file's only
+  sizable September items (alongside a U.S.-linked training program at the Egyptian Military
+  Academy), consistent with the framework moving in stop-start rounds rather than dying.
 
 ---
 

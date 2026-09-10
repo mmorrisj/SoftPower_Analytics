@@ -1,14 +1,22 @@
 # MENA Theater Assessment — Cross-Actor Soft-Power Competition
 ### China · Iran · Russia · Turkey | Strategic Influence in the Middle East & North Africa
 
-*Observation window 2024-08-01 → 2026-07-31 (24 full months). Open-source media corpus, 796K
-documents (refreshed 2026-08-25; corpus extends to 2026-08-24 — August 1–24 is treated as
+*Observation window 2024-08-01 → 2026-08-31 (25 full months). Open-source media corpus, 804K
+documents (refreshed 2026-09-09; corpus extends to 2026-09-09 — September 1–9 is treated as
 **post-window context only**, see §7); method, lineage, and scope per [`../../INSIGHT_REPORT_PROMPT.md`](../../INSIGHT_REPORT_PROMPT.md).
 Unit of analysis: the **corroborated initiative** (named canonical event with ≥50% third-party
 coverage from ≥3 independent outlets), not the article. Every figure's underlying numbers are
 persisted as a sibling CSV in [`assets/`](assets/). Produced by a five-thread agentic
 investigation with two-lens adversarial verification of every finding (57 findings: 38
 workflow-verified, 19 re-verified inline; 0 refuted, 14 revised with corrections applied).*
+
+> **2026-09-09 edition note:** window advanced one month (August 2026 is now the 25th full
+> month; September 1–9 is post-window context). The events/entities layers were extended
+> incrementally and re-validated; per-pair figures quoted in §7 are re-measured on this layer
+> and can differ modestly from the prior edition's. Substantive changes in this edition:
+> China's record 2026 month on Gulf-core summitry (Jordan), the reversal of Iran's Yemen
+> re-entry, Russia's second consecutive record-low month, and the Qatar flip confirmed
+> in-window.
 
 ---
 
@@ -347,69 +355,69 @@ segmentation, |z|≥2.5) against the trigger calendar.*
    Lebanon–Israel Agreement Framework** (271 articles; Rome round July 6). Khamenei funeral
    diplomacy (114 articles) ran into the seasonal Arbaeen ramp (1,161 docs in July, 5%
    third-party). Succession signals are ambiguous; the corpus does not support naming a
-   successor.
+   successor. **August 2026 extends the pattern in two directions**: the US–Iran channel
+   narrowed to the **Strait of Hormuz** (the month's largest US-file events are two Hormuz
+   negotiation rounds, 85 and 81 articles, and a reopening proposal, 47) while a **"Gaza
+   Agreement"** (materiality 8.0) entered the mediation file; and **China produced its
+   strongest corroborated month of 2026 (1,214 docs, +61% on July)** on head-of-state
+   summitry — **King Abdullah II's Beijing state visit** (24 bilateral agreements signed,
+   materiality 8.0, corroboration 1.00; China→Jordan 72 → 118 → 705 corroborated docs
+   Jun→Aug) plus the **SDIC acquisition of a 28% stake in Arab Potash** — a Jordan surge
+   large enough to lift Jordan past Saudi Arabia into third place among China's corroborated
+   recipients (2,607 vs 2,511). Turkey's August also brought the **Mecca Joint Defense
+   Agreement** (36 docs, 30 outlets, corroboration 1.00), formalizing the
+   Turkey–Saudi–Pakistan defense triangle.
 
 ![Narrative themes](assets/11_narrative_themes.png)
 *Fig 10 — Semantically-clustered initiative families spanning ≥3 recipients. The live 2026
 clusters (Hormuz mediation, US–Iran MOU, permanent-ceasefire brokerage) are the mediation race;
 the durable ones (Arbaeen, Hejaz railway, Huawei ICT competitions) are standing campaigns.*
 
-**H2-2026 watchboard** *(moderate confidence — leading-edge items by design; July is now
-in-window; August 1–24 post-window status appended per item, partial-month caveat applies)*:
+**H2-2026 watchboard** *(moderate confidence — leading-edge items by design; August is now a
+full in-window month; September 1–9 post-window status appended where it moves)*:
 - **Turkey's Hejaz Railway revival** (Syria–Jordan–Saudi corridor; first mention Jun 2 2026, 18
   outlets, corr 1.0) — infrastructure that would physically wire Turkey's Levant position into
-  the Gulf. *Jul–Aug status: still active (66 docs since June 15, last mention Aug 13); no
+  the Gulf. *Aug status: still active (last mention Aug 13); no
   confirmation yet of progress past MOU.*
 - **Turkey–Egypt/Saudi economic normalization wave** (Economic docs 5→32/mo toward Riyadh,
-  40→77/mo toward Cairo). *Jul–Aug status: **confirmed on both legs** — Turkey→Egypt 113 corroborated docs in July
-  and 158 in the first 24 days of August (Economic docs 9 → 37/mo Jun→Jul); Turkey→Saudi dipped
-  to 43 in July, then rebounded to 135 in August.*
+  40→77/mo toward Cairo). *Aug verdict: **confirmed on both legs** — Turkey→Egypt set a third consecutive
+  record on the re-measured layer (48 → 94 → 151 corroborated docs, Jun→Aug); the Turkey→Saudi
+  August rebound held. On the re-consolidated September layer the wave is Turkey's clearest
+  growth vector.*
 - **The reactivated Muscat channel** (Iran–Oman nuclear talks resurging after the mid-2025
-  strike pause; al-Busaidi the pivot). *Jul–Aug status: **confirmed** — Iran–Oman Strait of Hormuz
-  navigation negotiations (July 4 and 14; 226 → 243 → 199 corroborated docs/mo Jun→Aug);
-  Oman is now Iran's #3 corroborated recipient (1,509), behind only Lebanon and Iraq.*
+  strike pause; al-Busaidi the pivot). *Aug verdict: **confirmed and holding** — 201 → 212 → 192 corroborated docs/mo
+  Jun→Aug on the re-measured layer; Oman is now Iran's **#3 corroborated recipient (1,701)**,
+  behind only Lebanon and Iraq and ahead of Syria.*
 - **China's Libya re-entry** (cp Apr 2026, z=3.65; consulate reopening + strategic-partnership
-  mechanism = the standard Chinese re-entry opening sequence). *Jul–Aug status: **sustained** through July
-  (~32 corroborated docs); only 9 in August 1–24 — watch for a stall.*
+  mechanism = the standard Chinese re-entry opening sequence). *Aug verdict: **stalled** — 33 → 32 → 15 corroborated docs Jun→Aug;
+  the re-entry sequence paused without a follow-on project announcement.*
 - **China→Iraq silence** after the $4B Basra desalination launch — an unexplained
-  project-pipeline pause worth a collection question. *Jul–Aug status: **easing** — 36 corroborated docs in
-  July (from ~19), 16 in August 1–24; no new project announcement yet.*
+  project-pipeline pause worth a collection question. *Aug verdict: **easing** — 16 → 26 → 28 corroborated docs Jun→Aug, a slow
+  recovery from the post-Basra pause; still no new headline project.*
 - **Decay watch:** Russia broadly (KJ4); Iran→Yemen still unreplaced; China→Saudi cooling.
-  *Jul–Aug status: Russia's decay **deepened** — 293 corroborated docs in July, its lowest full
-  month on record, Russia→Iran 268 → 167 → 55 (May→Aug), and no registered Russian role in the
-  US–Iran mediation rounds; Iran→Yemen is **no longer unreplaced** — Iran itself re-entered
-  (3 → 19 → 65 corroborated docs/mo, May→July) but the return did not hold into August (5).*
+  *Aug verdict: Russia's decay **deepened again** — successive record-low full months
+  (268 in July, 222 in August on the re-measured layer) and still no registered Russian role in
+  any mediation round; **Iran's Yemen re-entry reversed** — 15 → 52 → 13 corroborated docs
+  Jun→Aug, so July now reads as Hormuz-crisis spillover, not a durable return, and the file is
+  back to unreplaced.*
 
-### Post-window developments (August 1–24, 2026) — context, not analysis-grade
+### Post-window developments (September 1–9, 2026) — context, not analysis-grade
 
-*The corpus extends to 2026-08-24. August is a partial month with a possible ingestion
-tail-off, so the items below are context for H2-2026 monitoring, not findings on the
-corroborated-metric basis of this report.*
+*The corpus extends to 2026-09-09. September is nine days of data, so the items below are
+context for H2-2026 monitoring, not findings on the corroborated-metric basis of this report.*
 
-- **The US–Iran channel narrowed to the Strait of Hormuz.** The largest US-file events of the
-  fortnight are "US–Iran Strait of Hormuz Negotiation" (81 articles, materiality 7.5), a second
-  Hormuz negotiation event (56) and a "Proposal to reopen the Strait of Hormuz" (47); Iran's own
-  side shows an Iran–Oman Hormuz negotiation (64 articles) and a proposed shipping route (39).
-  Hormuz coverage held at ~840 docs/month (600 third-party) for a third straight month. The
-  broader **Lebanon–Israel framework** track cooled sharply (735 → 397 → 107 third-party docs,
-  Jun→Aug).
-- **Iran's August is Iraq and Arbaeen, not the Gulf.** Seven of Iran's ten largest August
-  events are Arbaeen logistics (816 Arbaeen docs, 5% third-party — the standing bias case) and
-  the **Shalamcheh–Basra railway** (parliamentary meeting Aug 19, 244 articles, materiality
-  6.5) — the one substantive economic item, and one to watch as a corroborated initiative.
-  Iran→Lebanon fell to 22 corroborated docs (from 639 in June); Iran→Qatar to 18.
-- **China–Jordan strategic partnership** (Aug 15 and 19; 58 + 42 articles, materiality 6.0) is
-  China's only sizable August initiative; China→Egypt held ~79 corroborated docs, China→Saudi
-  fell to 18.
-- **Turkey is the only actor whose corroborated tempo did not dip in August** (1,137 docs vs
-  1,167 in July), carried by Egypt (158), Syria (148) and the Saudi rebound (135); "Gaza
-  Ceasefire and Reconstruction Diplomacy" (launched July 31; 138 articles on the Turkey file,
-  212 on the US file, materiality 8.0) is the live mediation event entering H2.
-- **Qatar:** on the full-corpus corroborated basis Iran now leads Turkey among the four actors
-  **inside the window** (1,094 vs 1,073 through July; 1,112 vs 1,085 through Aug 24) — the
-  flip flagged as post-window context in the previous edition is now an in-window fact.
-
----
+- **Xi Jinping's state visit to Egypt is the post-window story** — the corpus's largest
+  September events are all one trip: the Grand Egyptian Museum visit (263 articles), the
+  Cairo round upgrading the comprehensive strategic partnership (125 articles, materiality
+  7.5), a Belt-and-Road cooperation plan aligned with Egypt Vision 2030, and "Sustainable
+  Panda Bonds" (27 articles) — Egypt-denominated RMB financing. Taken with August's Jordan
+  state visit, September opens as a second consecutive month of Chinese head-of-state
+  summitry in the Arab core.
+- **The Lebanon–Israel track re-warmed in Rome**: a US-brokered detainee release and a push
+  to resume the Rome dialogue (Sept 1–9) after the framework's August cooling — the US file's
+  only sizable September events.
+- Iran's September opens quiet (Arbaeen ramp-down; Hormuz channel steady); no Russian
+  September event clears 10 articles — the decay pattern extends.
 
 ## 8. Data Gaps & Coverage Priorities
 

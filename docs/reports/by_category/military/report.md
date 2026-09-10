@@ -154,11 +154,13 @@ captures the economic returns. **(H)**
   hedging dynamic for U.S. policymakers to manage.
 - **Announced ≠ delivered.** Arms-deal dollar figures ($96B Qatar, $17.9B Israel) are reported
   commitments; track deliveries and end-use.
-- **July 2026 (in-window) / August post-window note:** the mid-June 2026 U.S.–Iran ceasefire MOU
-  (June 14), July's "Nuclear Disarmament Talks" and the August Strait of Hormuz negotiations shift
-  the military file toward diplomacy — watch for knock-on effects on U.S. force-posture coverage
-  (THAAD/Patriot deployments) in H2-2026. Hormuz coverage held at ~840 docs/month (600
-  third-party) for a third straight month in August.
+- **August 2026 (in-window) / September post-window note:** the U.S.–Iran de-escalation arc
+  (June ceasefire MOU → July "Nuclear Disarmament Talks" → August Strait-of-Hormuz rounds)
+  keeps shifting the military file toward diplomacy. August's structural item is the **Mecca
+  Joint Defense Agreement** (36 docs, 30 outlets, corroboration 1.00) — Turkey, Saudi Arabia
+  and Pakistan formalizing their defense triangle, the first new multilateral defense
+  instrument in the corpus since the window opened. Watch U.S. force-posture coverage
+  (THAAD/Patriot) for knock-on effects in Q4.
 
 ---
 
