@@ -2990,9 +2990,9 @@ def load_raw_events_for_rename(
         params['end_date'] = end_date
     if recurring_min:
         # Only umbrella labels that recur — the names that fragment the event
-        # layer into same-name duplicates. One-off specific names are skipped.
-        filters.append("""re.event_name IN (
-            SELECT event_name FROM raw_events GROUP BY 1 HAVING count(*) >= :recurring_min)""")
+        # layer into same-name duplicates. MATERIALIZED so the 1.5M-row GROUP BY
+        # runs once instead of nested-looping per candidate row.
+        filters.append("re.event_name IN (SELECT event_name FROM recurring_names)")
         params['recurring_min'] = recurring_min
 
     limit_clause = f"LIMIT {limit}" if limit else ""
@@ -3004,7 +3004,11 @@ def load_raw_events_for_rename(
     else:
         where_clause = "WHERE " + base_filter
 
+    cte = ("WITH recurring_names AS MATERIALIZED ("
+           "SELECT event_name FROM raw_events GROUP BY 1 HAVING count(*) >= :recurring_min) "
+           if recurring_min else "")
     query = text(f"""
+        {cte}
         SELECT
             re.doc_id,
             re.event_name,
