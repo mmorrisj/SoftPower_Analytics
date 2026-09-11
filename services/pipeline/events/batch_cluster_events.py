@@ -122,8 +122,8 @@ class EventBatchClusterer:
             print(f"  WARNING: {generic:,}/{total:,} raw events in this window carry")
             print("  un-renamed RECURRING event names (umbrella labels). Clustering them")
             print("  will create same-name duplicate events. Run the event_rename batch")
-            print("  first:  batch_prepare.py --job-type event_rename --recurring-min 10 \")
-            print(f"          --start-date {start_date} --end-date {end_date}")
+            print(f"  first:  batch_prepare.py --job-type event_rename --recurring-min 10 "
+                  f"--start-date {start_date} --end-date {end_date}")
             print("=" * 70)
 
     def normalize_event_name(self, name: str) -> str:
