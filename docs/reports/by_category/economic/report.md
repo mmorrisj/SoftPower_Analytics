@@ -113,8 +113,8 @@ China→Jordan to 705 corroborated docs and Jordan into China's #3 recipient slo
 a third consecutive record (48 → 94 → 151 corroborated docs Jun→Aug); Iran's one substantive
 economic item remains the Shalamcheh–Basra railway; the China→Iraq pipeline pause kept easing
 (26 → 28) with still no new headline project. The September post-window opens with **Xi's Egypt
-state visit** — a strategic-partnership upgrade, a BRI cooperation plan aligned with Egypt Vision
-2030, and RMB-denominated "Sustainable Panda Bonds."*
+state visit**, whose substantive economic deliverable is the **third-phase expansion of the
+Chinese-Egyptian (Suez) industrial zone** (242 articles, materiality 8.0).*
 
 ---
 

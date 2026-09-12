@@ -130,8 +130,8 @@ influence from being present at every inflection point. **(M)**
 **August 2026 (now in-window).** Turkey's corroborated tempo rose to **1,118 docs** — with
 China's summitry surge (1,214) it made August the window's first month with two actors above
 1,100. (a) **Turkey→Egypt set a third consecutive record** — 48 → 94 → 151 corroborated docs
-Jun→Aug — now Turkey's clearest growth vector. (b) The **Mecca Joint Defense Agreement** (36
-docs, 30 outlets, corroboration 1.00) formalized the Turkey–Saudi–Pakistan defense triangle,
+Jun→Aug — now Turkey's clearest growth vector. (b) The **Mecca Joint Defense Agreement** (52
+articles, corroboration 1.00) formalized the Turkey–Saudi–Pakistan defense triangle,
 capping the Saudi rebound. (c) **Iran's Qatar lead held through August** (934 vs 882 among
 the four actors; both files quiet in the month itself). (d) "Gaza Ceasefire and Reconstruction
 Diplomacy" (materiality 8.0) stayed live on the mediation franchise, alongside the Lebanon

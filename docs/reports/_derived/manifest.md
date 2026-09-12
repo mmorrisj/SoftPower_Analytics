@@ -1,5 +1,16 @@
 # Derived Artifacts Manifest
 
+> **2026-09-12 window redo (dedup fix):** the 08-23 → 09-09 event window was re-built after
+> running the `event_rename` batch (4,078 recurring umbrella labels — "Belt and Road
+> Initiative" et al. — given specific names; the job had been skipped in every refresh since
+> April). Result: zero same-name duplicate masters remain in the window; the Xi-Egypt visit
+> re-attributed (its economic deliverable is the **third-phase Suez industrial-zone
+> expansion**, 242 articles, mat 8.0; the former "Grand Egyptian Museum visit (263)" event
+> dissolved into that family), SDIC-Arab Potash re-measured at 54 articles, Mecca Joint
+> Defense at 52. Window layers fully re-validated/re-scored; summaries regenerated. Report
+> prose updated to the re-measured names/figures. Rename is now a standing stage —
+> `docs/PIPELINE_REFRESH_RUNBOOK.md` §3.
+
 > **2026-09-09 refresh:** all objects rebuilt on the 804K-doc corpus (extends to 2026-09-09;
 > window end moved to `date < 2026-09-01`, August 2026 = last full month, September 1–9 =
 > post-window context; report_base now 325,573 rows). The events/entities layers were extended

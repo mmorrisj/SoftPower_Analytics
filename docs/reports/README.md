@@ -12,9 +12,9 @@ distinct-document basis.*
 > driven by **King Abdullah II's Beijing state visit** (24 bilateral agreements; China→Jordan
 > 72 → 118 → 705 corroborated docs Jun→Aug) and the **SDIC 28% stake in Arab Potash** —
 > enough to lift **Jordan past Saudi Arabia into China's #3 recipient slot**. The September
-> post-window opens with **Xi Jinping's state visit to Egypt** (Grand Egyptian Museum, a
-> strategic-partnership upgrade, panda-bond financing) — a second consecutive month of Chinese
-> head-of-state summitry in the Arab core. Elsewhere: **Iran's Yemen re-entry reversed**
+> post-window opens with **Xi Jinping's state visit to Egypt** (the third-phase Suez
+> industrial-zone expansion, 242 articles; a joint security statement) — a second consecutive
+> month of Chinese head-of-state summitry in the Arab core. Elsewhere: **Iran's Yemen re-entry reversed**
 > (52 → 13 corroborated docs Jul→Aug; back to unreplaced), **Russia logged a second
 > consecutive record-low month** (268 → 222) with no role in any mediation round, Turkey→Egypt
 > set a **third consecutive record** (151), Turkey formalized the **Mecca Joint Defense

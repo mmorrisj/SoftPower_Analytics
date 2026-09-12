@@ -182,8 +182,8 @@ is nine days of data — context, not analysis-grade.*
   July now reads as Hormuz-crisis spillover rather than a durable return, and the
   post-November-2024 Yemen vacancy stands — no actor has moved on the file.
 - **The Muscat channel held** — 201 → 212 → 192 corroborated docs Jun→Aug (an Iran–Oman
-  Hormuz navigation round Aug 2; a proposed Hormuz shipping route, 39 docs at 0.82
-  corroboration, was August's most-corroborated new Iranian initiative). **Oman is Iran's
+  Hormuz navigation round Aug 2; a proposed Hormuz shipping route, 54 articles, was
+  among August's most-corroborated new Iranian initiatives). **Oman is Iran's
   #3 corroborated recipient (1,701)**, behind only Lebanon and Iraq.
 - **Qatar:** Iran's lead over Turkey as Qatar's top corroborated four-actor engager **held
   through the full August window — 934 vs 882** (both files quiet in August itself).

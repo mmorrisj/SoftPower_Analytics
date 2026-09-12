@@ -151,22 +151,22 @@ partly an artifact of the corpus's trailing edge. **(M)**
 **August 2026 (now in-window) — China's strongest month of 2026.** Corroborated tempo jumped
 to **1,214 docs (+61% on July's 753)**, the best month since September 2025 — and the driver
 is exactly the thesis: head-of-state summitry, not crisis. **King Abdullah II's state visit to
-Beijing** produced **24 bilateral agreements** (materiality 8.0, corroboration 1.00) plus
-Xi–Abdullah talks on the Palestinian file, lifting China→Jordan from 118 to **705 corroborated
-docs** in a month — enough to move **Jordan past Saudi Arabia into China's #3 recipient slot
+Beijing** produced **24 reported bilateral agreements** plus Xi–Abdullah talks on the
+Palestinian file, lifting China→Jordan from 118 to **705 corroborated docs** in a month — enough to move **Jordan past Saudi Arabia into China's #3 recipient slot
 (2,607 vs 2,511 in-window)**. The month's other substantive economic item is the **SDIC Group
-acquisition of a 28% stake in Arab Potash Company** (45 docs, 24 outlets, corroboration 1.00) —
+acquisition of a 28% stake in Arab Potash Company** (54 articles, corroboration 1.00) —
 capital, not just communiqués. July's items held: the China–Pakistan mediation track stayed in
 the portfolio, the China→Iraq pipeline pause kept easing (26 → 28 corroborated docs), while
 the **Libya re-entry stalled** (32 → 15). **(M)**
 
 **Post-window context (September 1–9, 2026).** The corpus extends to 2026-09-09; nine days of
-data — context, not trend. **Xi Jinping's state visit to Egypt** dominates: the Grand Egyptian
-Museum visit (263 articles), a Cairo round upgrading the comprehensive strategic partnership
-(125 articles, materiality 7.5), a Belt-and-Road cooperation plan aligned with Egypt Vision
-2030, and **"Sustainable Panda Bonds"** — RMB-denominated financing for Egypt. Two consecutive
-months of Chinese head-of-state summitry in the Arab core (Jordan in August, Egypt in
-September) is the pattern to watch entering Q4. **(M)**
+data — context, not trend. **Xi Jinping's state visit to Egypt** dominates (Aug 27 – Sep 3, the 70th
+anniversary of relations): the **launch of the third-phase expansion of the Chinese-Egyptian
+(Suez) industrial zone** (242 articles, materiality 8.0) — the visit's substantive economic
+deliverable — a partnership-reinforcement wave ahead of the trip (158 articles, 7.5), the
+Grand Egyptian Museum program with el-Sisi, and a **China–Egypt joint security statement**
+(Sep 3). Two consecutive months of Chinese head-of-state summitry in the Arab core (Jordan
+in August, Egypt in September) is the pattern to watch entering Q4. **(M)**
 
 ---
 

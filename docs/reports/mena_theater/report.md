@@ -360,12 +360,12 @@ segmentation, |z|≥2.5) against the trigger calendar.*
    negotiation rounds, 85 and 81 articles, and a reopening proposal, 47) while a **"Gaza
    Agreement"** (materiality 8.0) entered the mediation file; and **China produced its
    strongest corroborated month of 2026 (1,214 docs, +61% on July)** on head-of-state
-   summitry — **King Abdullah II's Beijing state visit** (24 bilateral agreements signed,
-   materiality 8.0, corroboration 1.00; China→Jordan 72 → 118 → 705 corroborated docs
-   Jun→Aug) plus the **SDIC acquisition of a 28% stake in Arab Potash** — a Jordan surge
+   summitry — **King Abdullah II's Beijing state visit** (24 bilateral agreements
+   reported signed; China→Jordan 72 → 118 → 705 corroborated docs Jun→Aug) plus the **SDIC
+   acquisition of a 28% stake in Arab Potash** (54 articles, corroboration 1.00) — a Jordan surge
    large enough to lift Jordan past Saudi Arabia into third place among China's corroborated
    recipients (2,607 vs 2,511). Turkey's August also brought the **Mecca Joint Defense
-   Agreement** (36 docs, 30 outlets, corroboration 1.00), formalizing the
+   Agreement** (52 articles, corroboration 1.00), formalizing the
    Turkey–Saudi–Pakistan defense triangle.
 
 ![Narrative themes](assets/11_narrative_themes.png)
@@ -407,12 +407,13 @@ full in-window month; September 1–9 post-window status appended where it moves
 context for H2-2026 monitoring, not findings on the corroborated-metric basis of this report.*
 
 - **Xi Jinping's state visit to Egypt is the post-window story** — the corpus's largest
-  September events are all one trip: the Grand Egyptian Museum visit (263 articles), the
-  Cairo round upgrading the comprehensive strategic partnership (125 articles, materiality
-  7.5), a Belt-and-Road cooperation plan aligned with Egypt Vision 2030, and "Sustainable
-  Panda Bonds" (27 articles) — Egypt-denominated RMB financing. Taken with August's Jordan
-  state visit, September opens as a second consecutive month of Chinese head-of-state
-  summitry in the Arab core.
+  September events are all one trip (Aug 27 – Sep 3, spanning the 70th anniversary of
+  China–Egypt relations): the **launch of the third-phase expansion of the Chinese-Egyptian
+  (Suez) industrial zone** (242 articles, materiality 8.0), the partnership-reinforcement
+  wave ahead of the visit (158 articles, 7.5), the Cairo anniversary program itself, and a
+  **China–Egypt joint security statement** (Sep 3). Taken with August's Jordan state visit,
+  September opens as a second consecutive month of Chinese head-of-state summitry in the
+  Arab core.
 - **The Lebanon–Israel track re-warmed in Rome**: a US-brokered detainee release and a push
   to resume the Rome dialogue (Sept 1–9) after the framework's August cooling — the US file's
   only sizable September events.

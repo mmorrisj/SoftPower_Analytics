@@ -157,7 +157,7 @@ captures the economic returns. **(H)**
 - **August 2026 (in-window) / September post-window note:** the U.S.–Iran de-escalation arc
   (June ceasefire MOU → July "Nuclear Disarmament Talks" → August Strait-of-Hormuz rounds)
   keeps shifting the military file toward diplomacy. August's structural item is the **Mecca
-  Joint Defense Agreement** (36 docs, 30 outlets, corroboration 1.00) — Turkey, Saudi Arabia
+  Joint Defense Agreement** (52 articles, corroboration 1.00) — Turkey, Saudi Arabia
   and Pakistan formalizing their defense triangle, the first new multilateral defense
   instrument in the corpus since the window opened. Watch U.S. force-posture coverage
   (THAAD/Patriot) for knock-on effects in Q4.
