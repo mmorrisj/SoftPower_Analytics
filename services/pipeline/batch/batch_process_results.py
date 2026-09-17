@@ -1104,7 +1104,7 @@ def process_daily_summary_result(
                 total_documents_across_categories, total_documents_across_subcategories,
                 total_documents_across_recipients, total_documents_across_sources,
                 count_by_category, count_by_subcategory, count_by_recipient, count_by_source,
-                narrative_summary
+                narrative_summary, canonical_event_id
             ) VALUES (
                 :id, :period_type, :period_start, :period_end,
                 :event_name, :country,
@@ -1114,10 +1114,11 @@ def process_daily_summary_result(
                 0, 0,
                 0, :total_docs,
                 CAST(:categories AS jsonb), '{}'::jsonb, CAST(:recipients AS jsonb), '{}'::jsonb,
-                CAST(:narrative AS jsonb)
+                CAST(:narrative AS jsonb), :canonical_event_id
             )
         """), {
             'id': summary_id,
+            'canonical_event_id': master_event_id,
             'period_type': 'DAILY',
             'period_start': date,
             'period_end': date,
@@ -1310,7 +1311,7 @@ def process_weekly_summary_result(
                 total_documents_across_categories, total_documents_across_subcategories,
                 total_documents_across_recipients, total_documents_across_sources,
                 count_by_category, count_by_subcategory, count_by_recipient, count_by_source,
-                narrative_summary
+                narrative_summary, canonical_event_id
             ) VALUES (
                 :id, :period_type, :period_start, :period_end,
                 :event_name, :country,
@@ -1320,10 +1321,11 @@ def process_weekly_summary_result(
                 0, 0,
                 0, :total_docs,
                 '{}'::jsonb, '{}'::jsonb, '{}'::jsonb, '{}'::jsonb,
-                CAST(:narrative AS jsonb)
+                CAST(:narrative AS jsonb), :canonical_event_id
             )
         """), {
             'id': summary_id,
+            'canonical_event_id': canonical_event_id,
             'period_type': 'WEEKLY',
             'period_start': week_start,
             'period_end': week_end,
@@ -1512,7 +1514,7 @@ def process_monthly_summary_result(
                 total_documents_across_categories, total_documents_across_subcategories,
                 total_documents_across_recipients, total_documents_across_sources,
                 count_by_category, count_by_subcategory, count_by_recipient, count_by_source,
-                narrative_summary
+                narrative_summary, canonical_event_id
             ) VALUES (
                 :id, :period_type, :period_start, :period_end,
                 :event_name, :country,
@@ -1522,10 +1524,11 @@ def process_monthly_summary_result(
                 0, 0,
                 0, :total_docs,
                 '{}'::jsonb, '{}'::jsonb, '{}'::jsonb, '{}'::jsonb,
-                CAST(:narrative AS jsonb)
+                CAST(:narrative AS jsonb), :canonical_event_id
             )
         """), {
             'id': summary_id,
+            'canonical_event_id': canonical_event_id,
             'period_type': 'MONTHLY',
             'period_start': month_start,
             'period_end': month_end,
@@ -1709,7 +1712,7 @@ def process_yearly_summary_result(
                 total_documents_across_categories, total_documents_across_subcategories,
                 total_documents_across_recipients, total_documents_across_sources,
                 count_by_category, count_by_subcategory, count_by_recipient, count_by_source,
-                narrative_summary
+                narrative_summary, canonical_event_id
             ) VALUES (
                 :id, :period_type, :period_start, :period_end,
                 :event_name, :country,
@@ -1719,10 +1722,11 @@ def process_yearly_summary_result(
                 0, 0,
                 0, :total_docs,
                 '{}'::jsonb, '{}'::jsonb, '{}'::jsonb, '{}'::jsonb,
-                CAST(:narrative AS jsonb)
+                CAST(:narrative AS jsonb), :canonical_event_id
             )
         """), {
             'id': summary_id,
+            'canonical_event_id': canonical_event_id,
             'period_type': 'YEARLY',
             'period_start': year_start,
             'period_end': year_end,
