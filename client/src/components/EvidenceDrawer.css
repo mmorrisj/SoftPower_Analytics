@@ -247,3 +247,65 @@
 .ev-event-link:hover {
   background: #234a7d;
 }
+
+/* --- ComparisonDrawer additions (shares the ev-* shell) --- */
+.cmp-country {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cmp-country-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cmp-country-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.cmp-country-date {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.cmp-outcomes {
+  color: #64748b;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.cmp-country-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cmp-trace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1a365d;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.28rem 0.6rem;
+  cursor: pointer;
+}
+
+.cmp-trace:hover {
+  background: #eef2f7;
+}
