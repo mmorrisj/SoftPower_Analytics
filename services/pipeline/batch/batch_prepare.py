@@ -58,6 +58,7 @@ from services.pipeline.batch.batch_config import (
     JOB_TYPE_CANONICAL_DECONFLICT,
     JOB_TYPE_ENTITY_EXTRACT,
     JOB_TYPE_SCORE_MATERIALITY,
+    JOB_TYPE_EVENT_NARRATIVE,
     JOB_TYPE_DAILY_ENTITY_EXTRACT,
     JOB_TYPE_ENTITY_DECONFLICT,
     JOB_TYPE_CANONICAL_ENTITY_DECONFLICT,
@@ -653,6 +654,80 @@ def load_canonical_events_for_entity_extraction(
         })
 
     return events
+
+
+def load_events_for_narrative(
+    session,
+    country: Optional[str],
+    min_articles: int = 3,
+) -> List[Dict]:
+    """Load master events with no consolidated_description, with top doc snippets.
+
+    Feeds the event_narrative job: an LLM writes a short factual narrative per
+    event from its most substantive source distillations. Events below
+    min_articles are covered by the free single-doc backfill instead
+    (see docs/PIPELINE_REFRESH_RUNBOOK.md).
+    """
+    query_text = """
+        SELECT ce.id, ce.canonical_name, ce.initiating_country,
+               ce.first_mention_date::text, ce.last_mention_date::text,
+               ce.total_articles, ce.primary_recipients,
+               snip.snippets
+        FROM canonical_events ce
+        CROSS JOIN LATERAL (
+            SELECT array_agg(s ORDER BY ln DESC) AS snippets FROM (
+                SELECT DISTINCT ON (doc.doc_id) LEFT(doc.distilled_text, 700) AS s,
+                       length(doc.distilled_text) AS ln
+                FROM daily_event_mentions dem
+                CROSS JOIN LATERAL unnest(dem.doc_ids) u(doc_id)
+                JOIN documents doc ON doc.doc_id = u.doc_id
+                WHERE dem.canonical_event_id = ce.id
+                  AND COALESCE(doc.distilled_text, '') <> ''
+                ORDER BY doc.doc_id, length(doc.distilled_text) DESC
+            ) x LIMIT 1
+        ) snip
+        WHERE ce.master_event_id IS NULL
+          AND COALESCE(ce.consolidated_description, '') = ''
+          AND ce.total_articles >= :min_articles
+    """
+    params: Dict[str, Any] = {'min_articles': min_articles}
+    if country:
+        query_text += " AND ce.initiating_country = :country"
+        params['country'] = country
+    rows = session.execute(text(query_text), params).fetchall()
+    records = []
+    for r in rows:
+        recips = r[6] or {}
+        if isinstance(recips, dict):
+            recips = sorted(recips, key=recips.get, reverse=True)[:4]
+        records.append({
+            'id': str(r[0]), 'canonical_name': r[1], 'initiating_country': r[2],
+            'first_mention_date': r[3], 'last_mention_date': r[4],
+            'total_articles': r[5], 'recipients': recips,
+            'snippets': (r[7] or [])[:5],
+        })
+    return records
+
+
+def build_event_narrative_prompt(event: Dict) -> Dict[str, List[Dict[str, str]]]:
+    """Prompt for a short factual event narrative (event_narrative job)."""
+    sys_prompt = (
+        "You are a senior analyst writing reference descriptions of soft-power events "
+        "for an intelligence-style database. Given media distillations about one event, "
+        "write a factual narrative of 2-4 sentences: what happened, who was involved, "
+        "and any concrete outcomes (agreements, figures, dates). Report only what the "
+        "distillations support; no speculation, no editorializing. "
+        'Respond with JSON: {"description": "<narrative>"}'
+    )
+    snips = "\n\n".join(f"[{i+1}] {s}" for i, s in enumerate(event['snippets']))
+    user_prompt = (
+        f"EVENT: {event['canonical_name']}\n"
+        f"Initiator: {event['initiating_country']} | Recipients: {', '.join(event['recipients']) or 'n/a'}\n"
+        f"Coverage: {event['total_articles']} articles, {event['first_mention_date']} to {event['last_mention_date']}\n\n"
+        f"SOURCE DISTILLATIONS:\n{snips}"
+    )
+    return {"messages": [{"role": "system", "content": sys_prompt},
+                         {"role": "user", "content": user_prompt}]}
 
 
 def load_canonical_events_for_materiality_scoring(
@@ -3200,6 +3275,23 @@ def generate_batch_requests(
                 }
             })
 
+    elif job_type == JOB_TYPE_EVENT_NARRATIVE:
+        # records is a list of master events needing a narrative description
+        for event in records:
+            custom_id = generate_custom_id(job_type, event['id'])
+            prompt_data = build_event_narrative_prompt(event)
+            batch_requests.append({
+                "custom_id": custom_id,
+                "method": "POST",
+                "url": "/v1/chat/completions",
+                "body": {
+                    "model": model,
+                    "messages": prompt_data["messages"],
+                    "temperature": temperature,
+                    "response_format": response_format
+                }
+            })
+
     elif job_type == JOB_TYPE_DAILY_ENTITY_EXTRACT:
         # records is a list of documents needing entity extraction
         for doc in records:
@@ -3493,7 +3585,7 @@ def main():
     # Job configuration
     parser.add_argument('--job-type', required=True,
                        choices=[JOB_TYPE_CLUSTER_DECONFLICT, JOB_TYPE_CANONICAL_DECONFLICT,
-                               JOB_TYPE_ENTITY_EXTRACT, JOB_TYPE_SCORE_MATERIALITY,
+                               JOB_TYPE_ENTITY_EXTRACT, JOB_TYPE_SCORE_MATERIALITY, JOB_TYPE_EVENT_NARRATIVE,
                                JOB_TYPE_DAILY_ENTITY_EXTRACT, JOB_TYPE_ENTITY_DECONFLICT,
                                JOB_TYPE_CANONICAL_ENTITY_DECONFLICT, JOB_TYPE_GENERATE_DAILY_SUMMARY,
                                JOB_TYPE_GENERATE_WEEKLY_SUMMARY, JOB_TYPE_GENERATE_MONTHLY_SUMMARY,
@@ -3608,6 +3700,14 @@ def main():
                 args.rescore
             )
             print(f"Found {len(records)} canonical events needing materiality scoring")
+
+        elif args.job_type == JOB_TYPE_EVENT_NARRATIVE:
+            records = load_events_for_narrative(
+                session,
+                args.country,
+                min_articles=args.min_articles,
+            )
+            print(f"Found {len(records)} master events needing a narrative (min_articles={args.min_articles})")
 
         elif args.job_type == JOB_TYPE_DAILY_ENTITY_EXTRACT:
             records = load_documents_for_entity_extraction(

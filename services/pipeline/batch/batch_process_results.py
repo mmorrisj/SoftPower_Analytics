@@ -35,6 +35,7 @@ from services.pipeline.batch.batch_config import (
     JOB_TYPE_CANONICAL_DECONFLICT,
     JOB_TYPE_ENTITY_EXTRACT,
     JOB_TYPE_SCORE_MATERIALITY,
+    JOB_TYPE_EVENT_NARRATIVE,
     JOB_TYPE_DAILY_ENTITY_EXTRACT,
     JOB_TYPE_ENTITY_DECONFLICT,
     JOB_TYPE_CANONICAL_ENTITY_DECONFLICT,
@@ -355,6 +356,36 @@ def process_entity_extract_result(
     except Exception as e:
         if verbose:
             print(f"  Error processing event {event_id}: {e}")
+        stats['errors'] += 1
+        raise
+
+
+def process_event_narrative_result(
+    session,
+    event_id: str,
+    llm_response: Dict[str, Any],
+    verbose: bool = False
+) -> Dict[str, Any]:
+    """Write the LLM-generated narrative into canonical_events.consolidated_description."""
+    stats = {'narratives_written': 0, 'errors': 0}
+    try:
+        event = session.get(CanonicalEvent, event_id)
+        if not event:
+            if verbose:
+                print(f"  Warning: Event {event_id} not found, skipping")
+            stats['errors'] += 1
+            return stats
+        description = (llm_response.get('description') or '').strip()
+        if not description:
+            if verbose:
+                print(f"  Warning: Event {event_id}: empty description in response")
+            stats['errors'] += 1
+            return stats
+        if not (event.consolidated_description or '').strip():
+            event.consolidated_description = description
+            stats['narratives_written'] += 1
+        return stats
+    except Exception:
         stats['errors'] += 1
         raise
 
@@ -2575,6 +2606,10 @@ def main():
                                 stats = process_materiality_score_result(
                                     session, record_id, llm_response, verbose=args.verbose
                                 )
+                            elif job_type == JOB_TYPE_EVENT_NARRATIVE:
+                                stats = process_event_narrative_result(
+                                    session, record_id, llm_response, verbose=args.verbose
+                                )
                             elif job_type == JOB_TYPE_DAILY_ENTITY_EXTRACT:
                                 stats = process_daily_entity_extract_result(
                                     session, record_id, llm_response, verbose=args.verbose
@@ -2672,6 +2707,8 @@ def main():
                 print(f"Entities extracted: {overall_stats['entities_extracted']}")
             elif batch_job.job_type == JOB_TYPE_SCORE_MATERIALITY:
                 print(f"Events scored: {overall_stats['events_scored']}")
+            elif batch_job.job_type == JOB_TYPE_EVENT_NARRATIVE:
+                print(f"Narratives written: {overall_stats.get('narratives_written', 0)}")
             elif batch_job.job_type == JOB_TYPE_DAILY_ENTITY_EXTRACT:
                 print(f"Entities extracted: {overall_stats.get('entities_extracted', 0)}")
             elif batch_job.job_type == JOB_TYPE_GENERATE_DAILY_SUMMARY:

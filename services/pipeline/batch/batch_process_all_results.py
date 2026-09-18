@@ -39,6 +39,7 @@ from services.pipeline.batch.batch_config import (
     JOB_TYPE_CANONICAL_DECONFLICT,
     JOB_TYPE_ENTITY_EXTRACT,
     JOB_TYPE_SCORE_MATERIALITY,
+    JOB_TYPE_EVENT_NARRATIVE,
     JOB_TYPE_DAILY_ENTITY_EXTRACT,
     JOB_TYPE_ENTITY_DECONFLICT,
     JOB_TYPE_CANONICAL_ENTITY_DECONFLICT,
@@ -61,6 +62,7 @@ from services.pipeline.batch.batch_process_results import (
     process_canonical_result,
     process_entity_extract_result,
     process_materiality_score_result,
+    process_event_narrative_result,
     process_daily_entity_extract_result,
     process_entity_deconflict_result,
     process_canonical_entity_deconflict_result,
@@ -261,6 +263,10 @@ def _route_result(
         return process_materiality_score_result(
             session, record_id, llm_response, verbose=verbose
         )
+    elif job_type == JOB_TYPE_EVENT_NARRATIVE:
+        return process_event_narrative_result(
+            session, record_id, llm_response, verbose=verbose
+        )
     elif job_type == JOB_TYPE_DAILY_ENTITY_EXTRACT:
         return process_daily_entity_extract_result(
             session, record_id, llm_response, verbose=verbose
@@ -344,6 +350,8 @@ def _merge_stats(overall: Dict, stats: Dict, job_type: str):
         overall['entities_extracted'] += stats.get('entities_extracted', 0)
     elif job_type == JOB_TYPE_SCORE_MATERIALITY:
         overall['events_scored'] += stats.get('events_scored', 0)
+    elif job_type == JOB_TYPE_EVENT_NARRATIVE:
+        overall['narratives_written'] = overall.get('narratives_written', 0) + stats.get('narratives_written', 0)
     elif job_type == JOB_TYPE_ENTITY_DECONFLICT:
         overall['canonical_entities_created'] += stats.get('canonical_entities_created', 0)
         overall['canonical_entities_updated'] += stats.get('canonical_entities_updated', 0)
