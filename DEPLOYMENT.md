@@ -13,13 +13,15 @@ What are you doing?
 ├─ Local development with hot-reload / debugging ──► DOCKER_WORKFLOW.md
 │     docker-compose.dev.yml (external volume + network, mirrors prod)
 │
-├─ Standard production (permissive Docker daemon) ─► docs/deployment/PRODUCTION_INSTALL.md
+├─ Standard production (permissive Docker daemon) ─► README.md § Production Operations
 │     docker-compose.production.yml
 │
-├─ Enterprise / hardened daemon ───────────────────► PRODUCTION_DOCKER_RUN.md
-│     no `docker exec`, no bridge networks, --network host, TCP-only psql
+├─ Enterprise / hardened daemon ───────────────────► docker-compose.enterprise.yml
+│     scripts/docker/enterprise-deploy.sh (hosted PostgreSQL, host networking);
+│     raw `docker run` fallback: PRODUCTION_DOCKER_RUN.md
 │
-├─ Migrating data to a new host / Rocky 9 ─────────► ENTERPRISE_MIGRATION.md
+├─ Migrating data to a new host / Rocky 9 ─────────► scripts/docker/production-wipe.sh
+│     then `production-deploy.sh rebuild-db [file]` (see PRODUCTION_DOCKER_RUN.md)
 │
 └─ Just pulling the published image ───────────────► docs/DOCKERHUB_README.md
 ```
@@ -30,11 +32,14 @@ What are you doing?
 |---|---|---|
 | Demo / quickstart | `docker-compose.yml` | [docs/DEMO_RUNBOOK.md](docs/DEMO_RUNBOOK.md) |
 | Local dev (hot-reload) | `docker-compose.dev.yml` | [DOCKER_WORKFLOW.md](DOCKER_WORKFLOW.md) |
-| Standard production | `docker-compose.production.yml` | [docs/deployment/PRODUCTION_INSTALL.md](docs/deployment/PRODUCTION_INSTALL.md) |
-| Enterprise hardened daemon | `docker-compose.production.yml` (host networking) | [PRODUCTION_DOCKER_RUN.md](PRODUCTION_DOCKER_RUN.md) |
+| Standard production | `docker-compose.production.yml` | [README.md](README.md) § Production Operations |
+| Enterprise hardened daemon (hosted PostgreSQL) | `docker-compose.enterprise.yml` + `scripts/docker/enterprise-deploy.sh` | [PRODUCTION_DOCKER_RUN.md](PRODUCTION_DOCKER_RUN.md) (raw `docker run` fallback) |
 | Windows host | `docker-compose.windows.yml` | [DOCKER_WORKFLOW.md](DOCKER_WORKFLOW.md) |
+| Laptop stack (pull-and-run, no build) | `docker-compose.laptop.yml` | header comments in the compose file |
+| Laptop GPU embedding runner (preprocessing-image overlay) | `docker-compose.laptop.embed.yml` | header comments in the compose file |
+| Laptop GPU device reservation (overlay) | `docker-compose.laptop.gpu.yml` | header comments in the compose file |
 | Preprocessing batch jobs | `docker-compose.preprocessing.yml` | [services/pipeline/batch/README_BATCH_PROCESSING.md](services/pipeline/batch/README_BATCH_PROCESSING.md) |
-| Data migration / restore | — | [ENTERPRISE_MIGRATION.md](ENTERPRISE_MIGRATION.md) |
+| Data migration / restore | — | `scripts/docker/production-wipe.sh` + `production-deploy.sh rebuild-db [file]` ([PRODUCTION_DOCKER_RUN.md](PRODUCTION_DOCKER_RUN.md)) |
 
 ## ⚠️ Important: do not mix daemon assumptions
 
@@ -82,17 +87,10 @@ docker compose -f docker-compose.production.yml --profile bundled-db up -d
 
 > Development and the demo quickstart keep the bundled container by default
 > (`docker-compose.yml`, `docker-compose.dev.yml`) — no change there.
-> See `docs/MAINTAINABILITY_ASSESSMENT.md` §9 for the rationale.
+> See `docs/archive/MAINTAINABILITY_ASSESSMENT_2026-06.md` §9 for the rationale.
 
 ## Common to all paths
 
 - Populate `.env` from `.env.example` (DB creds, `CLAUDE_KEY`, optional AWS/S3).
 - Run Alembic migrations after the DB is up (`--profile migrate`).
 - See [CLAUDE.md](CLAUDE.md) for architecture and the environment-variable hierarchy.
-
----
-
-> **Maintainer note:** the five+ deployment docs above overlap and should
-> eventually be merged into this file (see `docs/MAINTAINABILITY_ASSESSMENT.md`
-> §5). For now this page is the single entry point; the others are kept as the
-> detailed references it links to.

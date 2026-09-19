@@ -129,6 +129,7 @@ Full walkthrough (including demo data): [`docs/DEMO_RUNBOOK.md`](docs/DEMO_RUNBO
 | Local demo / first run | default `docker-compose.yml` + [DEMO_RUNBOOK](docs/DEMO_RUNBOOK.md) |
 | Development with hot-reload | `docker-compose.dev.yml` + [DOCKER_WORKFLOW.md](DOCKER_WORKFLOW.md) |
 | Standard production | `docker-compose.production.yml` / `scripts/docker/production-deploy.sh` |
+| Enterprise stack (hosted PostgreSQL) | `docker-compose.enterprise.yml` / `scripts/docker/enterprise-deploy.sh` (host networking, pinned image) — see [PRODUCTION_DOCKER_RUN.md](PRODUCTION_DOCKER_RUN.md) |
 | Enterprise / hardened daemon | [`PRODUCTION_DOCKER_RUN.md`](PRODUCTION_DOCKER_RUN.md) (raw `docker run`, no exec) |
 | Pipeline-only worker | `docker/preprocessing.Dockerfile` (see Pipeline below) |
 
@@ -190,9 +191,9 @@ python services/run_ingestion_pipeline.py \
 ```
 
 Individual stages (ingestion, embeddings, two-stage event clustering, entity resolution,
-bilateral summaries) are documented in [CLAUDE.md](CLAUDE.md) and the service READMEs
-([events](services/pipeline/events/README_EVENT_SUMMARIES.md),
-[publication](services/publication/README.md)).
+bilateral summaries) are documented in
+[services/PIPELINE_REFERENCE.md](services/PIPELINE_REFERENCE.md); for the full ordered
+refresh sequence, follow [docs/PIPELINE_REFRESH_RUNBOOK.md](docs/PIPELINE_REFRESH_RUNBOOK.md).
 
 **Pipeline-only container** (no web stack):
 
@@ -263,7 +264,7 @@ print("Connected" if health_check() else "Failed"); print(get_pool_status())
 ```
 client/            React + TypeScript frontend (Vite; served by FastAPI in production)
 server/            FastAPI server (API + React UI + chat/RAG + insight reports + S3/LLM proxy)
-  routers/         Extracted API routers (influencer, ingestion, intel_reports)
+  routers/         Extracted API routers (influencer, ingestion, intel_reports, survey)
 services/
   dashboard/       Streamlit analytics dashboard
   chat/            RAG service (semantic search + LLM responses)
@@ -273,7 +274,7 @@ shared/            SQLAlchemy models, DB/session management, config, utilities
 docs/
   reports/         Analytic insight reports (served in-app at /intel-reports)
   INSIGHT_REPORT_PROMPT.md   Report-generation doctrine & methodology
-docker/            Dockerfiles (registry, production, pgvector, preprocessing, dev)
+docker/            Dockerfiles (registry, pgvector, preprocessing, api, dashboard)
 scripts/           Deployment, release, export/import, and utility scripts
 alembic/           Database migrations
 ```

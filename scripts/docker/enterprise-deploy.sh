@@ -52,7 +52,7 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$REPO_ROOT"
 
 COMPOSE_FILE="docker-compose.enterprise.yml"
-APP_IMAGE_DEFAULT="mmorrisj/softpower-analytics:1.8.6"
+APP_IMAGE_DEFAULT="mmorrisj/softpower-analytics:2.0.3"
 
 # ============================================
 # Load .env

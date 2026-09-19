@@ -143,8 +143,8 @@ python services/pipeline/embeddings/import_embeddings.py \
 
 # See services/pipeline/embeddings/README_BACKUP_RESTORE.md for full documentation
 
-# FastAPI server (for S3 operations, runs on host)
-uvicorn services.api.main:app --host 0.0.0.0 --port 8000 --reload
+# FastAPI server (host S3/Batch/LLM proxy for containers)
+python -m uvicorn server.main:app --host 0.0.0.0 --port 7001
 ```
 
 ## Architecture
@@ -161,7 +161,7 @@ This is a **Soft Power Analytics Dashboard** that processes diplomatic documents
   - **React + TypeScript + Vite** - Modern web interface (primary UI at client/)
   - **Streamlit** - Analytics and data exploration dashboard (services/dashboard/)
 - **AI/ML**: OpenAI GPT models (via `CLAUDE_KEY`), sentence-transformers, HDBSCAN clustering
-- **Infrastructure**: Docker Compose stack (optional), Alembic migrations, Redis (for future Celery tasks)
+- **Infrastructure**: Docker Compose stack (optional), Alembic migrations, Redis (cache/queue)
 - **Storage**: AWS S3 for raw documents and embeddings (via boto3)
 
 ### Directory Structure
@@ -197,10 +197,14 @@ SP_Streamlit/
 │   │   ├── queries/           # Database queries
 │   │   └── charts/            # Chart components
 │   │
+│   ├── publication/            # Word-document publication generator
+│   │
 │   └── pipeline/               # Data processing pipeline
 │       ├── ingestion/         # Document ingestion (atom_pipeline.py, dsr.py)
 │       ├── analysis/          # AI analysis (phase0_event_analysis.py)
-│       ├── events/            # Event processing (news_event_tracker.py)
+│       ├── events/            # Event processing (batch_cluster_events.py, llm_deconflict_clusters.py, consolidate_all_events.py, merge_canonical_events.py)
+│       ├── entities/          # Entity resolution (canonical entities)
+│       ├── batch/             # OpenAI Batch API job runners
 │       ├── embeddings/        # Vector embeddings (s3_to_pgvector.py)
 │       ├── migrations/        # Data migrations
 │       └── diagnostics/       # Diagnostic tools
@@ -220,6 +224,7 @@ SP_Streamlit/
 ├── docker/                     # Docker configurations
 │   ├── registry.Dockerfile    # Production consolidated app (Docker Hub)
 │   ├── pgvector.Dockerfile    # Custom pgvector database image
+│   ├── preprocessing.Dockerfile # Pipeline-only worker image
 │   ├── api.Dockerfile         # Dev API service Dockerfile
 │   ├── dashboard.Dockerfile   # Dev dashboard Dockerfile
 │   └── supervisord.conf       # Process manager config
@@ -233,16 +238,8 @@ SP_Streamlit/
 ├── alembic/                    # Database migrations
 ├── docker-compose.yml          # Docker orchestration
 ├── requirements.txt            # Unified Python dependencies
-├── QUICKSTART.md               # Quick start guide
 └── CLAUDE.md                   # This file
 ```
-
-**Migration Notes**:
-- All `backend/` code has been reorganized into `services/` and `shared/`
-- Old imports like `from backend.database import` → `from shared.database.database import`
-- Old imports like `from backend.scripts.utils import` → `from shared.utils.utils import`
-- Docker services renamed: `backend` → `api`, `streamlit` → `dashboard`
-- All services share the same `requirements.txt` at the root level
 
 ### Docker Architecture
 
@@ -265,14 +262,14 @@ The application runs as a multi-container Docker stack:
 │  └─> Redis cache/queue                                       │
 └─────────────────────────────────────────────────────────────┘
          ↑
-    Host Machine (port 5001)
+    Host Machine (port 7001)
     └─> server/main.py (S3/Batch/LLM proxy for Docker containers)
 ```
 
 **Key Points**:
 - PostgreSQL exposed on host port 5432
 - Docker api-service runs `server/main.py` on port 8000
-- Host runs same `server/main.py` on port 5001 for S3/Batch/LLM proxy (Docker uses `host.docker.internal:5001`)
+- Host runs same `server/main.py` on port 7001 for S3/Batch/LLM proxy (Docker uses `host.docker.internal:7001`)
 - Shared network `softpower_net` allows inter-container communication
 - Volume `postgres_data` persists database data
 
@@ -281,7 +278,7 @@ The application runs as a multi-container Docker stack:
 The project deploys via Docker with `DOCKER_ENV=true` environment variable:
 - All services run in containers
 - Database host: `softpower_db` (container name)
-- API URL: `http://host.docker.internal:5001`
+- API URL: `http://host.docker.internal:7001`
 - Start with: `docker-compose up -d`
 
 **Environment Variable Hierarchy**:
@@ -308,8 +305,6 @@ The project deploys via Docker with `DOCKER_ENV=true` environment variable:
 - `PeriodSummary` - Aggregated summaries across all events for a time period
 - `EventSourceLink` - Traceability linking events to source documents
 
-**Legacy Event Tables**: The system is transitioning from separate `daily_events`, `weekly_events`, etc. tables to the consolidated `event_summaries` table. Some scripts may still reference the old schema.
-
 **LangChain Integration**:
 - `langchain_pg_collection` - Vector store collections
 - `langchain_pg_embedding` - Document embeddings for semantic search
@@ -317,7 +312,7 @@ The project deploys via Docker with `DOCKER_ENV=true` environment variable:
 ### Processing Pipeline Architecture
 
 1. **Document Ingestion** (`services/pipeline/ingestion/`): Imports raw documents from various sources
-2. **AI Analysis** (`services/pipeline/analysis/`): GPT-4 extracts salience, categories, countries, projects, locations
+2. **AI Analysis** (`services/pipeline/analysis/`): GPT models (gpt-4.1-mini by default) extract salience, categories, countries, projects, locations
 3. **Event Processing** (`services/pipeline/events/`): Groups related documents into events and tracks news
 4. **Embedding Generation** (`services/pipeline/embeddings/`): Creates vector representations and syncs with S3
 5. **Dashboard** (`services/dashboard/`): Streamlit visualization of trends and patterns
@@ -727,6 +722,6 @@ export SQL_DEBUG=true  # For connection pool debugging
 **Docker logs**:
 ```bash
 docker-compose logs -f api           # FastAPI logs
-docker-compose logs -f streamlit    # Streamlit logs
+docker-compose logs -f dashboard    # Streamlit logs
 docker-compose logs -f db           # PostgreSQL logs
 ```

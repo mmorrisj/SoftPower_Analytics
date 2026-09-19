@@ -2,24 +2,7 @@
 
 Quick reference for building, running, and maintaining the SoftPower Analytics Docker container.
 
-> ## ⚠ Enterprise / kiosk hosts — read this first
->
-> This document assumes a permissive Docker daemon (laptop, dev VM, generic Linux server) where `docker exec`, `docker cp`, custom bridge networks, and `--rm` all work normally.
->
-> **On enterprise / kiosk hosts (Rocky 9 + hardened daemon), most patterns in this file will fail with `setns: permission denied` errors.** Specifically these are blocked: `docker exec`, `docker cp`, `docker rm` of existing containers, `docker run --rm` (teardown), and `--network` with anything other than `host`.
->
-> **For enterprise deployments use [`PRODUCTION_DOCKER_RUN.md`](./PRODUCTION_DOCKER_RUN.md) instead** — it documents the host-TCP / `--network host` / non-`--rm` patterns that actually work in that environment.
->
-> Quick translation table for commands in this doc:
->
-> | Doc says | Enterprise host uses |
-> |---|---|
-> | `docker exec <container> psql ...` | `psql -h 127.0.0.1 -p 5432 ...` (host-installed psql) |
-> | `docker exec <container> printenv X` | `docker inspect <container> --format '{{range .Config.Env}}{{println .}}{{end}}' \| grep X` |
-> | `docker exec -it <container> bash` | Not available — debug via `docker logs` and host-side reproductions |
-> | `docker exec <container> curl ...` | `curl ...` from the host (containers are on `--network host`) |
-> | `docker run --rm ...` | `docker run` without `--rm`; ignore the stopped container afterward |
-> | `docker network create ...` | Don't create networks; use `--network host` |
+> **Enterprise / hardened hosts:** this doc assumes a permissive Docker daemon — on hardened daemons (no `docker exec`, no bridge networks) see [`PRODUCTION_DOCKER_RUN.md`](./PRODUCTION_DOCKER_RUN.md) instead.
 
 ## Architecture
 
@@ -47,8 +30,8 @@ sudo docker build -f docker/registry.Dockerfile -t softpower-analytics:latest .
 ```
 
 **What happens during the build:**
-- Stage 1: `node:20-slim` installs npm deps and runs `npm run build` (compiles React to static files)
-- Stage 2: `python:3.13-slim` installs system packages and all pip dependencies (including ML packages)
+- Stage 1: `node:22-bookworm-slim` (digest-pinned) installs npm deps and runs `npm run build` (compiles React to static files)
+- Stage 2: `python:3.13-slim-trixie` (digest-pinned) installs system packages and all pip dependencies (including ML packages)
 - The built React files are copied from Stage 1 into Stage 2
 - Node.js is **not** present in the final image — React runs as pre-built static files
 
@@ -63,16 +46,20 @@ Fix the source files in `client/src/`, then re-run the build command. Only the c
 
 ```bash
 sudo docker run -d \
-  --name softpower_analytics \
+  --name api-service \
   -p 8005:8000 \
   -p 8503:8501 \
   --env-file .env \
   -e DOCKER_ENV=true \
-  -e DATABASE_URL=postgresql+psycopg2://matthew50:softpower@host.docker.internal:5432/softpower-db \
+  -e DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@host.docker.internal:5432/${POSTGRES_DB} \
   -e API_URL=http://host.docker.internal:7001 \
   --add-host=host.docker.internal:host-gateway \
   softpower-analytics:latest
 ```
+
+> Container naming: the dev/demo compose stack calls this container `api-service`;
+> the production stack (`docker-compose.production.yml` / `production-deploy.sh`)
+> calls it `sp_prod_app`. The examples below use `api-service`.
 
 **Port mapping format: `-p HOST:CONTAINER`**
 - `-p 8005:8000` → access FastAPI/React at `http://localhost:8005`
@@ -82,7 +69,7 @@ sudo docker run -d \
 | Flag | Purpose |
 |------|---------|
 | `-d` | Run in background (detached) |
-| `--name softpower_analytics` | Name the container for easy reference |
+| `--name api-service` | Name the container for easy reference |
 | `-p HOST:CONTAINER` | Map host port to container port |
 | `--env-file .env` | Load environment variables from .env |
 | `-e DOCKER_ENV=true` | Tell the app it's running in Docker |
@@ -90,7 +77,7 @@ sudo docker run -d \
 | `-e API_URL=...` | LLM/S3 proxy relay — base URL for host proxy on port 7001 (code appends `/proxy_query`, `/s3/*`, etc.) |
 | `--add-host=host.docker.internal:host-gateway` | Linux-only: lets container reach host network |
 
-**IMPORTANT:** The `-e API_URL` flag **overrides** the value from `.env`. Your `.env` likely has `API_URL=http://localhost:7001` — correct on the host but wrong inside the container where `localhost` means the container itself. The `-e` override rewrites it to `host.docker.internal` so the container can reach the host.
+**IMPORTANT:** The `-e API_URL` flag **overrides** the value from `.env`. The `.env` default is `API_URL=http://localhost:8000` (matching `API_PORT`); the host-side proxy port is separate (`LLM_PROXY_PORT=7001`). Either way, `localhost` is wrong inside the container — it means the container itself. The `-e` override rewrites it to `host.docker.internal:7001` so the container reaches the host proxy.
 
 **Prerequisites:**
 - Host-side LLM proxy must be running on port 7001 for LLM features.
@@ -116,28 +103,28 @@ sudo docker run -d \
 sudo docker ps
 
 # Check both services (FastAPI + Streamlit)
-sudo docker logs softpower_analytics 2>&1 | tail -30
+sudo docker logs api-service 2>&1 | tail -30
 
 # Check FastAPI specifically
-sudo docker logs softpower_analytics 2>&1 | grep -E "fastapi|uvicorn|ERROR|FATAL"
+sudo docker logs api-service 2>&1 | grep -E "fastapi|uvicorn|ERROR|FATAL"
 
 # Check Streamlit specifically
-sudo docker logs softpower_analytics 2>&1 | grep -i streamlit
+sudo docker logs api-service 2>&1 | grep -i streamlit
 
 # Follow logs in real time
-sudo docker logs -f softpower_analytics
+sudo docker logs -f api-service
 
 # Health check
 curl http://localhost:8005/api/health
 
 # Verify proxy env var is correct (should show host.docker.internal, NOT localhost)
-sudo docker exec softpower_analytics printenv API_URL
+sudo docker exec api-service printenv API_URL
 ```
 
 ## 4. Stop the Container
 
 ```bash
-sudo docker stop softpower_analytics
+sudo docker stop api-service
 ```
 
 ## 5. Remove a Container
@@ -146,10 +133,10 @@ You must stop a container before removing it (or use `-f` to force).
 
 ```bash
 # Stop then remove
-sudo docker stop softpower_analytics && sudo docker rm softpower_analytics
+sudo docker stop api-service && sudo docker rm api-service
 
 # Force remove (even if running)
-sudo docker rm -f softpower_analytics
+sudo docker rm -f api-service
 ```
 
 ## 6. Restart After Code Changes
@@ -157,15 +144,15 @@ sudo docker rm -f softpower_analytics
 After editing source files, rebuild and restart:
 
 ```bash
-sudo docker rm -f softpower_analytics && \
+sudo docker rm -f api-service && \
 sudo docker build -f docker/registry.Dockerfile -t softpower-analytics:latest . && \
 sudo docker run -d \
-  --name softpower_analytics \
+  --name api-service \
   -p 8005:8000 \
   -p 8503:8501 \
   --env-file .env \
   -e DOCKER_ENV=true \
-  -e DATABASE_URL=postgresql+psycopg2://matthew50:softpower@host.docker.internal:5432/softpower-db \
+  -e DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@host.docker.internal:5432/${POSTGRES_DB} \
   -e API_URL=http://host.docker.internal:7001 \
   --add-host=host.docker.internal:host-gateway \
   softpower-analytics:latest
@@ -194,7 +181,7 @@ A container with that name already exists (running or stopped).
 sudo docker ps -a
 
 # Remove the old one
-sudo docker rm -f softpower_analytics
+sudo docker rm -f api-service
 ```
 
 ### FastAPI crashes / port 8005 not connecting (but Streamlit works)
@@ -202,7 +189,7 @@ sudo docker rm -f softpower_analytics
 Check the logs for Python import or startup errors:
 
 ```bash
-sudo docker logs softpower_analytics 2>&1 | grep -E "ERROR|FATAL|Traceback|NameError|ImportError" | tail -20
+sudo docker logs api-service 2>&1 | grep -E "ERROR|FATAL|Traceback|NameError|ImportError" | tail -20
 ```
 
 Fix the Python source, rebuild, and restart (see section 6).
@@ -224,12 +211,12 @@ The container proxies LLM requests through the host. Check:
 2. **API_URL set correctly?** Must be `http://host.docker.internal:7001`.
    Check from inside the container:
    ```bash
-   sudo docker exec softpower_analytics printenv API_URL
+   sudo docker exec api-service printenv API_URL
    ```
 
 3. **Container can reach host?** Test connectivity:
    ```bash
-   sudo docker exec softpower_analytics curl -s http://host.docker.internal:7001/docs | head -5
+   sudo docker exec api-service curl -s http://host.docker.internal:7001/docs | head -5
    ```
 
 ### "no such container"
@@ -253,7 +240,7 @@ sudo docker ps
 sudo docker ps -a
 
 # Shell into a running container
-sudo docker exec -it softpower_analytics bash
+sudo docker exec -it api-service bash
 
 # Check disk usage
 sudo docker system df
@@ -273,12 +260,15 @@ The **registry** path is the recommended production deployment. It produces a fu
 
 ```bash
 # Build + push the registry image (default mode)
-REGISTRY=docker.io/yourusername ./scripts/docker/push-to-registry.sh
+# NOTE: with no VERSION, push-to-registry.sh tags 1.0.0 — always pass the
+# release version explicitly (see README § Quick Start for the release invocation):
+./scripts/docker/push-to-registry.sh registry mmorrisj <version>
 
 # This builds docker/registry.Dockerfile with:
 #   --pull --sbom=true --provenance=mode=max --push
 # Produces: softpower-app (FastAPI + Streamlit + React + ML, self-contained)
-# Also rebuilds: pgvector (PostgreSQL + pgvector extension)
+# The pgvector image is built and pushed SEPARATELY via docker/pgvector.Dockerfile
+# (see that file's header for build/push commands).
 ```
 
 ### Deploy with docker-compose.production.yml
@@ -295,33 +285,13 @@ This pulls pre-built images from Docker Hub (no local builds needed). See `docs/
 
 ### Security hardening (production compose)
 
-The production compose file includes:
-- `security_opt: no-new-privileges:true`
-- `cap_drop: ALL`
-- Health checks on database
-- Non-root user (`appuser`)
+See [`PRODUCTION_DOCKER_RUN.md`](./PRODUCTION_DOCKER_RUN.md) and the comments in
+`docker-compose.production.yml` (`no-new-privileges`, `cap_drop: ALL`, health checks, non-root `appuser`).
 
-## 10. Export for Production Deployment
+## 10. Transferring Images to a Production Host
 
-### Option A: Registry push (if registry is accessible from both networks)
-
-```bash
-REGISTRY=docker.io/yourusername ./scripts/docker/push-to-registry.sh --production
-```
-
-### Option B: Save as tar file (for physical/S3 transfer)
-
-```bash
-# Save the app image
-sudo docker save softpower-analytics:latest -o softpower-analytics.tar
-
-# Save the database image
-sudo docker save pgvector/pgvector:0.8.1-pg16 -o pgvector-pg16.tar
-
-# Transfer to production system, then load
-sudo docker load -i softpower-analytics.tar
-sudo docker load -i pgvector-pg16.tar
-```
+Save images with `docker save ... -o <file>.tar` (app: `mmorrisj/softpower-analytics:<version>`, DB: `mmorrisj/pgvector:0.8.2-pg17`), transfer, then load them on the target with `./scripts/docker/production-deploy.sh load [dir]`.
+See README § Production Operations for the full command table.
 
 ## 11. File Reference
 
@@ -331,11 +301,18 @@ sudo docker load -i pgvector-pg16.tar
 | `docker/registry.Dockerfile` | Production image — self-contained with ML packages + HuggingFace model (~2GB) |
 | `docker/api.Dockerfile` | Dev API service (multi-stage: Node build + Python FastAPI) |
 | `docker/dashboard.Dockerfile` | Dev Streamlit dashboard service |
-| `docker/pgvector.Dockerfile` | Custom PostgreSQL 16 + pgvector (compiled from source) |
+| `docker/pgvector.Dockerfile` | Custom PostgreSQL 17 + pgvector (compiled from source) |
 | `docker/supervisord.conf` | Process manager config (runs FastAPI + Streamlit in consolidated images) |
 | **Compose files** | |
-| `docker-compose.dev.yml` | Development stack (separate containers: API, Dashboard, DB, Redis) |
-| `docker-compose.production.yml` | Production stack (consolidated app image from Docker Hub) |
+| `docker-compose.yml` | Default dev/demo stack (zero prerequisites, Compose-managed volume + network) |
+| `docker-compose.dev.yml` | Development stack (separate containers: API, Dashboard, DB, Redis; external volume/network) |
+| `docker-compose.enterprise.yml` | Enterprise stack: app + Redis against a hosted PostgreSQL (host networking) |
+| `docker-compose.laptop.yml` | Laptop pull-and-run stack (pinned registry images, no local build) |
+| `docker-compose.laptop.embed.yml` | GPU embedding-runner overlay on the laptop stack (preprocessing image) |
+| `docker-compose.laptop.gpu.yml` | GPU device-reservation overlay (nvidia) |
+| `docker-compose.preprocessing.yml` | Pipeline-only preprocessing/batch worker stack |
+| `docker-compose.production.yml` | Production stack (consolidated app image from Docker Hub, host networking) |
+| `docker-compose.windows.yml` | Bridge-networking override of the production stack for Docker Desktop (Windows/macOS/WSL2) |
 | **Requirements** | |
 | `requirements-production.txt` | Lightweight Python deps baked into production Docker image |
 | `requirements-production-heavy.txt` | Heavy ML deps installed from wheels on production target |
