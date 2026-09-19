@@ -21,6 +21,9 @@ Usage:
     python scripts/db_delta_export.py --output-dir ./db_delta_20260826 --doc-date-from 2026-07-21
     python scripts/db_delta_export.py --output-dir ./x --doc-date-from 2026-07-21 --no-vectors
     python scripts/db_delta_export.py --output-dir ./x --doc-date-from 2026-07-21 --dry-run
+    # ship only the event layer (e.g. after a narrative backfill):
+    python scripts/db_delta_export.py --output-dir ./x --doc-date-from 2026-07-21 \
+        --tables canonical_events,daily_event_mentions,event_summaries,event_source_links
 
 Connection: DATABASE_URL, or POSTGRES_* / DB_HOST / DB_PORT from the environment (.env).
 """
@@ -47,6 +50,14 @@ except Exception:  # pragma: no cover - dotenv is optional
 SUMMARY_COLLECTIONS = ("daily_event_embeddings", "weekly_event_embeddings",
                        "monthly_event_embeddings", "yearly_event_embeddings")
 DOC_COLLECTION = "chunk_embeddings"
+
+# Whole-table replace deletes the target first, so replacing a parent without
+# reshipping these dependents would cascade-delete or NULL them on the target.
+REPLACE_DEPENDENTS = {
+    "canonical_events": ["daily_event_mentions", "event_summaries", "event_source_links"],
+    "event_summaries": ["event_source_links"],
+    "canonical_entities": ["daily_entity_mentions", "entity_relationships"],
+}
 
 
 def connect():
@@ -178,6 +189,8 @@ def main():
     ap.add_argument("--output-dir", required=True)
     ap.add_argument("--doc-date-from", required=True, help="documents with date >= this are exported (replace-by-key)")
     ap.add_argument("--no-vectors", action="store_true", help="omit canonical_events/entities embedding vectors (re-embed on target)")
+    ap.add_argument("--tables", help="comma-separated table names (bare or schema.table): export only these entries. "
+                    "Replaced parents must ship with their dependents (enforced).")
     ap.add_argument("--include-batch-jobs", action="store_true")
     ap.add_argument("--max-mb", type=int, default=250, help="split any gzipped file above this size (default 250)")
     ap.add_argument("--dry-run", action="store_true", help="count rows only, write nothing")
@@ -191,6 +204,18 @@ def main():
     conn = connect(); conn.set_session(readonly=True, autocommit=False)
     cur = conn.cursor()
     entries = plan(args.doc_date_from, not args.no_vectors, args.include_batch_jobs) + analytics_entries(cur)
+    if args.tables:
+        wanted = {t.strip() for t in args.tables.split(",") if t.strip()}
+        entries = [e for e in entries if e["table"] in wanted or f'{e["schema"]}.{e["table"]}' in wanted]
+        if not entries:
+            sys.exit(f"ERROR: --tables matched nothing among the plan's tables")
+        selected = {e["table"] for e in entries}
+        for e in entries:
+            if e["mode"] == "replace":
+                missing = [d for d in REPLACE_DEPENDENTS.get(e["table"], []) if d not in selected]
+                if missing:
+                    sys.exit(f"ERROR: replacing {e['table']} on the target deletes rows in {', '.join(missing)} "
+                             f"(FK cascade / SET NULL) — add them to --tables")
     cur.execute("SELECT count(*), max(date) FROM public.documents"); ndocs, maxdate = cur.fetchone()
     print(f"Source: {ndocs:,} documents through {maxdate}; window from {args.doc_date_from}; "
           f"{'DRY RUN' if args.dry_run else 'writing to ' + str(out)}")
