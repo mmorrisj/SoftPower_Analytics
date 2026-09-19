@@ -16,6 +16,12 @@ healthy-but-queued OpenAI batches). `WINDOW` below = first ingest date … last 
 ## 0. Preflight
 - `docker ps` — db healthy; host proxy up on 7001; `nvidia-smi` — if the GPU is busy with the
   user's other work, run model steps with `-e CUDA_VISIBLE_DEVICES=` (CPU).
+  The 7001 proxy does NOT survive between sessions — verify it responds
+  (`curl -s -o /dev/null -w '%{http_code}' localhost:7001/docs`) before submitting any batch
+  stage; a dead proxy fails every job at upload with
+  `HTTPConnectionPool(host='host.docker.internal', port=7001)`. Recovery: restart the proxy,
+  `UPDATE batch_jobs SET status='preparing', error_message=NULL, submitted_at=NULL WHERE ...`,
+  re-run the queue runner.
 - Check overlap: if the new export re-covers already-clustered dates with materially more
   docs, roll back Stage-1 event artifacts for those dates first (backup schema + delete
   clusters/fully-inside events/straddling mentions, null straddling material_score — recipe in
