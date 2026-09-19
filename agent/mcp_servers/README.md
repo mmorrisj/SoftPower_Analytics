@@ -2,9 +2,10 @@
 
 This directory contains standalone Model Context Protocol servers. Each
 server is a separate process that speaks JSON-RPC over stdio per the MCP
-specification. The agent orchestrator (`agent/orchestrator.py`) talks to
-these servers via `agent/mcp/client.py`; the same servers can also be
-registered in any other MCP host (Claude Desktop, MCP Inspector, IDE
+specification. The agent's tool layer (`agent/tools/document_search.py`)
+routes calls to these servers via `agent/mcp/client.py` when
+`AGENT_DOCUMENT_SEARCH_USE_MCP` is truthy (the default); the same servers can
+also be registered in any other MCP host (Claude Desktop, MCP Inspector, IDE
 plugins).
 
 ## Current servers
@@ -13,6 +14,10 @@ plugins).
 |---|---|---|
 | `softpower-document-search` | `agent.mcp_servers.document_search_server` | Tools: `document_search` |
 | `softpower-writing` | `agent.mcp_servers.writing_server` | Prompts: `quick_summary`, `sourced_report`, `metrics_focused`, `entity_profile`, `bilateral_assessment`. Tools: `list_writing_products`, `recommend_product` |
+
+Note: the writing server is for external MCP hosts only — it is not wired
+into the product's conversational agent (`get_converse_registry` in
+`agent/tools/__init__.py` deliberately omits the writing/synthesis tools).
 
 ### MCP primitives used
 
@@ -47,15 +52,13 @@ npx @modelcontextprotocol/inspector \
   python -m agent.mcp_servers.writing_server
 ```
 
-Inspector's UI has separate panes for **Tools**, **Prompts**, and
-**Resources** — useful for verifying that the writing server exposes its
-products as proper prompts rather than just tool calls.
-
-Inspector opens a browser UI where you can call `tools/list` and
-`tools/call` interactively. Database environment variables
-(`DB_HOST`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`,
-`OPENAI_PROJ_API` / `CLAUDE_KEY`) must be exported in the shell that
-launches Inspector — the server inherits them.
+Inspector opens a browser UI with separate panes for **Tools**, **Prompts**,
+and **Resources**, where you can call `tools/list`, `tools/call`,
+`prompts/list`, etc. interactively — useful for verifying that the writing
+server exposes its products as proper prompts rather than just tool calls.
+Database environment variables (`DB_HOST`, `POSTGRES_USER`,
+`POSTGRES_PASSWORD`, `POSTGRES_DB`, `OPENAI_PROJ_API` / `CLAUDE_KEY`) must be
+exported in the shell that launches Inspector — the server inherits them.
 
 ## Claude Desktop integration
 
@@ -68,7 +71,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`
     "softpower-document-search": {
       "command": "python",
       "args": ["-m", "agent.mcp_servers.document_search_server"],
-      "cwd": "/absolute/path/to/SoftPower_Analytics",
+      "cwd": "/absolute/path/to/SP_Streamlit",
       "env": {
         "DB_HOST": "localhost",
         "DB_PORT": "5432",
@@ -85,11 +88,11 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`
 After restarting Claude Desktop, the `document_search` tool appears in
 the tool picker and Claude can call it against the live database.
 
-## Agent orchestrator integration
+## Agent tool-layer integration
 
-The orchestrator routes `document_search` through MCP by default. To
-fall back to the in-process implementation (useful for performance
-comparisons or when the subprocess can't start):
+`agent/tools/document_search.py` routes `document_search` through MCP by
+default. To fall back to the in-process implementation (useful for
+performance comparisons or when the subprocess can't start):
 
 ```bash
 AGENT_DOCUMENT_SEARCH_USE_MCP=false

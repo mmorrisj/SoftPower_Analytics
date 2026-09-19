@@ -62,7 +62,7 @@ tools), still used by `/analyze`.
 | `AGENT_LLM_MODEL` | `gpt-4.1-mini` | falls back to `LITELLM_MODEL` |
 | `AGENT_LLM_BASE_URL` | unset | falls back to `LITELLM_URL`, else api.openai.com |
 | `AGENT_MAX_TURNS` | `24` | tool-call budget per turn |
-| `AGENT_LLM_REQUEST_TIMEOUT` | `60` | seconds per LLM call |
+| `AGENT_LLM_REQUEST_TIMEOUT` | `240` | seconds per LLM call |
 
 The router is mounted defensively in `server/main.py` (a broken import cannot
 take down the API).

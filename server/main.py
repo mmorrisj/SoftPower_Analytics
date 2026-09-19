@@ -119,7 +119,7 @@ from shared.utils.request_context import GatewayJWTMiddleware
 app.add_middleware(GatewayJWTMiddleware)
 
 # Agent module: isolated runtime for the OSINT-style agent page.
-# EXPERIMENTAL / incomplete — see agent/README.md. Set DISABLE_AGENT=true to
+# Optional agent subsystem — see agent/README.md. Set DISABLE_AGENT=true to
 # skip mounting it (e.g. for a demo build). Guarded either way so a broken
 # agent import cannot take down the foundational API.
 if os.getenv("DISABLE_AGENT", "false").lower() == "true":

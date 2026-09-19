@@ -1,3 +1,5 @@
+> **Superseded 2026-07-31.** The remediation banner below reflects final state; scorecard rows marked ⚠ were retracted by the 2026-07-31 re-run.
+
 # Evaluation Findings — 2026-07-29/30
 
 > **2026-07-31 remediation update.** The two biggest gaps (F1/F2) are
@@ -28,10 +30,7 @@
 > distance + candidate LIMIT). Entity-matching eval identical post-change.
 > A full column-type migration to `vector(768)` was deliberately deferred:
 > it touches every reader/writer (psycopg2 returns unregistered vector
-> columns as strings) and should ride a proper release. New repo finding:
-> **alembic has three heads** (006_search_vector, 20260224_aiddata,
-> 20260612_ingestion_jobs) — needs a merge revision before any new
-> migration is added.
+> columns as strings) and should ride a proper release.
 
 First full run of the evaluation harness (`evals/`). All metrics are internal
 measures (methodological soundness, faithfulness to the corpus) — the media-lens
@@ -54,9 +53,9 @@ LLM probes via the container proxy (gpt-4o-mini class).
 | Extraction reliability | **Good** | positive-salience stability 75/75; category F1 0.87 (P=1.0), initiator F1 0.83, recipient F1 0.78 |
 | Event traceability | **Sound** | 1,320 sampled mention doc_ids → 100% resolve to documents (entities likewise 100%) |
 | Daily event clustering | **Good** | intra-cluster cosine 0.906 vs 0.550 random baseline |
-| Retrieval | **Mixed** | hybrid known-item MRR 0.52 (2× vector-only 0.28); event-evidence recall@50 only 0.15; rerank *hurts* known-item (MRR→0.20) but helps topical (event hit@5 0.52→0.73); entity boost +48% event recall@25 |
-| Stage-2 event consolidation | **Behind** | 57.5% masters LLM-validated; 541 (Iran) + 186 (China) near-window duplicate master pairs ≥0.90 incl. literal same-name pairs ("Belt and Road Initiative" ×2) |
-| Stage-1b deconfliction backlog | **Behind** | only 22.7% of 114,869 clusters LLM-deconflicted |
+| Retrieval | **Mixed** | hybrid known-item MRR 0.52 (2× vector-only 0.28); event-evidence recall@50 only 0.15; ⚠ rerank known-item regression retracted — fixed 2026-07-30 (RRF blend + pinned top-1: known-item restored to no-rerank parity, event MRR 0.55); entity boost +48% event recall@25 |
+| Stage-2 event consolidation | ⚠ **Retracted — see banner** | post-remediation (2026-07-31): 76,690 masters covering 100% of clustered signal |
+| Stage-1b deconfliction backlog | ⚠ **Retracted — see banner** | deconfliction coverage 100% after the 2026-07-31 backfill + Stage-2 completion |
 | Taxonomy governance | **Drifted** | 29.6% of subcategory rows (298,667) use values outside config.yaml ("International Negotiations" 144K, "Aid/Donation" 96K) |
 | RAG answers | **Good, one weak spot** | citation validity 100%, out-of-corpus refusal 2/2, groundedness mean 0.69 (two answers 1.0, one 0.75, one 0.0) |
 | Agent converse doctrine | **Strong** | 3/3 doctrine probes: provenance_stats for volume comparisons, activity_series for trends, entity_lookup for entities |

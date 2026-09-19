@@ -129,3 +129,7 @@ softpower-production-20260220.tar.gz
 # Database transfer bundles (pg_dump chunks / delta CSV bundles)
 db_export_*/
 db_delta_*/
+
+# Machine-generated eval outputs (curated findings live in evals/FINDINGS.md)
+evals/results/
+docs/reports/_derived/__pycache__/

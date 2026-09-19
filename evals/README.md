@@ -13,7 +13,9 @@ python -m evals.run_eval --components retrieval entity_matching
 ```
 
 Results land in `evals/results/` as a timestamped `.json` (full per-case
-records) and `.md` (summary tables). Sampling is seeded (`20260729`) and
+records) and `.md` (summary tables). Results are machine-generated locally
+and gitignored; the curated findings live in [FINDINGS.md](FINDINGS.md).
+Sampling is seeded (`20260729`) and
 stratified by initiating country, so runs are reproducible and no single
 media ecosystem dominates the metrics.
 
