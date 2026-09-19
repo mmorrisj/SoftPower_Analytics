@@ -58,10 +58,13 @@ This pipeline extracts named entities (persons, organizations, companies, locati
 │                                                                      │
 │  RELATIONSHIP EXTRACTION (Graph Building)                            │
 │  ┌────────────────────────────────────────────────────────────┐   │
-│  │  extract_entity_relationships.py                            │   │
-│  │      ├─> Find co-occurring entities in documents            │   │
-│  │      ├─> LLM extracts relationship types                    │   │
-│  │      └─> Save to entity_relationships table                 │   │
+│  │  build_entity_cooccurrence.py                               │   │
+│  │      ├─> Find co-occurring entities in shared documents     │   │
+│  │      └─> Save edges to entity_relationships table           │   │
+│  │                                                              │   │
+│  │  classify_entity_relationships.py                           │   │
+│  │      ├─> LLM classifies each co-occurrence edge             │   │
+│  │      └─> Sets relationship_type + description               │   │
 │  └────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -239,19 +242,9 @@ python services/pipeline/entities/llm_deconflict_entity_clusters.py \
     --start-date 2024-08-01 \
     --end-date 2024-08-31 \
     --entity-type person
-
-# Resume from checkpoint (skips already processed)
-python services/pipeline/entities/llm_deconflict_entity_clusters.py \
-    --country China \
-    --start-date 2024-08-01 \
-    --end-date 2024-08-31 \
-    --resume
-
-# Check status
-python services/pipeline/entities/llm_deconflict_entity_clusters.py \
-    --country China \
-    --status
 ```
+
+Flags: `--country`, `--start-date`, `--end-date` (all three required), `--entity-type`, `--checkpoint-frequency`, `--dry-run`. Incremental by design: only clusters with `llm_deconflicted=FALSE` are processed, so re-running the same range resumes automatically.
 
 **Output**: Creates `canonical_entities` and `daily_entity_mentions`
 
@@ -259,28 +252,47 @@ python services/pipeline/entities/llm_deconflict_entity_clusters.py \
 
 ### Stage 2: Batch Consolidation (Entity Resolution)
 
+#### 2A-0. Embed Canonical Entities (Prerequisite)
+
+Stage 2A consolidation matches on `canonical_entities.embedding_vector`, so embed first:
+
+```bash
+# Embed entities missing an embedding
+python services/pipeline/entities/embed_canonical_entities.py --country China
+
+# Check embedding status / re-embed everything
+python services/pipeline/entities/embed_canonical_entities.py --country China --status
+python services/pipeline/entities/embed_canonical_entities.py --influencers --force
+```
+
+Flags: `--country`, `--influencers`, `--status`, `--dry-run`, `--force`, `--batch-size` (default 100)
+
+**Output**: Populates `canonical_entities.embedding_vector`
+
 #### 2A. Consolidate Entities Across Dates
 
 ```bash
-# Consolidate all entity types for China
+# Consolidate all entities for China
 python services/pipeline/entities/consolidate_all_entities.py \
     --country China
-
-# Consolidate specific entity type
-python services/pipeline/entities/consolidate_all_entities.py \
-    --country China \
-    --entity-type person
 
 # Custom similarity threshold (stricter matching)
 python services/pipeline/entities/consolidate_all_entities.py \
     --country China \
-    --threshold 0.90
+    --similarity-threshold 0.90
 
-# Check status
+# Reset existing consolidations before re-running
 python services/pipeline/entities/consolidate_all_entities.py \
     --country China \
-    --status
+    --force
+
+# Dry run
+python services/pipeline/entities/consolidate_all_entities.py \
+    --country China \
+    --dry-run
 ```
+
+Flags: `--country`, `--influencers`, `--similarity-threshold` (default 0.88), `--dry-run`, `--force`
 
 **Output**: Sets `master_entity_id` for child entities
 
@@ -291,21 +303,18 @@ python services/pipeline/entities/consolidate_all_entities.py \
 python services/pipeline/entities/llm_deconflict_canonical_entities.py \
     --country China
 
-# Validate specific entity type
-python services/pipeline/entities/llm_deconflict_canonical_entities.py \
-    --country China \
-    --entity-type person
-
-# Resume from checkpoint
+# Resume from checkpoint (skip already-validated groups)
 python services/pipeline/entities/llm_deconflict_canonical_entities.py \
     --country China \
     --resume
 
-# Check status
+# Force reprocessing of all groups
 python services/pipeline/entities/llm_deconflict_canonical_entities.py \
     --country China \
-    --status
+    --force
 ```
+
+Flags: `--country`, `--influencers`, `--all`, `--dry-run`, `--verbose`, `--resume`, `--force`, `--batch-size` (default 10)
 
 **Output**: Marks `llm_validated=TRUE` for validated groups
 
@@ -316,21 +325,13 @@ python services/pipeline/entities/llm_deconflict_canonical_entities.py \
 python services/pipeline/entities/merge_canonical_entities.py \
     --country China
 
-# Merge specific entity type
-python services/pipeline/entities/merge_canonical_entities.py \
-    --country China \
-    --entity-type person
-
 # Dry run (show what would be merged)
 python services/pipeline/entities/merge_canonical_entities.py \
     --country China \
     --dry-run
-
-# Check status
-python services/pipeline/entities/merge_canonical_entities.py \
-    --country China \
-    --status
 ```
+
+Flags: `--country`, `--influencers`, `--dry-run`, `--verbose`
 
 **Output**: Consolidates `daily_entity_mentions`, deletes empty child entities
 
@@ -338,34 +339,49 @@ python services/pipeline/entities/merge_canonical_entities.py \
 
 ### Relationship Extraction (Graph Building)
 
+Two-step process: build the co-occurrence network, then classify the edges with the LLM.
+
+#### Step 1: Build Co-occurrence Network
+
 ```bash
-# Extract relationships for all entities
-python services/pipeline/entities/extract_entity_relationships.py \
-    --country China \
-    --start-date 2024-08-01 \
-    --end-date 2024-08-31
+# Build edges from shared documents
+python services/pipeline/entities/build_entity_cooccurrence.py --country China
 
-# Extract for specific entity types only
-python services/pipeline/entities/extract_entity_relationships.py \
+# Stricter co-occurrence threshold
+python services/pipeline/entities/build_entity_cooccurrence.py \
     --country China \
-    --start-date 2024-08-01 \
-    --end-date 2024-08-31 \
-    --entity-types person organization
-
-# Minimum co-occurrence threshold
-python services/pipeline/entities/extract_entity_relationships.py \
-    --country China \
-    --start-date 2024-08-01 \
-    --end-date 2024-08-31 \
     --min-cooccurrence 3
 
-# Check status
-python services/pipeline/entities/extract_entity_relationships.py \
-    --country China \
-    --status
+# Rebuild from scratch
+python services/pipeline/entities/build_entity_cooccurrence.py --country China --force
 ```
 
-**Output**: Populates `entity_relationships` table
+Flags: `--country`, `--influencers`, `--dry-run`, `--force` (delete existing relationships before rebuilding), `--min-cooccurrence` (minimum shared documents, default 2), `--batch-size` (default 500), `--verbose`
+
+**Output**: Populates `entity_relationships` (type `co_occurrence`, with `co_occurrence_count`, date range, `source_doc_ids`)
+
+#### Step 2: Classify Relationships
+
+```bash
+# LLM classifies unclassified edges
+python services/pipeline/entities/classify_entity_relationships.py --country China
+
+# Reclassify already-classified edges
+python services/pipeline/entities/classify_entity_relationships.py --country China --force
+```
+
+Flags: `--country`, `--influencers`, `--dry-run`, `--force` (reclassify already-classified), `--min-cooccurrence` (only classify edges with ≥ N shared documents, default 2), `--batch-size` (default 20), `--verbose`
+
+**Output**: Sets `entity_relationships.relationship_type` and `relationship_description`
+
+---
+
+### Additional Scripts
+
+- **embed_canonical_entities.py** — Generates `canonical_entities.embedding_vector`; prerequisite for Stage 2A (see above). Flags: `--country`, `--influencers`, `--status`, `--dry-run`, `--force`, `--batch-size`.
+- **link_entities_to_events.py** — Links entity mentions to canonical events; writes `daily_entity_mentions.associated_event_ids` and `canonical_entities.associated_events`. Flags: `--country`, `--influencers`, `--dry-run`, `--force`, `--batch-size` (default 500), `--verbose`.
+- **generate_entity_descriptions.py** — LLM-generated profiles; writes `canonical_entities.entity_description` and `key_activities`. Flags: `--country`, `--influencers`, `--dry-run`, `--force`, `--resume` (default behavior), `--batch-size` (default 20), `--min-docs` (default 3), `--verbose`.
+- **wipe_entity_tables.py** — ⚠️ Deletes entity pipeline data (optionally scoped). Flags: `--country`, `--start-date`, `--end-date`, `--dry-run`, `--yes`.
 
 ---
 
@@ -386,6 +402,10 @@ python services/pipeline/entities/cluster_daily_entities.py \
 python services/pipeline/entities/llm_deconflict_entity_clusters.py \
     --country China --start-date 2024-08-01 --end-date 2024-12-31
 
+# Stage 2A-0: Embed canonical entities (prerequisite for consolidation)
+python services/pipeline/entities/embed_canonical_entities.py \
+    --country China
+
 # Stage 2A: Consolidate across all dates
 python services/pipeline/entities/consolidate_all_entities.py \
     --country China
@@ -398,9 +418,9 @@ python services/pipeline/entities/llm_deconflict_canonical_entities.py \
 python services/pipeline/entities/merge_canonical_entities.py \
     --country China
 
-# Extract relationships
-python services/pipeline/entities/extract_entity_relationships.py \
-    --country China --start-date 2024-08-01 --end-date 2024-12-31
+# Build the relationship graph
+python services/pipeline/entities/build_entity_cooccurrence.py --country China
+python services/pipeline/entities/classify_entity_relationships.py --country China
 ```
 
 ---
@@ -550,7 +570,7 @@ DEFAULT_EPS = 0.12  # vs 0.15 for events
 DEFAULT_MIN_SAMPLES = 1
 
 # Consolidation (stricter matching)
-DEFAULT_SIMILARITY_THRESHOLD = 0.88  # vs 0.85 for events
+DEFAULT_SIMILARITY_THRESHOLD = 0.88
 ```
 
 ### Batch Sizes
@@ -604,22 +624,16 @@ ORDER BY master.total_documents DESC;
 
 ## Next Steps
 
-1. **Run Alembic Migration**: Create database tables
-   ```bash
-   alembic revision --autogenerate -m "add entity extraction tables"
-   alembic upgrade head
-   ```
-
-2. **Process Test Dataset**: Run on small date range first
+1. **Process Test Dataset**: Run on small date range first
    ```bash
    # Test with one month
    python services/pipeline/entities/extract_daily_entities.py \
        --country China --start-date 2024-08-01 --end-date 2024-08-31
    ```
 
-3. **Build Visualizations**: Use entity graph data for network visualizations
+2. **Build Visualizations**: Use entity graph data for network visualizations
    - Export to GraphML/JSON for tools like Gephi, Cytoscape
    - Build interactive dashboard with entity timelines
    - Create influence network charts
 
-4. **Extend Analysis**: Link entities to events, track influence patterns over time
+3. **Extend Analysis**: Link entities to events, track influence patterns over time

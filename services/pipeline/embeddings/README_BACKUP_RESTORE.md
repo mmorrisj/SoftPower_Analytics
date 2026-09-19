@@ -32,6 +32,8 @@ python services/pipeline/embeddings/import_embeddings.py \
 
 ## Export Options
 
+**Defaults** (`export_embeddings.py`): `--output-dir` defaults to `./_data/exports/embeddings`, `--batch-size` defaults to 10000 embeddings per parquet file, `--s3-prefix` defaults to `embeddings/backup/`.
+
 ### 1. Export All Embeddings + Event Summaries
 
 ```bash
@@ -40,7 +42,7 @@ python services/pipeline/embeddings/export_embeddings.py \
     --include-event-summaries
 ```
 
-**Exports:**
+**Exports** (counts are a 2024-11 snapshot; current counts are higher):
 - `chunk_embeddings.parquet` - Document chunk embeddings (470,890 embeddings, ~850 MB)
 - `daily_event_embeddings.parquet` - Daily event embeddings (8,317 embeddings, ~18 MB)
 - `weekly_event_embeddings.parquet` - Weekly event embeddings (1,014 embeddings, ~2 MB)
@@ -225,7 +227,7 @@ with get_session() as session:
 "
 ```
 
-Expected output:
+Expected output (2024-11 snapshot; current counts are higher):
 ```
 Chunk embeddings: 470,890
 Daily event embeddings: 8,317
@@ -371,12 +373,7 @@ python services/pipeline/embeddings/export_embeddings.py \
 
 ### Slow Import Performance
 
-Import uses batches of 1000 embeddings. For faster import on powerful systems:
-
-Edit `import_embeddings.py` line ~140:
-```python
-batch_size = 5000  # Increase from 1000
-```
+Import batch sizes are constants inside `import_embeddings.py` (currently 5000 for embeddings, 500 for event summaries, 1000 for source links). For faster import on powerful systems, adjust the relevant `batch_size` constant in `import_embeddings.py`.
 
 ## Best Practices
 
@@ -408,7 +405,7 @@ batch_size = 5000  # Increase from 1000
 
 ## File Size Reference
 
-Approximate compressed sizes:
+Approximate compressed sizes (2024-11 snapshot; current counts are higher):
 
 | Collection | Embeddings | File Size | Uncompressed |
 |------------|------------|-----------|--------------|

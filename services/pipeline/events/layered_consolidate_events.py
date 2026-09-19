@@ -20,6 +20,12 @@ Usage:
         --end-date 2025-12-31 \
         --similarity-threshold 0.80 \
         --dry-run
+
+Flags: --country --start-date --end-date (all required), --similarity-threshold,
+--boundary-days, --dry-run, --skip-within-month, --skip-cross-boundary.
+
+Status: experimental alternative to consolidate_all_events.py; NOT part of the
+standard pipeline (see EVENT_PIPELINE_FLOW.md for the standard Stage 2 flow).
 """
 
 import sys

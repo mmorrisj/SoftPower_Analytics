@@ -1,6 +1,6 @@
 # Event Processing Pipeline Flow
 
-**Last Updated**: January 2026
+**Last Updated**: 2026-09
 **Visual Diagram**: See [EVENT_PIPELINE_DIAGRAM.drawio](EVENT_PIPELINE_DIAGRAM.drawio)
 
 ---
@@ -10,6 +10,7 @@
 The event processing pipeline uses a **two-stage batch consolidation approach**:
 - **Stage 1**: Daily event detection and clustering
 - **Stage 2**: Cross-date consolidation and merging
+- **Stage 3** (optional): Materiality scoring of master events
 
 ---
 
@@ -78,12 +79,15 @@ The event processing pipeline uses a **two-stage batch consolidation approach**:
 │  │ 3. consolidate_all_events.py                                     │     │
 │  │                                                                   │     │
 │  │ • Processes ENTIRE dataset (not per-day)                          │     │
-│  │ • Embedding similarity (cosine ≥0.85)                            │     │
-│  │ • Groups events across all dates                                  │     │
-│  │ • Sets master_event_id to create hierarchy                        │     │
+│  │ • HDBSCAN over composite distance:                                │     │
+│  │   alpha*name-embedding + beta*recipient + gamma*temporal          │     │
+│  │ • Hard temporal gate: pairs > --max-days-gate (30d) apart         │     │
+│  │   can NEVER cluster together                                      │     │
+│  │ • Sets master_event_id — CANDIDATE groupings only, not final      │     │
+│  │   until llm_deconflict_canonical_events.py sets llm_validated     │     │
 │  │                                                                   │     │
 │  │ Input: canonical_events (all dates)                               │     │
-│  │ Output: master-child hierarchy                                    │     │
+│  │ Output: candidate master-child hierarchy                          │     │
 │  └──────────────────────────────────────────────────────────────────┘     │
 │                                   ↓                                         │
 │                      Master-Child Hierarchy:                                │
@@ -278,18 +282,23 @@ docker exec -it api-service python services/pipeline/events/llm_deconflict_clust
 
 ### Stage 2: Batch Consolidation
 ```bash
-# Group events across dates
-docker exec -it api-service python services/pipeline/events/consolidate_all_events.py \
-  --country "United States"
+# Propose candidate groupings (HDBSCAN + composite distance, 30-day temporal gate)
+docker compose -f docker-compose.preprocessing.yml run --rm preprocessing \
+  python services/pipeline/events/consolidate_all_events.py \
+  --country "United States" --force
 
-# LLM validate groupings
-docker exec -it api-service python services/pipeline/events/llm_deconflict_canonical_events.py \
+# LLM validate groupings (sets llm_validated — groupings are candidates until this runs)
+docker compose -f docker-compose.preprocessing.yml run --rm preprocessing \
+  python services/pipeline/events/llm_deconflict_canonical_events.py \
   --country "United States"
 
 # Merge into multi-day events
-docker exec -it api-service python services/pipeline/events/merge_canonical_events.py \
+docker compose -f docker-compose.preprocessing.yml run --rm preprocessing \
+  python services/pipeline/events/merge_canonical_events.py \
   --country "United States"
 ```
+
+Key `consolidate_all_events.py` flags: `--alpha` 0.4 / `--beta` 0.2 / `--gamma` 0.4 (composite-distance weights), `--max-days-gate` 30 (hard temporal gate — it does NOT group freely across all dates), `--min-cluster-size` 2, `--force`, `--start-date` (incremental mode). See `services/PIPELINE_REFERENCE.md` for the full reference.
 
 ### Diagnostics
 ```bash
@@ -301,6 +310,58 @@ docker exec -it api-service python services/pipeline/events/check_pipeline_cover
 docker exec -it api-service python services/pipeline/events/query_master_events.py \
   --list-top 20 --country "United States"
 ```
+
+---
+
+## Stage 3: Materiality Scoring (Optional)
+
+After batch consolidation creates multi-day master events, you can score their materiality.
+
+**Script**: [score_canonical_event_materiality.py](score_canonical_event_materiality.py)
+
+**Purpose**: Assign materiality scores (1-10) to canonical events measuring concrete/substantive nature versus symbolic/rhetorical gestures
+
+**Why This Matters**: Enables tracking the materiality of specific initiatives over their entire lifecycle, distinguishing between:
+- High-materiality events (7-10): Infrastructure projects, financial commitments, tangible deliverables
+- Mixed materiality (4-6): Agreements with unclear implementation, capacity building
+- Low-materiality events (1-3): Symbolic statements, cultural events without concrete commitments
+
+**Process**:
+1. Loads master canonical events (WHERE master_event_id IS NULL)
+2. Formats event data: consolidated_description, key_facts, categories, recipients
+3. LLM scores each event on 1-10 scale using specialized materiality prompt
+4. Saves material_score and material_justification to canonical_events table
+
+**Database Fields**:
+- `canonical_events.material_score` - NUMERIC(3,1) score from 1.0 to 10.0
+- `canonical_events.material_justification` - TEXT explanation of score
+
+**Flags**: `--country` / `--influencers` (one required), `--min-days` (default 1), `--min-articles` (default 5), `--rescore`, `--dry-run`, `--quiet`
+
+**Usage**:
+```bash
+# Score all canonical events for a country
+python services/pipeline/events/score_canonical_event_materiality.py --country China
+
+# Score all influencer countries
+python services/pipeline/events/score_canonical_event_materiality.py --influencers
+
+# Only score events with 3+ days of mentions (recommended for initial run)
+python services/pipeline/events/score_canonical_event_materiality.py --influencers --min-days 3
+
+# Rescore existing events
+python services/pipeline/events/score_canonical_event_materiality.py --country China --rescore
+
+# Test without saving to database
+python services/pipeline/events/score_canonical_event_materiality.py --country China --dry-run
+```
+
+**Example Scores**:
+- Al-Abdaliya Photovoltaic Project: 8.0 - "Major infrastructure project with renewable energy deliverables"
+- Beijing-hosted Saudi-Iranian rapprochement: 6.5 - "Significant diplomatic engagement with economic potential"
+- Arbaeen Pilgrimage Hospitality: 3.0 - "Primarily symbolic gesture of goodwill and cultural diplomacy"
+
+**Note**: For large runs, prefer the Batch API path (`score_materiality` job type) over this synchronous script — see `services/PIPELINE_REFERENCE.md`.
 
 ---
 
@@ -340,7 +401,6 @@ The system uses batch consolidation instead of real-time temporal linking becaus
 **Solution**:
 1. Fixed in code with savepoints
 2. Run wipe_event_tables.py and reprocess
-3. Or use backfill_daily_mentions.py (archived)
 
 ### Issue: Zero Multi-Day References
 **Symptom**: Master events show 0 documents
@@ -361,7 +421,12 @@ The system uses batch consolidation instead of real-time temporal linking becaus
 - llm_deconflict_clusters.py
 - consolidate_all_events.py
 - llm_deconflict_canonical_events.py
+- llm_deconflict_canonical_events_parallel.py — auto-resuming, parallelizable (--chunk) variant of Stage 2B validation
 - merge_canonical_events.py
+- score_canonical_event_materiality.py — Stage 3 materiality scoring (see below)
+- auto_queue_materiality.py — monitors one country's materiality run and auto-starts the next
+- split_overaggregated_events.py — one-off cleanup: LLM-validated temporal split of over-aggregated canonical events
+- extract_canonical_event_entities.py — extracts named entities from master canonical events into entities_mentioned
 
 ### Diagnostic Tools
 - check_pipeline_coverage.py
@@ -375,12 +440,6 @@ The system uses batch consolidation instead of real-time temporal linking becaus
 - wipe_event_tables.py
 - export_event_tables.py
 - import_event_tables.py
-
-### Archived Scripts
-See [_archived/README.md](_archived/README.md) for:
-- One-time migration scripts
-- Deprecated implementations
-- Historical approaches
 
 ---
 

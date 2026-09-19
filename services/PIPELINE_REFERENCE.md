@@ -47,7 +47,7 @@ sp-pipeline python services/pipeline/events/llm_deconflict_clusters.py \
 # 4. Deconflict clusters (batch - 50% cheaper)
 sp-pipeline python services/pipeline/batch/batch_prepare.py \
     --job-type cluster_deconflict --influencers --start-date 2026-02-01 --end-date 2026-02-28
-sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type cluster_deconflict
+sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type cluster_deconflict --stall-timeout 0
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py --job-type cluster_deconflict
 
 # 5. Consolidate across all dates (must process full dataset)
@@ -58,7 +58,7 @@ sp-pipeline python services/pipeline/events/llm_deconflict_canonical_events.py -
 
 # 6. Validate consolidation (batch)
 sp-pipeline python services/pipeline/batch/batch_prepare.py --job-type canonical_deconflict --influencers
-sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type canonical_deconflict
+sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type canonical_deconflict --stall-timeout 0
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py --job-type canonical_deconflict
 
 # 7. Merge into multi-day events
@@ -226,7 +226,7 @@ sp-pipeline python services/pipeline/ingestion/dsr.py --source local --no-embed
 | `--source` | required | `local` or `s3` |
 | `--no-embed` | False | Skip embedding step |
 | `--relocate` | False | Move processed files to `./data/processed/` |
-| `--reprocess` | False | Reprocess already-ingested files |
+| `--reprocess` | None | S3 only: reprocess specific files — takes a list of filenames (removes them from the processed tracker) |
 | `--doc-batch-size` | 100 | Documents per DB commit |
 | `--embed-batch-size` | 50 | Documents per embedding batch |
 
@@ -320,7 +320,7 @@ sp-pipeline python services/pipeline/batch/batch_prepare.py \
 
 # 2. Submit to OpenAI + poll until complete
 sp-pipeline python services/pipeline/batch/batch_queue_runner.py \
-    --job-type cluster_deconflict
+    --job-type cluster_deconflict --stall-timeout 0
 
 # 3. Apply results to database
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py \
@@ -336,10 +336,12 @@ sp-pipeline python services/pipeline/batch/batch_process_all_results.py \
 
 Links canonical events across days into multi-day event threads.
 
-### Step 4A: Embedding-Based Consolidation
+### Step 4A: HDBSCAN Candidate Consolidation
 
 **Script:** `services/pipeline/events/consolidate_all_events.py`
 **Reads:** `canonical_events` → **Writes:** `canonical_events.master_event_id`
+
+Proposes CANDIDATE groupings using HDBSCAN over a composite distance — `alpha * name-embedding cosine distance + beta * recipient Jaccard distance + gamma * normalized temporal distance` — with a hard temporal gate: pairs more than `--max-days-gate` days apart can never cluster. Groupings are not final until Step 4B sets `llm_validated`.
 
 ```bash
 sp-pipeline python services/pipeline/events/consolidate_all_events.py --influencers --force
@@ -347,11 +349,19 @@ sp-pipeline python services/pipeline/events/consolidate_all_events.py --influenc
 
 | Flag | Default | Purpose |
 |------|---------|---------|
-| `--similarity-threshold` | 0.85 | Cosine similarity for grouping |
-| `--force` | False | Reset all `master_event_id` to NULL before re-running |
+| `--country` | None | Single country |
+| `--influencers` | False | All influencer countries from config |
+| `--alpha` | 0.4 | Weight for name-embedding cosine distance |
+| `--beta` | 0.2 | Weight for recipient Jaccard distance |
+| `--gamma` | 0.4 | Weight for normalized temporal distance |
+| `--max-days-gate` | 30 | Hard temporal gate — pairs further apart cannot cluster |
+| `--min-cluster-size` | 2 | HDBSCAN `min_cluster_size` |
+| `--force` | False | Reset existing consolidations before re-running |
+| `--start-date` | None | Incremental mode: only consider master events with `first_mention_date >=` this date (use new-window-start minus `--max-days-gate`) |
 | `--dry-run` | False | Preview without saving |
+| `--verbose` | True | Print detailed progress |
 
-**WARNING:** Without `--force`, only processes events where `master_event_id IS NULL`. This can create fragmented groups if new events were added. Use `--force` after adding new data.
+**WARNING:** Without `--force`, only processes events where `master_event_id IS NULL`. This can create fragmented groups if new events were added. Use `--force` after adding new data, or `--start-date` for an incremental pass over just the new window.
 
 **Sets:** `master_event_id` on child events. Masters have `master_event_id IS NULL`.
 
@@ -379,7 +389,7 @@ sp-pipeline python services/pipeline/events/llm_deconflict_canonical_events.py \
 sp-pipeline python services/pipeline/batch/batch_prepare.py \
     --job-type canonical_deconflict --influencers
 sp-pipeline python services/pipeline/batch/batch_queue_runner.py \
-    --job-type canonical_deconflict
+    --job-type canonical_deconflict --stall-timeout 0
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py \
     --job-type canonical_deconflict
 ```
@@ -449,7 +459,7 @@ sp-pipeline python services/pipeline/entities/llm_deconflict_entity_clusters.py 
 # Batch
 sp-pipeline python services/pipeline/batch/batch_prepare.py \
     --job-type entity_deconflict --country China
-sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type entity_deconflict
+sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type entity_deconflict --stall-timeout 0
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py --job-type entity_deconflict
 ```
 
@@ -492,7 +502,7 @@ sp-pipeline python services/pipeline/entities/llm_deconflict_canonical_entities.
 # Batch
 sp-pipeline python services/pipeline/batch/batch_prepare.py \
     --job-type canonical_entity_deconflict --influencers
-sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type canonical_entity_deconflict
+sp-pipeline python services/pipeline/batch/batch_queue_runner.py --job-type canonical_entity_deconflict --stall-timeout 0
 sp-pipeline python services/pipeline/batch/batch_process_all_results.py --job-type canonical_entity_deconflict
 ```
 
@@ -559,6 +569,27 @@ sp-pipeline python services/pipeline/batch/batch_prepare.py \
 ---
 
 ## Step 8: Summaries
+
+### Canonical Event Summaries (Daily/Weekly/Monthly/Yearly)
+
+**Scripts:** `services/pipeline/summaries/generate_daily_summaries.py`, `generate_weekly_summaries.py`, `generate_monthly_summaries.py`, `generate_yearly_summaries.py`
+**Writes:** `event_summaries` (with `event_source_links`)
+
+These generators work from `canonical_events` + `daily_event_mentions` and roll up: daily → weekly → monthly → yearly (each period builds on the one below). They replace the deprecated `services/pipeline/events/generate_event_summaries.py` RawEvent path.
+
+```bash
+# Daily first, then roll up
+sp-pipeline python services/pipeline/summaries/generate_daily_summaries.py \
+    --country China --start-date 2026-02-01 --end-date 2026-02-28
+sp-pipeline python services/pipeline/summaries/generate_weekly_summaries.py \
+    --country China --start-date 2026-02-01 --end-date 2026-02-28
+sp-pipeline python services/pipeline/summaries/generate_monthly_summaries.py \
+    --country China --start-date 2026-02-01 --end-date 2026-02-28
+sp-pipeline python services/pipeline/summaries/generate_yearly_summaries.py \
+    --country China --year 2026
+```
+
+Common flags: `--country` / `--influencers`, `--start-date` / `--end-date` (yearly also accepts `--year`), `--dry-run`. Batch API equivalents exist (`generate_daily_summary` … `generate_yearly_summary` job types).
 
 ### Bilateral Relationship Summaries
 
@@ -627,10 +658,14 @@ Creates JSONL + queue        Uploads to OpenAI + polls       Parses output + app
 | `generate_daily_summary` | — | Generate daily event summaries |
 | `generate_weekly_summary` | — | Generate weekly event summaries |
 | `generate_monthly_summary` | — | Generate monthly event summaries |
+| `generate_yearly_summary` | — | Generate yearly event summaries |
 | `score_summary_materiality` | — | Score event summary materiality |
 | `generate_entity_descriptions` | `generate_entity_descriptions.py` | Entity Stage 3C |
 | `generate_bilateral_summaries` | `generate_bilateral_summaries.py` | Bilateral summaries |
 | `classify_entity_relationships` | `classify_entity_relationships.py` | Entity Stage 3D |
+| `event_rename` | — | LLM renames generic raw event names to specific ones |
+| `event_narrative` | — | Writes LLM 2-4 sentence narratives to `canonical_events.consolidated_description` for masters with ≥3 articles |
+| `proposition_extract` | — | Extract propositions from documents |
 
 ### Common Batch Flags
 
@@ -653,8 +688,12 @@ Creates JSONL + queue        Uploads to OpenAI + polls       Parses output + app
 | `--job-type` | Filter by job type |
 | `--country` | Filter by country |
 | `--max-concurrent` | Max simultaneous OpenAI batches (default: 5) |
-| `--poll-interval` | Seconds between status checks (default: 300) |
+| `--poll-interval` | Seconds between status checks (default: 60) |
 | `--retry-failed` | Reset failed jobs to preparing and resubmit |
+| `--stall-timeout` | Minutes with 0% progress before marking a batch as failed (default: 120, 0=disabled) |
+| `--dry-run` | Show what would be submitted without actually submitting |
+
+**⚠️ Every invocation must pass `--stall-timeout 0`.** The default stall detector cancels healthy OpenAI batches that are simply sitting in the queue (0% progress while queued is normal).
 
 **batch_process_all_results.py:**
 
@@ -662,6 +701,7 @@ Creates JSONL + queue        Uploads to OpenAI + polls       Parses output + app
 |------|---------|
 | `--job-type` | Filter by job type |
 | `--country` | Filter by country |
+| `--checkpoint-frequency` | Commit every N processed results (default: 100) |
 | `--include-processed` | Re-process already-processed batches |
 | `--dry-run` | Preview without applying |
 
@@ -679,7 +719,7 @@ with get_session() as s:
 
 # Retry failed batch jobs
 sp-pipeline python services/pipeline/batch/batch_queue_runner.py \
-    --job-type cluster_deconflict --retry-failed
+    --job-type cluster_deconflict --retry-failed --stall-timeout 0
 ```
 
 **Common issues:**

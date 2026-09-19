@@ -1,6 +1,8 @@
 # Document-Based Summary Generator - Usage Guide
 
-**Last Updated**: January 2026
+> **Usage: this file; citation-chain design: [README_SOURCE_ATTRIBUTION.md](README_SOURCE_ATTRIBUTION.md)**
+
+**Last Updated**: September 2026
 
 ## Overview
 
@@ -22,7 +24,7 @@ This generator creates hierarchical summaries with **full source attribution** a
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2
@@ -47,7 +49,7 @@ If the process crashes or you stop it, just re-run the same command:
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2
@@ -70,7 +72,7 @@ To regenerate everything from scratch:
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -85,7 +87,7 @@ python services/pipeline/summaries/generate_document_based_summaries.py \
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -100,7 +102,7 @@ After reviewing/editing daily summaries:
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -123,7 +125,7 @@ STEP 2: Generating Weekly Summaries
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -134,7 +136,7 @@ python services/pipeline/summaries/generate_document_based_summaries.py \
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -213,7 +215,7 @@ For small to medium datasets (<500 total days):
 
 ```bash
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2
@@ -247,10 +249,10 @@ python ... --from-overall
 
 ```bash
 # Initial run (crashes after processing 100 days)
-python ... --country China --start-date 2025-06-01 --end-date 2025-12-31
+python ... --influencer China --start-date 2025-06-01 --end-date 2025-12-31
 
 # Just re-run same command - automatically resumes from day 101
-python ... --country China --start-date 2025-06-01 --end-date 2025-12-31
+python ... --influencer China --start-date 2025-06-01 --end-date 2025-12-31
 ```
 
 ### Workflow 4: Regenerate Upper Levels Only
@@ -267,13 +269,15 @@ python ... --from-weekly
 ## Command-Line Arguments
 
 ### Required
-- `--country` - Country to analyze (e.g., "China", "Russia")
+- `--influencer` - Influencer (initiating) country to analyze (e.g., "China", "Russia")
 - `--start-date` - Start date (YYYY-MM-DD)
 - `--end-date` - End date (YYYY-MM-DD)
 
 ### Optional
+- `--recipient` - Optional recipient country for bilateral analysis (omit for all recipients)
 - `--output-dir` - Output directory (default: `./publications`)
 - `--daily-only` - Stop after generating daily summaries
+- `--bilateral-only` - Generate only bilateral summaries (monthly per recipient + overall)
 - `--from-weekly` - Skip daily, start from weekly (reads daily JSON)
 - `--from-monthly` - Skip daily/weekly, start from monthly (reads weekly JSON)
 - `--from-overall` - Skip all, generate only overall (reads monthly JSON)
@@ -307,13 +311,13 @@ For multiple countries:
 
 ```bash
 # Terminal 1
-python ... --country China --start-date 2025-06-01 --end-date 2025-12-31
+python ... --influencer China --start-date 2025-06-01 --end-date 2025-12-31
 
 # Terminal 2
-python ... --country Russia --start-date 2025-06-01 --end-date 2025-12-31
+python ... --influencer Russia --start-date 2025-06-01 --end-date 2025-12-31
 
 # Terminal 3
-python ... --country "United States" --start-date 2025-06-01 --end-date 2025-12-31
+python ... --influencer "United States" --start-date 2025-06-01 --end-date 2025-12-31
 ```
 
 ### 3. Use Appropriate Models
@@ -339,7 +343,7 @@ python ... --model-daily gpt-4o-mini --model-monthly gpt-4o
 
 **Cause**: Default chunk size (100) may be too large
 
-**Solution**: Currently hardcoded to 100. Consider reducing in code if needed.
+**Solution**: The chunk size is the `max_docs_per_chunk` parameter default (100) in `generate_document_based_summaries.py`; there is no CLI flag, so reduce that default in code if needed.
 
 ### Issue: Want to re-process just one day
 
@@ -360,7 +364,7 @@ python ... --model-daily gpt-4o-mini --model-monthly gpt-4o
 ```bash
 # 1. Generate dailies for China H2 2025
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -377,7 +381,7 @@ cat ./publications/china_2025_h2/daily/2025-08-15.json
 
 # 3. Generate weekly summaries from daily JSON
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -390,7 +394,7 @@ python services/pipeline/summaries/generate_document_based_summaries.py \
 
 # 4. Generate monthly summaries from weekly JSON
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \
@@ -402,7 +406,7 @@ python services/pipeline/summaries/generate_document_based_summaries.py \
 
 # 5. Generate overall summary from monthly JSON
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2 \

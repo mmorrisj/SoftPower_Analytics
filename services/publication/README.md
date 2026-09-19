@@ -27,7 +27,7 @@ services/publication/
 ├── templates/
 │   ├── GAI_Summary_Template.docx  # Word template
 │   └── atom.png                   # Icon for hyperlinks
-├── output/                      # Generated documents
+├── output/                      # Generated documents (created at runtime)
 └── README.md                    # This file
 ```
 
@@ -80,6 +80,7 @@ python services/publication/generate_publication.py \
 | `--output` | No | services/publication/output | Output directory |
 | `--max-sources` | No | 10 | Max source documents per section |
 | `--no-consolidation` | No | False | Skip event consolidation |
+| `--use-existing` | No | True | Use existing EventSummary data |
 
 ## Document Versions
 
@@ -169,10 +170,14 @@ Creates overview and outcome narratives from documents (if not using existing Ev
 
 The service requires that **EventSummary** data exists in the database for the specified period. If no EventSummary records are found:
 
-1. Run the event summarization pipeline first
-2. Or use the event processing scripts to generate summaries:
+1. Run the event summarization pipeline first:
    ```bash
-   python services/pipeline/events/process_date_range.py --start 2024-10-01 --end 2024-10-31
+   python services/pipeline/summaries/generate_daily_summaries.py \
+       --country China --start-date 2024-10-01 --end-date 2024-10-31
+   python services/pipeline/summaries/generate_weekly_summaries.py \
+       --country China --start-date 2024-10-01 --end-date 2024-10-31
+   python services/pipeline/summaries/generate_monthly_summaries.py \
+       --country China --start-date 2024-10-01 --end-date 2024-10-31
    ```
 
 ### Key Tables
@@ -187,7 +192,7 @@ The service requires that **EventSummary** data exists in the database for the s
 ### Environment Variables
 
 Required:
-- `CLAUDE_KEY`: OpenAI API key for GPT models
+- `CLAUDE_KEY` (holds the OpenAI API key used for GPT models)
 - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`: Database credentials
 
 Optional:
@@ -247,30 +252,6 @@ python services/publication/generate_publication.py \
   --categories Economic \
   --max-sources 5
 ```
-
-## Migration from Deprecated Pipeline
-
-This service replaces `summary_template/summary_publication.py` with:
-
-### Key Improvements
-
-1. **Modern Architecture**: Service-oriented design with clear separation of concerns
-2. **Current Models**: Uses EventSummary, PeriodSummary, and current SQLAlchemy 2.0 models
-3. **Better Session Management**: Proper use of context managers and connection pooling
-4. **Modular Design**: Separate query, generation, and building components
-5. **CLI Interface**: Clear command-line interface with validation
-6. **Error Handling**: Comprehensive error handling and user feedback
-
-### Differences
-
-| Feature | Deprecated | New Service |
-|---------|-----------|-------------|
-| Models | Old Flask-SQLAlchemy | SQLAlchemy 2.0 |
-| Event Data | CountrySummary, RecipientSummary | EventSummary, PeriodSummary |
-| Architecture | Monolithic script | Modular services |
-| Session Mgmt | Manual, error-prone | Context managers |
-| CLI | Hardcoded variables | argparse with validation |
-| Sourcing | Manual TF-IDF | AI-powered identification |
 
 ## Troubleshooting
 

@@ -1,6 +1,8 @@
 # Source Attribution System for Document-Based Summaries
 
-**Last Updated**: January 2026
+> **Citation-chain design: this file; usage: [USAGE_GUIDE.md](USAGE_GUIDE.md)**
+
+**Last Updated**: September 2026
 
 ## Overview
 
@@ -240,12 +242,11 @@ The document-based hierarchical summary generator includes a **complete source a
 -- Get full document details for a citation
 SELECT
     doc_id,
-    headline,
+    title,
     source_name,
-    source_url,
-    published_date,
-    full_text_extract,
-    salience_rating
+    date,
+    salience,
+    distilled_text
 FROM documents
 WHERE doc_id = 'abc123';
 ```
@@ -309,7 +310,7 @@ publications/china_2025_h2/
 ```bash
 # Generate complete hierarchy for China H2 2025
 python services/pipeline/summaries/generate_document_based_summaries.py \
-    --country China \
+    --influencer China \
     --start-date 2025-06-01 \
     --end-date 2025-12-31 \
     --output-dir ./publications/china_2025_h2

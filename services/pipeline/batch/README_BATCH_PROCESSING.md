@@ -31,7 +31,7 @@ Stage 5: CLEANUP     → Archive files to S3 → Delete OpenAI files
 Run the Alembic migration to create the batch_jobs table:
 
 ```bash
-cd c:\Users\mmorr\Desktop\Apps\SP_Streamlit
+cd <repo root>
 alembic upgrade head
 ```
 
@@ -65,9 +65,9 @@ pip install openai>=1.0.0 tiktoken>=0.5.0
 
 ## Usage
 
-### Quick Start: Cluster Deconfliction
+### Single-Job Debug Path: Cluster Deconfliction
 
-Process event clusters for a specific country and date range:
+For normal operation use the three-script orchestration path under "End-to-End Orchestration" below. The 5-stage per-job flow here is the debug path for walking a single batch job through its lifecycle:
 
 ```bash
 # Stage 1: Prepare JSONL input file
@@ -162,19 +162,30 @@ python services/pipeline/batch/batch_prepare.py \
 
 ### End-to-End Orchestration
 
-Use the orchestrator to run all stages automatically:
+The standard orchestration path is three scripts (see `services/PIPELINE_REFERENCE.md` for the full flag reference):
 
 ```bash
-python services/pipeline/batch/batch_runner.py \
+# 1. Prepare JSONL + queue batch jobs
+python services/pipeline/batch/batch_prepare.py \
     --job-type cluster_deconflict \
     --country China \
     --start-date 2024-08-01 \
-    --end-date 2024-08-31 \
-    --auto-submit \
-    --auto-cleanup
+    --end-date 2024-08-31
+
+# 2. Submit all queued jobs to OpenAI + poll until complete
+#    (always pass --stall-timeout 0: the default stall detector cancels
+#     healthy batches that are simply queued at OpenAI)
+python services/pipeline/batch/batch_queue_runner.py \
+    --job-type cluster_deconflict --stall-timeout 0
+
+# 3. Apply all completed results to the database
+python services/pipeline/batch/batch_process_all_results.py \
+    --job-type cluster_deconflict
 ```
 
-## Command Reference
+`batch_queue_runner.py` and `batch_process_all_results.py` handle every queued/completed job for the given filters, so the per-job Stage 2-5 scripts below are only needed for debugging a single job.
+
+## Command Reference (Single-Job Debug Path)
 
 ### Stage 1: batch_prepare.py
 
@@ -182,7 +193,7 @@ Generate JSONL input files from unprocessed database records.
 
 ```bash
 python batch_prepare.py \
-    --job-type {cluster_deconflict|canonical_deconflict|entity_extract|score_materiality} \
+    --job-type JOB_TYPE \
     [--country COUNTRY] \
     [--start-date YYYY-MM-DD] \
     [--end-date YYYY-MM-DD] \
@@ -198,7 +209,7 @@ python batch_prepare.py \
 ```
 
 **Key Options:**
-- `--job-type`: Type of batch job (required): cluster_deconflict, canonical_deconflict, entity_extract, score_materiality
+- `--job-type`: Type of batch job (required). See `SUPPORTED_JOB_TYPES` in `batch_config.py` for the full set — currently 18 job types, e.g. cluster_deconflict, canonical_deconflict, entity_deconflict, score_materiality, event_narrative, generate_daily_summary, proposition_extract
 - `--country`: Filter by initiating country
 - `--start-date` / `--end-date`: Date range filter
 - `--all-unprocessed`: Process all unprocessed records
@@ -385,6 +396,8 @@ WHERE status = 'in_progress';
 ```
 
 ## Cost Analysis
+
+> **Note:** The model (and therefore cost) varies by job type — `batch_config.py` maps each job type to an extraction, reasoning, or generation model tier (`DEFAULT_MODELS`), overridable via `BATCH_MODEL_*` env vars. The figures below assume gpt-4o-mini.
 
 ### Pricing Comparison
 
@@ -604,19 +617,3 @@ For issues or questions:
 1. Check [OpenAI Batch API docs](https://platform.openai.com/docs/guides/batch)
 2. Review troubleshooting section above
 3. Check batch_jobs table for error messages
-4. Open issue at https://github.com/your-repo/issues
-
-## Changelog
-
-### v1.1.0 (2025-02-02)
-- Added support for entity_extract job type (extract persons, organizations, companies, locations)
-- Added support for score_materiality job type (score event materiality 1.0-10.0)
-- Enhanced batch_prepare.py with --min-articles, --force, --min-days, --rescore parameters
-- Updated batch_process_results.py to handle entity extraction and materiality scoring results
-
-### v1.0.0 (2025-02-02)
-- Initial implementation
-- Support for cluster_deconflict and canonical_deconflict job types
-- 5-stage pipeline with checkpoint/resume
-- Cost estimation and tracking
-- S3 archiving support
