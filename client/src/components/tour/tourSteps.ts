@@ -105,7 +105,7 @@ export const TOUR_STEPS: TourStep[] = [
     placement: 'right',
     title: 'Deeper Analysis',
     body:
-      'Purpose-built views for specific questions: hierarchical summaries, the bilateral relationship ' +
+      'Purpose-built views for specific questions: the bilateral relationship ' +
       'matrix, side-by-side country comparison, materiality mapping, competing influence on a single ' +
       'recipient, and configurable alerts.',
   },

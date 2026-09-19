@@ -11,7 +11,6 @@ import AboutMethodologyPage from './pages/AboutMethodologyPage'
 import WhitePaperPage from './pages/WhitePaperPage'
 import Documents from './pages/Documents'
 import Events from './pages/Events'
-import Summaries from './pages/Summaries'
 import BilateralRelationships from './pages/BilateralRelationships'
 import Categories from './pages/Categories'
 import InfluencerPage from './pages/InfluencerPage'
@@ -60,7 +59,6 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="documents" element={<Documents />} />
               <Route path="events" element={<Events />} />
-              <Route path="summaries" element={<Summaries />} />
               <Route path="document-summaries" element={<DocumentSummariesPage />} />
               <Route path="document-summaries/detail" element={<SummaryDetailPage />} />
               <Route path="bilateral-summaries" element={<BilateralSummariesPage />} />

@@ -97,7 +97,6 @@ All routes render inside `Layout` and sit behind `ProtectedRoute`
 
 | Route | Page | Shows |
 |---|---|---|
-| `/summaries` | Summaries | Event summary browser |
 | `/document-summaries` | DocumentSummariesPage | Period document summaries |
 | `/document-summaries/detail` | SummaryDetailPage | One document summary |
 | `/bilateral-summaries` | BilateralSummariesPage | Bilateral relationship summaries |

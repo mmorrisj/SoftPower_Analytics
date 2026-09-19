@@ -19,7 +19,6 @@ const navItems = [
 
 const intelligenceItems = [
   { path: '/intel-reports', label: 'Insight Reports', icon: BookOpenText, tour: 'nav-intel-reports' },
-  { path: '/summaries', label: 'Summaries', icon: TrendingUp, tour: undefined },
   { path: '/bilateral', label: 'Bilateral', icon: Users, tour: undefined },
   { path: '/events/comparison', label: 'Country Comparison', icon: Globe, tour: undefined },
   { path: '/events/materiality', label: 'Materiality Map', icon: Flame, tour: undefined },
