@@ -93,7 +93,7 @@ export default function CountryComparison() {
         <div className="loading">Loading comparisons...</div>
       ) : comparisons.length > 0 ? (
         <>
-          <div className="ev-list">
+          <div className="ev-list" data-tour="comparison-list">
             {comparisons.map((comp, i) => (
               <ComparisonCard key={i} comp={comp} onOpen={() => setSelected(comp)} />
             ))}

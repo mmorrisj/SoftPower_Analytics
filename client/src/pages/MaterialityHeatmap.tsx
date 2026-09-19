@@ -146,7 +146,7 @@ export default function MaterialityHeatmap() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
             {/* Trend */}
-            <div className="chart-card">
+            <div className="chart-card" data-tour="materiality-trend">
               <h3>Materiality trend — {scopeLabel}</h3>
               <p style={{ fontSize: '0.78rem', color: '#64748b', margin: '0.15rem 0 0.5rem' }}>
                 Monthly event mix by materiality band (stacked bars, right axis) with average

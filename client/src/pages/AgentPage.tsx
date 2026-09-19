@@ -543,7 +543,7 @@ export default function AgentPage() {
           )}
         </div>
 
-        <div className="agent-input-row">
+        <div className="agent-input-row" data-tour="agent-input">
           <ChatInput onSend={send} disabled={busy} />
           {busy && (
             <button className="agent-btn agent-btn-danger agent-stop" onClick={abort} title="Stop">

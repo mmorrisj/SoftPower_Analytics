@@ -835,7 +835,7 @@ export default function ChatPage() {
         </div>
 
         {/* Input Form */}
-        <form className="chat-input-form" onSubmit={handleSubmit}>
+        <form className="chat-input-form" data-tour="chat-input" onSubmit={handleSubmit}>
           <input
             type="text"
             value={inputValue}

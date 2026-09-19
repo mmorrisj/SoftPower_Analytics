@@ -107,7 +107,29 @@ export const TOUR_STEPS: TourStep[] = [
     body:
       'Purpose-built views for specific questions: the bilateral relationship ' +
       'matrix, side-by-side country comparison, materiality mapping, competing influence on a single ' +
-      'recipient, and configurable alerts.',
+      'recipient, and configurable alerts. Let’s look at two of them.',
+  },
+  {
+    id: 'comparison',
+    target: '[data-tour="comparison-list"]',
+    route: '/events/comparison',
+    placement: 'top',
+    title: 'Country Comparison',
+    body:
+      'Events that more than one influencer is tracking, side by side. Click any event to slide ' +
+      'open each country’s own narrative of the same development — how materially each scored it, ' +
+      'and a trace back to each country’s sources.',
+  },
+  {
+    id: 'materiality',
+    target: '[data-tour="materiality-trend"]',
+    route: '/events/materiality',
+    placement: 'bottom',
+    title: 'Materiality Map',
+    body:
+      'Separates substance from symbolism. Every event carries a dollar-anchored 1–10 materiality ' +
+      'score; this view shows the mix over time, the score distribution, and the most substantive ' +
+      'developments — filterable by influencer and recipient.',
   },
   {
     id: 'intel-reports',
@@ -121,21 +143,25 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     id: 'research',
-    target: '[data-tour="nav-research"]',
-    placement: 'right',
+    target: '[data-tour="chat-input"]',
+    route: '/chat',
+    placement: 'top',
     title: 'Research Assistant',
     body:
-      'Ask questions about the corpus in plain language. Answers come from semantic search with ' +
-      'citations you can follow to verify — the fastest route from question to sourced answer.',
+      'Ask questions about the corpus in plain language, right here. Answers come from semantic ' +
+      'search with citations you can follow to verify — the fastest route from question to sourced ' +
+      'answer. Filters let you scope a question to a country, period, or category.',
   },
   {
     id: 'agent',
-    target: '[data-tour="nav-agent"]',
-    placement: 'right',
+    target: '[data-tour="agent-input"]',
+    route: '/agent',
+    placement: 'top',
     title: 'Analytics Agent',
     body:
       'For harder questions: an agentic assistant with direct access to analytics tools that works ' +
-      'through events, relationships, trends, and comparisons in multiple steps.',
+      'through events, relationships, trends, and comparisons in multiple steps — you can watch ' +
+      'each tool call as it runs, and it will offer a full report when a question deserves one.',
   },
   {
     id: 'publication',
@@ -179,6 +205,7 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     id: 'finish',
+    route: '/',
     title: "You're all set",
     body:
       'Retake this tour anytime with the "Take the tour" button at the bottom of the sidebar. ' +
