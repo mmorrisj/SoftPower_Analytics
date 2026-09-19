@@ -1,65 +1,54 @@
-# Enterprise Runbook: Spin Up the SoftPower React App (1.8.31)
+# Enterprise Runbook: Spin Up the SoftPower React App
 
 Instructions for an agent (human or AI) deploying on the enterprise host.
-Written against release **1.8.31** (`mmorrisj/softpower-analytics:1.8.31`).
+Applies to the current release (**2.0.3** at time of writing) and any release
+**≥ 1.8.31** — the first with the `/proxy_chat` chat-completions passthrough
+in both proxy implementations (`server/main.py` and `scripts/llm_proxy.py`).
+Tool-calling requires that passthrough; never adapt the agent to
+`/proxy_query`, which is a plain text-completion endpoint that cannot
+transport `tools` definitions or return structured `tool_calls`.
 
 ---
 
-## 1. Read this first: the failure you are probably looking at
+## 1. Prerequisites
 
-The 1.8.30 deployment produced this exact symptom chain. Do not re-fix the
-symptoms — they all have one root cause.
+1. **Repo checkout at the deployed release's commit/tag** on the enterprise
+   host. The host proxy runs from this checkout, so an old checkout = old
+   proxy = 404s, regardless of the container version. If a local workaround
+   was ever applied on the enterprise checkout (payload reshaping, endpoint
+   rewrites in `agent/llm/openai_compat.py` or elsewhere), **revert it before
+   deploying** — check with:
 
-| Symptom | Actual cause |
-|---|---|
-| `404` on the agent page's LLM calls | The **host proxy process** on port 7001 is running pre-1.8.31 code, which has no `/proxy_chat` route. The agent (1.8.30+) sends all LLM calls to `{API_URL}/proxy_chat`. |
-| Proxy complains it wants `sys_prompt`/`prompt`, not `messages` | Someone rerouted the agent's calls to `/proxy_query` to dodge the 404. `/proxy_query` is a plain text-completion endpoint with a different payload shape. |
-| Agent replies with tool-call text but never executes tools | Direct consequence of the reroute: `/proxy_query` cannot transport `tools` definitions or return structured `choices[].message.tool_calls`. The model *describes* tool calls in prose; the agent client never receives executable ones. |
-
-**The fix is never to adapt the agent to `/proxy_query`.** Tool-calling
-requires the full chat-completions passthrough (`/proxy_chat`), which exists
-in 1.8.31 in **both** proxy implementations (`server/main.py` and
-`scripts/llm_proxy.py`). If a local workaround was applied on the enterprise
-checkout (payload reshaping, endpoint rewrites in `agent/llm/openai_compat.py`
-or elsewhere), **revert it before deploying** — check with:
-
-```bash
-git status
-git diff          # any diff touching agent/, server/main.py, scripts/llm_proxy.py is suspect
-```
-
----
-
-## 2. Prerequisites
-
-1. **Repo checkout at 1.8.31** on the enterprise host — commit `9ee22d8`
-   ("Release 1.8.31") or later. The host proxy runs from this checkout, so an
-   old checkout = old proxy = 404s, regardless of the container version.
-2. **Image `mmorrisj/softpower-analytics:1.8.31`** available to the host
-   Docker daemon:
-   - With registry access: `docker pull mmorrisj/softpower-analytics:1.8.31`
+   ```bash
+   git status
+   git diff          # any diff touching agent/, server/main.py, scripts/llm_proxy.py is suspect
+   ```
+2. **The release image** (e.g. `mmorrisj/softpower-analytics:2.0.3`)
+   available to the host Docker daemon:
+   - With registry access: `docker pull mmorrisj/softpower-analytics:<tag>`
    - Airgapped: on a connected machine
-     `docker save mmorrisj/softpower-analytics:1.8.31 -o softpower-1.8.31.tar`,
-     transfer, then `docker load -i softpower-1.8.31.tar`
+     `docker save mmorrisj/softpower-analytics:<tag> -o softpower-<tag>.tar`,
+     transfer, then `docker load -i softpower-<tag>.tar`
 3. **`.env` in the repo root** with at minimum: `DB_HOST`, `DB_PORT`,
    `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, plus the LLM settings
-   in step 4.
+   in step 3.
 
 ---
 
-## 3. Check `.env` for stale image pins (this bit us on 1.8.30)
+## 2. Check `.env` for stale image pins (this bit us in the past)
 
-`docker-compose.enterprise.yml` uses `${APP_IMAGE:-mmorrisj/softpower-analytics:1.8.31}`.
-An `APP_IMAGE` (or `APP_VERSION`) line in `.env` **silently overrides** the
-compose default and keeps you on an old image:
+`docker-compose.enterprise.yml` uses `${APP_IMAGE:-mmorrisj/softpower-analytics:2.0.3}`
+(the default pins the current release). An `APP_IMAGE` (or `APP_VERSION`)
+line in `.env` **silently overrides** the compose default and keeps you on an
+old image:
 
 ```bash
 grep -E '^APP_IMAGE|^APP_VERSION' .env
 # Either delete those lines, or set:
-# APP_IMAGE=mmorrisj/softpower-analytics:1.8.31
+# APP_IMAGE=mmorrisj/softpower-analytics:<the release you are deploying>
 ```
 
-## 4. LLM environment settings (enterprise)
+## 3. LLM environment settings (enterprise)
 
 In the **host** `.env` (the proxy process reads it):
 
@@ -67,7 +56,7 @@ In the **host** `.env` (the proxy process reads it):
 |---|---|---|
 | `ENV` | `production` | Enables the production routing contract: LiteLLM → Azure, **no public-OpenAI fallback** (a failure returns 502 with the backend errors — this is intentional; do not "fix" it by adding keys). |
 | `LITELLM_URL` | enterprise LiteLLM endpoint | Primary backend. Authenticated per-request by the gateway JWT (`x-kiosk-gateway-jwt` header), which the agent forwards through the proxy automatically. |
-| `LITELLM_MODEL` | approved model name | Used when the client doesn't send a model. In 1.8.31 a client-sent model **wins** over this — pin `AGENT_LLM_MODEL` in the container env only if you want to force the agent's model explicitly. |
+| `LITELLM_MODEL` | approved model name | Used when the client doesn't send a model. A client-sent model **wins** over this (since 1.8.31) — pin `AGENT_LLM_MODEL` in the container env only if you want to force the agent's model explicitly. |
 | `LLM_PROXY_PORT` | `7001` (default) | Must match what the container's `API_URL` points at (compose wires `API_URL=http://127.0.0.1:${LLM_PROXY_PORT:-7001}` — the app service uses `network_mode: host`). |
 
 Things **not** to set:
@@ -78,7 +67,7 @@ Things **not** to set:
 - `GAI_DEFAULT_SOURCE=openai` — dev/laptop setting; on enterprise leave it
   unset (defaults to `proxy`).
 
-## 5. Start the host proxy (from the updated checkout)
+## 4. Start the host proxy (from the updated checkout)
 
 Whichever of the two you use, **restart it after updating the checkout** — a
 running process keeps executing the old code:
@@ -98,16 +87,17 @@ curl -s http://127.0.0.1:7001/openapi.json | grep -o '/proxy_chat'
 # Must print: /proxy_chat        (if empty -> proxy is running old code)
 ```
 
-## 6. Start the stack
+## 5. Start the stack
 
 ```bash
 docker compose -f docker-compose.enterprise.yml up -d
-docker compose -f docker-compose.enterprise.yml ps   # confirm image tag is 1.8.31 and status healthy
+docker compose -f docker-compose.enterprise.yml ps   # confirm the image tag matches the release you are deploying and status healthy
 ```
 
-Deploy targets do **not** auto-pull; if `ps` shows an old tag, redo step 2/3.
+Deploy targets do **not** auto-pull; if `ps` shows an old tag, re-pull the
+image (section 1) and re-check `.env` pins (section 2).
 
-## 7. Verification sequence (run in order)
+## 6. Verification sequence (run in order)
 
 ```bash
 # 1. App up, React UI served
@@ -118,7 +108,7 @@ curl -s http://127.0.0.1:8000/api/health
 curl -s http://127.0.0.1:8000/api/agent/health
 # expect: "llm_source":"proxy" and "llm_target":"http://127.0.0.1:7001/proxy_chat"
 # If llm_source is "direct" or "openai": AGENT_LLM_BASE_URL or GAI_DEFAULT_SOURCE
-# is set wrong (see step 4).
+# is set wrong (see section 3).
 
 # 3. Proxy accepts chat-completions payloads (messages array, NOT sys_prompt/prompt)
 curl -s -X POST http://127.0.0.1:7001/proxy_chat \
@@ -137,22 +127,13 @@ curl -s -X POST http://127.0.0.1:8000/api/agent/chat \
 # NOT prose describing tool calls.
 ```
 
-## 8. Failure modes → fixes
+## 7. Failure modes → fixes
 
 | Observation | Fix |
 |---|---|
-| Step 3 returns **404** | Host proxy is old code. Update checkout, restart proxy (step 5). |
-| Step 3 returns **422 about `sys_prompt`/`prompt`** | The request hit `/proxy_query` — a local workaround is rewriting agent traffic. Revert local diffs (section 1). |
-| Agent replies describe tool calls but nothing executes | Same root cause as above: traffic is going through `/proxy_query`. Confirm container image is 1.8.31 and step 3 passes. |
-| Step 3 returns **502 "all production LLM backends failed"** | Read the `detail` — it lists the LiteLLM and Azure errors verbatim. Usually gateway JWT absent/expired or `LITELLM_URL` unreachable from the host. |
+| Check 3 returns **404** | Host proxy is old code. Update checkout, restart proxy (section 4). |
+| Check 3 returns **422 about `sys_prompt`/`prompt`** | The request hit `/proxy_query` — a local workaround is rewriting agent traffic. Revert local diffs (section 1, item 1). |
+| Agent replies describe tool calls but nothing executes | Same root cause as above: traffic is going through `/proxy_query`. Confirm the container image is ≥ 1.8.31 and check 3 passes. |
+| Check 3 returns **502 "all production LLM backends failed"** | Read the `detail` — it lists the LiteLLM and Azure errors verbatim. Usually gateway JWT absent/expired or `LITELLM_URL` unreachable from the host. |
 | Agent calls time out | Client timeout is 240s by default (`AGENT_LLM_REQUEST_TIMEOUT` in the container env to override); if hit, the proxy's downstream (90s/backend) is the bottleneck — check LiteLLM latency. |
-| Wrong model in use | 1.8.31 precedence: `AGENT_LLM_MODEL` (container) > `LITELLM_MODEL` (container) > proxy's `LITELLM_MODEL` > `gpt-4.1-mini`. `/api/agent/health` shows the configured model. |
-
-## 9. Why dev worked while enterprise didn't
-
-Dev/laptop runs the proxy from the current checkout (or routes the agent
-direct to OpenAI), so `/proxy_chat` exists wherever the agent points.
-Enterprise runs a **long-lived host proxy process from whatever checkout it
-was started from** — updating the container image alone changes nothing about
-that process. Both halves must be 1.8.31: the container image (agent client)
-and the host proxy process (endpoint).
+| Wrong model in use | Precedence (since 1.8.31): `AGENT_LLM_MODEL` (container) > `LITELLM_MODEL` (container) > proxy's `LITELLM_MODEL` > `gpt-4.1-mini`. `/api/agent/health` shows the configured model. |

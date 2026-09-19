@@ -19,8 +19,13 @@ This image bundles everything into a single container managed by supervisord:
 
 ### 1. Start the stack
 
+The compose file below is a **standalone bridge-network example** for a
+typical Docker host — save it as `compose.yaml` next to your `.env`. It is
+*not* the repository's `docker-compose.production.yml`, which uses host
+networking (`network_mode: host`) for hardened enterprise daemons.
+
 ```yaml
-# docker-compose.production.yml
+# compose.yaml — standalone bridge-network example
 services:
   db:
     image: mmorrisj/pgvector:0.8.2-pg17
@@ -87,14 +92,22 @@ volumes:
 
 ```bash
 # Run database migrations
-docker compose -f docker-compose.production.yml --profile migrate up
+docker compose --profile migrate up
 
 # Start the application
-docker compose -f docker-compose.production.yml up -d
+docker compose up -d
 
-# Create an admin user
-docker exec -it <app-container> python scripts/create_admin.py --username admin
+# Grant the admin role to your login identity (see note below)
+docker exec -it <app-container> python scripts/create_admin.py --username <your.username>
 ```
+
+> **Admin accounts:** authentication is enterprise-JWT based — users are
+> auto-provisioned on first login and the image stores no local passwords.
+> `scripts/create_admin.py` promotes an existing user, or pre-creates one that
+> will be matched by username on first gateway login. `--username` must match
+> the JWT `preferred_username`/email claim; optional flags are `--role`
+> (admin/analyst/viewer), `--enterprise-id` (JWT `sub` claim, for
+> pre-provisioning) and `--display-name`.
 
 #### Path B: Restore from backup (existing pg_dump)
 
@@ -102,7 +115,7 @@ docker exec -it <app-container> python scripts/create_admin.py --username admin
 
 ```bash
 # Start the stack (db must be healthy before restore)
-docker compose -f docker-compose.production.yml up -d
+docker compose up -d
 
 # Copy the dump into the db container
 docker cp backup.dump <db-container>:/tmp/backup.dump
@@ -111,9 +124,11 @@ docker cp backup.dump <db-container>:/tmp/backup.dump
 docker exec <db-container> pg_restore -U softpower -d softpower-db \
   --no-owner --no-privileges --clean --if-exists /tmp/backup.dump
 
-# Reset the admin password (the dump contains the old hash)
+# Recover admin access: the restored users table may not contain your
+# identity (or may have it at the wrong role). Promote/pre-create the user
+# matching your enterprise JWT claim:
 docker exec <app-container> python scripts/create_admin.py \
-  --username admin --password YourNewPassword --reset-password
+  --username <your.username> --role admin
 ```
 
 ### 3. Access the dashboard
@@ -182,8 +197,8 @@ MSYS_NO_PATHCONV=1 docker exec sp_prod_db pg_restore -U softpower -d softpower-d
 - Build tools removed after compilation to reduce attack surface
 - Base image kept current with zero fixable critical/high CVEs
 - Supply chain attestations (SBOM + provenance) attached
-- Admin creation requires explicit password (no defaults)
-- Force-password-change enabled by default for new admin accounts
+- No local password store: authentication is enterprise-JWT based (users auto-provisioned from the gateway claim)
+- `scripts/create_admin.py` only promotes or pre-creates a user record matching the JWT identity — it sets no credentials and ships no default accounts
 
 ## Source
 

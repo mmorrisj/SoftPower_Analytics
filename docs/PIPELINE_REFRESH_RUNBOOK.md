@@ -11,7 +11,12 @@ Conventions: `DC` = `docker compose -f docker-compose.laptop.yml -f docker-compo
 run --rm embed` (the embed overlay has the GPU, the models, and `./data` + the repo bind-mounted).
 Batch-API stages need the host proxy: `python -m uvicorn server.main:app --host 0.0.0.0 --port 7001`.
 Run every `batch_queue_runner` with `--stall-timeout 0` (the default stall detector cancels
-healthy-but-queued OpenAI batches). `WINDOW` below = first ingest date … last ingest date.
+healthy-but-queued OpenAI batches). Size `--max-concurrent` against your OpenAI **Batch Queue
+Limit** (dashboard → Limits → gpt-4o-mini → "Batch queue limit", in tokens): each
+cluster_deconflict batch ≈ **0.43M enqueued tokens**, so safe concurrency =
+`floor(BQL / 0.43M)`. Exceeding it = HTTP 429 "Enqueued token limit reached" and failed
+batches (Tier 3 ≈ 40M ⇒ ~15–25 is safe; the default of 5 is always safe).
+`WINDOW` below = first ingest date … last ingest date.
 
 ## 0. Preflight
 - `docker ps` — db healthy; host proxy up on 7001; `nvidia-smi` — if the GPU is busy with the
@@ -103,6 +108,7 @@ update `INSIGHT_REPORT_PROMPT.md` Part F/I inventory + `manifest.md` note → co
 
 ## 9. Ship
 Refresh base-image digest pins (`docker pull` + inspect), bump version refs, release via
-`push-to-registry.sh registry mmorrisj X.Y.Z`; export the data delta with
-`scripts/db_delta_export.py --doc-date-from WINDOW_START` (text-only transfer,
+`scripts/docker/push-to-registry.sh registry mmorrisj X.Y.Z`; export the data delta with
+`scripts/db_delta_export.py --output-dir ./db_delta_YYYYMMDD --doc-date-from WINDOW_START`
+(text-only transfer; `--tables` produces a partial bundle, e.g. event-layer-only — see
 `docs/ENTERPRISE_DELTA_RUNBOOK.md`).

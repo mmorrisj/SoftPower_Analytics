@@ -4,11 +4,6 @@ A minimal, reproducible path to stand up the Soft Power Analytics stack for a
 demo from a fresh checkout. Targets the **default `docker-compose.yml`**
 (Compose-managed volume + network — no pre-steps).
 
-> **Validation status:** the compose file has been validated with
-> `docker compose config`, but this runbook should be **dry-run end-to-end on
-> the actual demo host** before the demo, since image builds, DB migration, and
-> LLM/S3 connectivity depend on that environment. Note any gaps here as you go.
-
 ---
 
 ## 1. Prerequisites
@@ -33,9 +28,18 @@ POSTGRES_USER=softpower
 POSTGRES_PASSWORD=change-me
 POSTGRES_DB=softpower
 
-# Host port the API/React UI is published on (container always listens on 8000)
+# API_PORT does double duty in docker-compose.yml:
+#   1. Host port the API/React UI is published on (container always listens on 8000)
+#   2. Port containers use to call back to a host-run server/main.py proxy
+#      (API_URL / S3_PROXY_URL = http://host.docker.internal:${API_PORT:-7001})
+# .env.example ships API_PORT=8000 — with that value the UI publishes on 8000
+# and containers expect any host proxy on 8000 too. Compose defaults to 7001
+# when the variable is unset. Either works for a demo; just browse to the port
+# you set.
 API_PORT=7001
-# Host port for the Streamlit dashboard
+# Host port for the Streamlit dashboard. docker-compose.yml interpolates
+# DASHBOARD_PORT (default 8501); note .env.example lists STREAMLIT_PORT=8501,
+# which the default compose file does NOT read (it is used by other stacks).
 DASHBOARD_PORT=8501
 
 # Skip enterprise JWT for the demo so the UI is reachable without a gateway
@@ -80,7 +84,7 @@ Then in a browser:
 - **Streamlit dashboard:** `http://localhost:8501` (or your `DASHBOARD_PORT`)
 
 If the database is empty, load a demo dataset/backup before showing data-heavy
-pages (see `ENTERPRISE_MIGRATION.md` for import/restore, and the embeddings
+pages (see `PRODUCTION_DOCKER_RUN.md` for import/restore, and the embeddings
 backup/restore docs under `services/pipeline/embeddings/`).
 
 ## 5. Teardown
@@ -108,5 +112,10 @@ docker compose down -v
 
 - `docker-compose.yml` — **this runbook** (default dev/demo, zero prerequisites).
 - `docker-compose.dev.yml` — production-mirroring dev (external volume/network).
-- `docker-compose.production.yml` — enterprise/hardened daemon; see
-  `PRODUCTION_DOCKER_RUN.md`.
+- `docker-compose.production.yml` — production from Docker Hub images, host networking; see `PRODUCTION_DOCKER_RUN.md`.
+- `docker-compose.enterprise.yml` — enterprise host (hosted Postgres, host networking, gateway JWT); see `docs/ENTERPRISE_AGENT_RUNBOOK.md`.
+- `docker-compose.laptop.yml` — laptop pipeline/dev stack.
+- `docker-compose.laptop.embed.yml` — embed-container overlay for the laptop stack (models + `./data` bind mounts).
+- `docker-compose.laptop.gpu.yml` — GPU overlay for the laptop stack.
+- `docker-compose.preprocessing.yml` — preprocessing/pipeline stack (batch jobs, re-embeds).
+- `docker-compose.windows.yml` — Windows host adjustments.

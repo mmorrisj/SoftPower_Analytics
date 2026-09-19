@@ -1,3 +1,5 @@
+> **Historical snapshot (archived 2026-02).** Kept for reference; content is not maintained and may not match the current release. This report scanned image `softpower-analytics:1.5.5` and `pgvector:0.8.1-pg16` — do not cite it for later releases; regenerate the scan against the deployed digests instead.
+
 # CVE Mitigation Report: SoftPower Analytics Docker Stack
 
 **Date**: February 24, 2026

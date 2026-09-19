@@ -20,57 +20,30 @@ PostgreSQL, no `db` container, host networking).
 
 - The enterprise host already runs the stack from `docker-compose.enterprise.yml`
   with a populated `.env` (`DB_HOST`, `POSTGRES_*`, etc.).
-- App image **2.0.0 or later**. Earlier images (1.8.x) contain neither the
-  survey page nor the API routes.
+- App image **2.0.0 or later** — use the current release (**2.0.3** at time
+  of writing). Earlier images (1.8.x) contain neither the survey page nor the
+  API routes.
 - The hosted database is reachable and already has the `vector` and `pg_trgm`
   extensions (existing deployments will).
 
-## Step 1 — Pull the 2.0.0 image
+## Deploy
 
-> ⚠️ The deploy script does **not** pull images. If you skip this step,
-> `docker compose` silently reuses whatever tag is cached locally.
+Deploying a new image (pull the tag explicitly, check `.env` `APP_IMAGE`
+pins, run migrations, recreate the app container) is the standard sequence in
+[ENTERPRISE_AGENT_RUNBOOK.md](ENTERPRISE_AGENT_RUNBOOK.md) — follow that with
+a **≥ 2.0.0** tag (e.g. `mmorrisj/softpower-analytics:2.0.3`).
 
-```bash
-docker pull mmorrisj/softpower-analytics:2.0.0
-```
+Survey-specific points:
 
-## Step 2 — Point the stack at 2.0.0
+- The survey table ships as Alembic revision **`20260807_survey_responses`**
+  (`alembic upgrade head` — via `scripts/docker/enterprise-deploy.sh migrate`
+  or `docker compose -f docker-compose.enterprise.yml --profile migrate up` —
+  applies it plus anything else the DB is behind on). The migration is
+  idempotent — it no-ops if `survey_responses` already exists.
+- `scripts/docker/enterprise-deploy.sh` falls back to an old default
+  (`1.8.6`) when `APP_IMAGE` is unset, so set it explicitly in `.env`.
 
-In the repo's `.env` on the enterprise host, set (or update) `APP_IMAGE` —
-both the `app` and `migrate` services read it:
-
-```bash
-APP_IMAGE=mmorrisj/softpower-analytics:2.0.0
-```
-
-Note: `scripts/docker/enterprise-deploy.sh` falls back to an old default
-(`1.8.6`) when `APP_IMAGE` is unset, so set it explicitly.
-
-## Step 3 — Run the database migration
-
-The survey table ships as Alembic revision `20260807_survey_responses`
-(`alembic upgrade head` applies it plus anything else the DB is behind on).
-The migration is idempotent — it no-ops if `survey_responses` already exists.
-
-```bash
-# Recommended: wraps pre-flight checks + migration
-scripts/docker/enterprise-deploy.sh migrate
-
-# Or directly:
-docker compose -f docker-compose.enterprise.yml --profile migrate up
-```
-
-## Step 4 — Restart the app on the new image
-
-```bash
-# Full deploy (pre-flight + migrate + start) — steps 3 and 4 in one:
-scripts/docker/enterprise-deploy.sh
-
-# Or just recreate the app container:
-docker compose -f docker-compose.enterprise.yml up -d
-```
-
-## Step 5 — Verify
+## Verify
 
 1. **Table exists** (from any host with psql access to the hosted DB):
    ```sql
@@ -116,7 +89,7 @@ docker compose -f docker-compose.enterprise.yml up -d
 
 | Symptom | Likely cause / fix |
 |---|---|
-| No **Feedback** item in the nav | App still on a 1.8.x image — check `docker inspect sp_ent_app --format '{{.Config.Image}}'`, then redo steps 1–2 and recreate the container. |
-| `500` on survey submit | Migration not applied — run step 3 and check `docker logs sp_ent_migrate`. |
+| No **Feedback** item in the nav | App still on a 1.8.x image — check `docker inspect sp_ent_app --format '{{.Config.Image}}'`, then re-pull and re-point `APP_IMAGE` at a ≥ 2.0.0 tag (see Deploy) and recreate the container. |
+| `500` on survey submit | Migration not applied — run the migration (see Deploy) and check `docker logs sp_ent_migrate`. |
 | `403` when reading responses | JWT role is not `analyst`/`admin`. Submissions still work for any authenticated user. |
 | Migration fails on connectivity | Run `scripts/docker/enterprise-deploy.sh check` — validates `DB_HOST` reachability and required extensions. Hosted DB without TLS? Set `ENVIRONMENT` to a non-production value in `.env` (production enforces `sslmode=require`). |

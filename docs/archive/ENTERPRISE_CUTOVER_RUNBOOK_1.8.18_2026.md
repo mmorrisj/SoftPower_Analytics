@@ -1,3 +1,5 @@
+> **Historical snapshot (archived 2026 — written for the 1.8.18 cutover).** Kept for reference; content is not maintained and may not match the current release.
+
 # Enterprise Cutover Runbook — Embedding Fix + Full Rebuild
 
 Repeatable procedure to deploy the embedding fix and rebuild the event/summary/

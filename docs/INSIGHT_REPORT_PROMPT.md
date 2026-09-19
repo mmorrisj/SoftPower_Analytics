@@ -516,7 +516,7 @@ are the index and the draft; the raw data is the evidence.
 
 ---
 
-## PART I — Live Schema Scan (verified 2026-06-29; volumes re-verified 2026-08-02)
+## PART I — Live Schema Scan (verified 2026-09-09)
 
 39 tables. The analytically relevant ones, with what the scan revealed:
 

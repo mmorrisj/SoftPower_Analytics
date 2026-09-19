@@ -1,3 +1,5 @@
+> **Historical snapshot (archived 2026-06).** Kept for reference; content is not maintained and may not match the current release.
+
 # Maintainability & Maintainer-Transition Assessment
 
 **Date:** 2026-06-07

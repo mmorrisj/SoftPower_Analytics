@@ -1,9 +1,10 @@
 # Cross-Initiator Reports by Recipient
 ### Who courts each MENA state — and who leads
 
-*Demand-side companion to the by-initiator and by-category reports. 17 qualifying recipients
-(>=300 cross-actor docs). Skipped (too thin): **UAE** (duplicate spelling of United Arab Emirates,
-230) and **Cyprus** (117). Intensity = corroborated (rivals) / registered (U.S.). The U.S. lead on
+*Demand-side companion to the by-initiator and by-category reports. 18 recipient reports
+(>=300 cross-actor docs, plus **Cyprus**, included despite its thinner 117-doc base). Skipped:
+**UAE** (duplicate spelling of United Arab Emirates, 230 docs — covered under
+[United Arab Emirates](united_arab_emirates/report.md)). Intensity = corroborated (rivals) / registered (U.S.). The U.S. lead on
 crisis/alliance files (Iran, Israel, Palestine, Lebanon, Syria) reflects involvement, not courtship.*
 
 | Recipient | Lead actor | Hedging profile | Lane leaders (E/S/M/D) |

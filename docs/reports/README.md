@@ -47,12 +47,12 @@ distinct-document basis.*
 > directly comparable to the four on the same basis.
 
 ### Category-focused (cross-actor) reports
-- [Economic](by_category/economic/report.md) — China the economic hegemon; Iran's economic influence a media mirage (88% self-reported); three lanes (China=Gulf/Egypt dev, Turkey=reconstruction, Russia=Iran energy). *Military next (arms live there).*
+- [Economic](by_category/economic/report.md) — China the economic hegemon; Iran's economic influence a media mirage (88% self-reported); three lanes (China=Gulf/Egypt dev, Turkey=reconstruction, Russia=Iran energy).
 - [Military](by_category/military/report.md) — the U.S. is the military hegemon (arms, $17.9B Israel aid, $96B Qatar aircraft, THAAD); Iran's footprint is its proxy axis (Hezbollah/Houthis); China militarily absent. With Economic, reveals the **U.S. security + Chinese capital** division of labor.
 - [Social](by_category/social/report.md) — Turkey leads (the only full cultural apparatus: TIKA/Yunus Emre/Maarif/Diyanet); Iran's social footprint is the dataset's biggest mirage (91% self-reported); China=culture-with-capital, US=Gaza humanitarian.
 
 ### By-recipient (cross-initiator) reports
-- [Who courts each MENA state](by_recipient/README.md) — 17 recipient reports: who leads, the hedging profile, and the lane each actor uses. Confirms the **U.S.-security + China-capital division of labor** recipient by recipient.
+- [Who courts each MENA state](by_recipient/README.md) — 18 recipient reports: who leads, the hedging profile, and the lane each actor uses. Confirms the **U.S.-security + China-capital division of labor** recipient by recipient.
 
 ---
 

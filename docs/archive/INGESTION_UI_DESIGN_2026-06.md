@@ -1,3 +1,5 @@
+> **Historical snapshot (archived 2026-06).** Kept for reference; content is not maintained and may not match the current release. For what actually shipped, see `services/pipeline/ingestion/README.md`.
+
 # Ingestion UI — Pipeline Review & Design Proposal
 
 **Goal:** Replace terminal-driven ingestion with a web interface where users drop in a

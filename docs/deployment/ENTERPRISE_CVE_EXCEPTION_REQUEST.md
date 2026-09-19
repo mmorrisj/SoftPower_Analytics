@@ -25,6 +25,8 @@ Attach scanner output generated from the exact deployed image digests:
 
 The entries below are the current exception candidates based on package presence and dependency constraints in Debian-based runtime images.
 
+> **Note:** this table is a point-in-time snapshot. Regenerate it from a fresh scan of the exact deployed image digests for every submission — do not resubmit these rows as-is.
+
 | CVE | Severity | Package Family | Image(s) | Disposition | Rationale |
 |---|---|---|---|---|---|
 | CVE-2026-0861 | HIGH | `glibc` (`libc-bin`, `libc6`, `libc-l10n`, `locales`) | app (2), pgvector (4) | Exception | Integer overflow in memalign requires attacker control of both size (near PTRDIFF_MAX) and alignment (>=2^62) arguments — not reachable from application code or network input. Debian classified as "minor issue / no-dsa". Fix in glibc 2.42-8+ (sid), not yet in trixie (2.41-12+deb13u1). |
@@ -75,9 +77,9 @@ These should be validated as closed by the enterprise scan after image refresh:
 
 ## Compensating Controls
 
-1. Network isolation and least exposure:
-- Only required service ports are exposed (8000, 8501).
-- Database is internal to Docker network (not exposed to host in production compose).
+1. Network exposure and boundary controls:
+- The production/enterprise composes run with `network_mode: host` (required on the hardened enterprise daemon), so services bind directly on the host: FastAPI (8000), Streamlit (8501), PostgreSQL (5432 — the bundled `db` container or a native/managed instance), and the host-side LLM/S3 proxy process (7001).
+- The database is therefore **not** isolated inside a Docker network; exposure is limited by the enterprise host firewall / network segmentation, and Redis is explicitly bound to `127.0.0.1` in the compose command. Postgres binding is governed by its own configuration, not by Docker.
 - No direct user input reaches glibc allocation functions with attacker-controlled alignment.
 
 2. Non-root container execution:
@@ -90,7 +92,7 @@ These should be validated as closed by the enterprise scan after image refresh:
 - `dpkg --purge` on residual configs prevents scanners from flagging removed packages.
 - Supervisor installed from PyPI (not Debian apt) to avoid pulling 36 extra packages.
 - `postgresql-client` removed from app image: `psycopg2-binary` bundles its own `libpq`; eliminates `libpq5` → `libldap2` → `libtasn1` and Kerberos library chains from the app image.
-- `locales` / `libc-l10n` retained in pgvector only because postgresql-16 hard-depends on them.
+- `locales` / `libc-l10n` retained in pgvector only because postgresql-17 hard-depends on them.
 
 4. Deployment controls:
 - Image tags/digests are pinned for release approval.
@@ -119,16 +121,17 @@ Residual risk is accepted for the listed CVEs because:
 ## Evidence Commands (for Approval Packet)
 
 ```bash
-# Replace tags with exact release tags/digests used in deployment
-docker pull mmorrisj/softpower-analytics:1.5.5
-docker pull mmorrisj/pgvector:0.8.1-pg16
+# Replace <scanned app image:tag> / <scanned db image:tag> with the exact
+# release tags/digests used in the deployment being submitted
+docker pull <scanned app image:tag>
+docker pull <scanned db image:tag>
 
-docker inspect --format='{{index .RepoDigests 0}}' mmorrisj/softpower-analytics:1.5.5
-docker inspect --format='{{index .RepoDigests 0}}' mmorrisj/pgvector:0.8.1-pg16
+docker inspect --format='{{index .RepoDigests 0}}' <scanned app image:tag>
+docker inspect --format='{{index .RepoDigests 0}}' <scanned db image:tag>
 
 # Package evidence snapshots
-docker run --rm mmorrisj/softpower-analytics:1.5.5 dpkg -l > app-dpkg.txt
-docker run --rm mmorrisj/pgvector:0.8.1-pg16 dpkg -l > db-dpkg.txt
+docker run --rm <scanned app image:tag> dpkg -l > app-dpkg.txt
+docker run --rm <scanned db image:tag> dpkg -l > db-dpkg.txt
 ```
 
 ## Approval Sign-Off
