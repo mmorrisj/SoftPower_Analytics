@@ -17,7 +17,8 @@ from scratch. Grounding is enforced via an explicit allow-list of doc_ids
 in the context and a post-LLM hallucination check (cited_doc_ids that
 weren't in the context are stripped).
 
-Per-event LLM call: ~5k input tokens, ~500 output tokens. Sequential
+Per-event LLM call: ~5k input tokens, ~500 visible output tokens (plus
+hidden reasoning tokens on reasoning models; see NARRATOR_MAX_TOKENS). Sequential
 for v1; parallelizing across events is straightforward in a follow-up.
 
 Output:
@@ -31,6 +32,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from typing import Any
 
@@ -43,6 +45,15 @@ logger = logging.getLogger(__name__)
 # Per-event context budgets.
 MAX_SOURCE_DOCS_PER_EVENT = 6
 SNIPPET_CHAR_LIMIT = 600
+
+# Output budget per narration. Reasoning models (gpt-5 family, o-series)
+# spend max_completion_tokens on hidden reasoning BEFORE any visible text,
+# so a budget that is ample for ~500 tokens of JSON can come back empty
+# (reasoning ate it all) or cut off mid-JSON. On finish_reason == "length"
+# the call is retried once with RETRY_MULTIPLIER x the budget.
+NARRATOR_MAX_TOKENS = int(os.getenv("AGENT_NARRATOR_MAX_TOKENS", "2500"))
+NARRATOR_RETRY_MULTIPLIER = 2
+_RAW_PREVIEW_CHARS = 200
 
 NARRATOR_SYSTEM_PROMPT = """\
 You are an event narrator drafting one section of a soft-power analyst report.
@@ -144,7 +155,10 @@ class EventNarratorStage(Stage):
                 continue
 
             narratives.append(result)
-            successes += 1
+            if result["ok"]:
+                successes += 1
+            else:
+                failures.append(event_id)
 
         ok = successes > 0
         total = len(events)
@@ -184,22 +198,53 @@ def _fetch_event_context(session, event_id: str) -> dict[str, Any]:
     }
 
 
+# narrative_summary JSONB key names differ by writer and period type:
+#   daily/weekly batch + generate_daily_summaries: overview / outcomes
+#   monthly batch:  monthly_overview / key_outcomes
+#   yearly batch:   yearly_overview  / annual_outcomes
+#   legacy generate_event_summaries + publication: overview / outcome
+# Checked in order; the first non-empty value wins.
+_OVERVIEW_KEYS = ("overview", "monthly_overview", "yearly_overview")
+_OUTCOMES_KEYS = ("outcomes", "key_outcomes", "annual_outcomes", "outcome")
+
+# Candidate rows to scan: the top-ranked row can carry a JSONB shape with
+# no recognised keys, so fall through to the next-best period.
+_SUMMARY_CANDIDATES = 5
+
+
+def _first_text(narrative: dict[str, Any], keys: tuple[str, ...]) -> str | None:
+    for key in keys:
+        value = narrative.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
 def _fetch_best_event_summary(session, canonical_event_id: str) -> dict[str, Any] | None:
     """Return the highest-period event_summary tied to this canonical event.
 
     Period ordering: yearly > monthly > weekly > daily. Within the same
-    period type, prefer the most recent."""
+    period type, prefer the most recent.
+
+    The summary pipelines write their text into the narrative_summary JSONB
+    (key names vary, see _OVERVIEW_KEYS / _OUTCOMES_KEYS); the
+    overall_summary / outcomes_summary columns are read as a fallback but
+    no pipeline stage currently populates them."""
     sql = """
         SELECT
             period_type,
             period_start,
             period_end,
+            narrative_summary,
             overall_summary,
             outcomes_summary
         FROM event_summaries
         WHERE canonical_event_id = :event_id
           AND is_deleted = FALSE
-          AND (overall_summary IS NOT NULL OR outcomes_summary IS NOT NULL)
+          AND (overall_summary IS NOT NULL
+               OR outcomes_summary IS NOT NULL
+               OR (narrative_summary IS NOT NULL
+                   AND narrative_summary <> '{}'::jsonb))
         ORDER BY
             CASE period_type
                 WHEN 'YEARLY'  THEN 1
@@ -209,17 +254,32 @@ def _fetch_best_event_summary(session, canonical_event_id: str) -> dict[str, Any
                 ELSE 5
             END,
             period_end DESC
-        LIMIT 1
+        LIMIT :limit
     """
-    row = session.execute(text(sql), {"event_id": canonical_event_id}).first()
-    if row is None:
+    rows = session.execute(
+        text(sql), {"event_id": canonical_event_id, "limit": _SUMMARY_CANDIDATES}
+    ).fetchall()
+    for row in rows:
+        summary = _summary_from_row(row)
+        if summary is not None:
+            return summary
+    return None
+
+
+def _summary_from_row(row) -> dict[str, Any] | None:
+    """Normalise one event_summaries row to {overall_summary, outcomes_summary},
+    or None when it carries no usable text."""
+    narrative = row.narrative_summary if isinstance(row.narrative_summary, dict) else {}
+    overall = _first_text(narrative, _OVERVIEW_KEYS) or (row.overall_summary or "").strip() or None
+    outcomes = _first_text(narrative, _OUTCOMES_KEYS) or (row.outcomes_summary or "").strip() or None
+    if overall is None and outcomes is None:
         return None
     return {
         "period_type": str(row.period_type),
         "period_start": str(row.period_start) if row.period_start else None,
         "period_end": str(row.period_end) if row.period_end else None,
-        "overall_summary": row.overall_summary,
-        "outcomes_summary": row.outcomes_summary,
+        "overall_summary": overall,
+        "outcomes_summary": outcomes,
     }
 
 
@@ -272,17 +332,38 @@ def _narrate_one(
         LLMMessage(role="system", content=NARRATOR_SYSTEM_PROMPT),
         LLMMessage(role="user", content=user_payload),
     ]
+    budget = NARRATOR_MAX_TOKENS
     response = provider.complete(
-        messages=messages,
-        tools=None,
-        temperature=0.2,
-        max_tokens=900,
+        messages=messages, tools=None, temperature=0.2, max_tokens=budget,
     )
-
     parsed = _parse_narrator_response(response.text)
+
+    if not parsed and response.finish_reason == "length":
+        # Truncated before the JSON closed — the budget, not the model's
+        # formatting, is the problem. One retry with more room.
+        logger.warning(
+            "narrator output truncated for %s at max_tokens=%d (%d chars); "
+            "retrying with %d",
+            event.get("event_id"), budget, len(response.text or ""),
+            budget * NARRATOR_RETRY_MULTIPLIER,
+        )
+        budget *= NARRATOR_RETRY_MULTIPLIER
+        response = provider.complete(
+            messages=messages, tools=None, temperature=0.2, max_tokens=budget,
+        )
+        parsed = _parse_narrator_response(response.text)
+
     overview = (parsed.get("overview") or "").strip()
     outcomes = (parsed.get("outcomes") or "").strip()
     claimed_cites = parsed.get("cited_doc_ids") or []
+
+    failure_reason = None
+    if not (overview or outcomes):
+        failure_reason = _describe_empty_response(response, budget, parsed)
+        logger.warning(
+            "narrator produced no narrative for %s: %s",
+            event.get("event_id"), failure_reason,
+        )
 
     # Hallucination check + prefix-match salvage: keep doc_ids exact-matching
     # the allow-list, plus any that uniquely-prefix an allow-list ID (LLMs
@@ -304,8 +385,34 @@ def _narrate_one(
         "hallucinated_doc_ids": hallucinated,
         "used_existing_summary": context["existing_narrative"] is not None,
         "context_doc_count": len(context["source_docs"]),
-        "ok": bool(overview or outcomes),
+        "ok": failure_reason is None,
+        "failure_reason": failure_reason,
+        "finish_reason": response.finish_reason,
     }
+
+
+def _describe_empty_response(response, budget: int, parsed: dict[str, Any]) -> str:
+    """Say WHY a narration came back empty, so the validator's
+    narrative_failure note distinguishes budget exhaustion from bad JSON."""
+    raw = response.text or ""
+    finish = response.finish_reason
+    if not raw.strip():
+        if finish == "length":
+            return (f"empty output with finish_reason=length at max_tokens={budget} "
+                    f"(reasoning tokens likely consumed the budget)")
+        return f"empty output (finish_reason={finish})"
+    if finish == "length":
+        cause = f"truncated at max_tokens={budget}"
+    elif not parsed:
+        cause = "unparseable JSON"
+    else:
+        cause = "JSON parsed but overview/outcomes empty"
+    preview = raw[:_RAW_PREVIEW_CHARS]
+    tail = raw[-_RAW_PREVIEW_CHARS:] if len(raw) > _RAW_PREVIEW_CHARS else ""
+    detail = f"{cause} (finish_reason={finish}, {len(raw)} chars): head={preview!r}"
+    if tail:
+        detail += f" tail={tail!r}"
+    return detail
 
 
 def _compose_analyst_query(intent: dict[str, Any]) -> str:
