@@ -198,22 +198,53 @@ def _fetch_event_context(session, event_id: str) -> dict[str, Any]:
     }
 
 
+# narrative_summary JSONB key names differ by writer and period type:
+#   daily/weekly batch + generate_daily_summaries: overview / outcomes
+#   monthly batch:  monthly_overview / key_outcomes
+#   yearly batch:   yearly_overview  / annual_outcomes
+#   legacy generate_event_summaries + publication: overview / outcome
+# Checked in order; the first non-empty value wins.
+_OVERVIEW_KEYS = ("overview", "monthly_overview", "yearly_overview")
+_OUTCOMES_KEYS = ("outcomes", "key_outcomes", "annual_outcomes", "outcome")
+
+# Candidate rows to scan: the top-ranked row can carry a JSONB shape with
+# no recognised keys, so fall through to the next-best period.
+_SUMMARY_CANDIDATES = 5
+
+
+def _first_text(narrative: dict[str, Any], keys: tuple[str, ...]) -> str | None:
+    for key in keys:
+        value = narrative.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
 def _fetch_best_event_summary(session, canonical_event_id: str) -> dict[str, Any] | None:
     """Return the highest-period event_summary tied to this canonical event.
 
     Period ordering: yearly > monthly > weekly > daily. Within the same
-    period type, prefer the most recent."""
+    period type, prefer the most recent.
+
+    The summary pipelines write their text into the narrative_summary JSONB
+    (key names vary, see _OVERVIEW_KEYS / _OUTCOMES_KEYS); the
+    overall_summary / outcomes_summary columns are read as a fallback but
+    no pipeline stage currently populates them."""
     sql = """
         SELECT
             period_type,
             period_start,
             period_end,
+            narrative_summary,
             overall_summary,
             outcomes_summary
         FROM event_summaries
         WHERE canonical_event_id = :event_id
           AND is_deleted = FALSE
-          AND (overall_summary IS NOT NULL OR outcomes_summary IS NOT NULL)
+          AND (overall_summary IS NOT NULL
+               OR outcomes_summary IS NOT NULL
+               OR (narrative_summary IS NOT NULL
+                   AND narrative_summary <> '{}'::jsonb))
         ORDER BY
             CASE period_type
                 WHEN 'YEARLY'  THEN 1
@@ -223,17 +254,32 @@ def _fetch_best_event_summary(session, canonical_event_id: str) -> dict[str, Any
                 ELSE 5
             END,
             period_end DESC
-        LIMIT 1
+        LIMIT :limit
     """
-    row = session.execute(text(sql), {"event_id": canonical_event_id}).first()
-    if row is None:
+    rows = session.execute(
+        text(sql), {"event_id": canonical_event_id, "limit": _SUMMARY_CANDIDATES}
+    ).fetchall()
+    for row in rows:
+        summary = _summary_from_row(row)
+        if summary is not None:
+            return summary
+    return None
+
+
+def _summary_from_row(row) -> dict[str, Any] | None:
+    """Normalise one event_summaries row to {overall_summary, outcomes_summary},
+    or None when it carries no usable text."""
+    narrative = row.narrative_summary if isinstance(row.narrative_summary, dict) else {}
+    overall = _first_text(narrative, _OVERVIEW_KEYS) or (row.overall_summary or "").strip() or None
+    outcomes = _first_text(narrative, _OUTCOMES_KEYS) or (row.outcomes_summary or "").strip() or None
+    if overall is None and outcomes is None:
         return None
     return {
         "period_type": str(row.period_type),
         "period_start": str(row.period_start) if row.period_start else None,
         "period_end": str(row.period_end) if row.period_end else None,
-        "overall_summary": row.overall_summary,
-        "outcomes_summary": row.outcomes_summary,
+        "overall_summary": overall,
+        "outcomes_summary": outcomes,
     }
 
 

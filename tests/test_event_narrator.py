@@ -55,3 +55,28 @@ def test_unparseable_without_truncation_does_not_retry():
     assert "unparseable JSON" in r["failure_reason"]
     assert "Sure!" in r["failure_reason"]
     assert len(p.budgets) == 1
+
+
+def _row(narrative=None, overall=None, outcomes=None, period="MONTHLY"):
+    from types import SimpleNamespace
+    return SimpleNamespace(period_type=period, period_start=None, period_end=None,
+                           narrative_summary=narrative, overall_summary=overall,
+                           outcomes_summary=outcomes)
+
+
+def test_summary_reads_each_narrative_shape():
+    shapes = [
+        ({"overview": "O", "outcomes": "R"}, "O", "R"),                # daily/weekly
+        ({"monthly_overview": "O", "key_outcomes": "R"}, "O", "R"),    # monthly
+        ({"yearly_overview": "O", "annual_outcomes": "R"}, "O", "R"),  # yearly
+        ({"overview": "O", "outcome": "R"}, "O", "R"),                 # legacy singular
+    ]
+    for narrative, overview, outcomes in shapes:
+        s = en._summary_from_row(_row(narrative))
+        assert (s["overall_summary"], s["outcomes_summary"]) == (overview, outcomes), narrative
+
+
+def test_summary_falls_back_to_columns_and_skips_empty():
+    s = en._summary_from_row(_row({}, overall="col O", outcomes="col R"))
+    assert (s["overall_summary"], s["outcomes_summary"]) == ("col O", "col R")
+    assert en._summary_from_row(_row({"source_link": "x", "outcomes": "  "})) is None
