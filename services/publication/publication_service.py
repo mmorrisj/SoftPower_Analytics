@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 
 from shared.models.models import PeriodType
 from shared.database.database import get_session
+from shared.utils.narrative_fields import narrative_outcomes, narrative_overview
 from services.publication.query_builder import PublicationQueryBuilder
 from services.publication.summary_generator import SummaryGenerator
 from services.publication.document_builder import DocumentBuilder
@@ -217,8 +218,8 @@ class PublicationService:
                     'id': str(es.id),
                     'event_name': es.event_name,
                     'category': primary_category or 'Unknown',
-                    'overview': es.narrative_summary.get('overview', '') if es.narrative_summary else '',
-                    'outcome': es.narrative_summary.get('outcome', '') if es.narrative_summary else '',
+                    'overview': narrative_overview(es.narrative_summary),
+                    'outcome': narrative_outcomes(es.narrative_summary),
                     'period_start': es.period_start,
                     'period_end': es.period_end,
                     'total_documents': es.total_unique_documents,
