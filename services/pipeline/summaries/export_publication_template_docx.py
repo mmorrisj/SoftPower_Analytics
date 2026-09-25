@@ -27,6 +27,7 @@ import requests
 
 from shared.database.database import get_session
 from shared.models.models import EventSourceLink
+from shared.utils.narrative_fields import narrative_outcomes, narrative_overview
 from services.pipeline.summaries.publication_charts import add_charts_to_document
 
 
@@ -175,8 +176,8 @@ def get_monthly_summaries_by_category(
     for summary in summaries:
         # Extract narrative sections
         narrative = summary['narrative']
-        overview = narrative.get('monthly_overview', narrative.get('overview', ''))
-        outcome = narrative.get('key_outcomes', narrative.get('outcome', ''))
+        overview = narrative_overview(narrative)
+        outcome = narrative_outcomes(narrative)
 
         # Get source document IDs
         source_links = session.query(EventSourceLink).filter(

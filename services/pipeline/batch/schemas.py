@@ -453,6 +453,19 @@ SCHEMA_PROPOSITION_EXTRACT = {
     }
 }
 
+SCHEMA_EVENT_NARRATIVE = {
+    "name": "event_narrative",
+    "strict": True,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "description": {"type": "string"},
+        },
+        "required": ["description"],
+        "additionalProperties": False,
+    }
+}
+
 
 # ===================================================================
 # Mapping from job type to schema (used by generate_batch_requests)
@@ -482,6 +495,7 @@ def get_response_format_for_job_type(job_type: str) -> dict:
         JOB_TYPE_CLASSIFY_ENTITY_RELATIONSHIPS,
         JOB_TYPE_EVENT_RENAME,
         JOB_TYPE_PROPOSITION_EXTRACT,
+        JOB_TYPE_EVENT_NARRATIVE,
     )
 
     _SCHEMA_MAP = {
@@ -502,6 +516,7 @@ def get_response_format_for_job_type(job_type: str) -> dict:
         JOB_TYPE_CLASSIFY_ENTITY_RELATIONSHIPS: SCHEMA_RELATIONSHIP_CLASSIFICATION,
         JOB_TYPE_EVENT_RENAME: SCHEMA_EVENT_RENAME,
         JOB_TYPE_PROPOSITION_EXTRACT: SCHEMA_PROPOSITION_EXTRACT,
+        JOB_TYPE_EVENT_NARRATIVE: SCHEMA_EVENT_NARRATIVE,
     }
 
     schema = _SCHEMA_MAP.get(job_type)
