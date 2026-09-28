@@ -1,7 +1,7 @@
 # Enterprise Runbook: Spin Up the SoftPower React App
 
 Instructions for an agent (human or AI) deploying on the enterprise host.
-Applies to the current release (**2.0.3** at time of writing) and any release
+Applies to the current release (**2.0.4** at time of writing) and any release
 **≥ 1.8.31** — the first with the `/proxy_chat` chat-completions passthrough
 in both proxy implementations (`server/main.py` and `scripts/llm_proxy.py`).
 Tool-calling requires that passthrough; never adapt the agent to
@@ -23,7 +23,7 @@ transport `tools` definitions or return structured `tool_calls`.
    git status
    git diff          # any diff touching agent/, server/main.py, scripts/llm_proxy.py is suspect
    ```
-2. **The release image** (e.g. `mmorrisj/softpower-analytics:2.0.3`)
+2. **The release image** (e.g. `mmorrisj/softpower-analytics:2.0.4`)
    available to the host Docker daemon:
    - With registry access: `docker pull mmorrisj/softpower-analytics:<tag>`
    - Airgapped: on a connected machine
@@ -37,7 +37,7 @@ transport `tools` definitions or return structured `tool_calls`.
 
 ## 2. Check `.env` for stale image pins (this bit us in the past)
 
-`docker-compose.enterprise.yml` uses `${APP_IMAGE:-mmorrisj/softpower-analytics:2.0.3}`
+`docker-compose.enterprise.yml` uses `${APP_IMAGE:-mmorrisj/softpower-analytics:2.0.4}`
 (the default pins the current release). An `APP_IMAGE` (or `APP_VERSION`)
 line in `.env` **silently overrides** the compose default and keeps you on an
 old image:

@@ -20,7 +20,7 @@ PostgreSQL, no `db` container, host networking).
 
 - The enterprise host already runs the stack from `docker-compose.enterprise.yml`
   with a populated `.env` (`DB_HOST`, `POSTGRES_*`, etc.).
-- App image **2.0.0 or later** — use the current release (**2.0.3** at time
+- App image **2.0.0 or later** — use the current release (**2.0.4** at time
   of writing). Earlier images (1.8.x) contain neither the survey page nor the
   API routes.
 - The hosted database is reachable and already has the `vector` and `pg_trgm`
@@ -31,7 +31,7 @@ PostgreSQL, no `db` container, host networking).
 Deploying a new image (pull the tag explicitly, check `.env` `APP_IMAGE`
 pins, run migrations, recreate the app container) is the standard sequence in
 [ENTERPRISE_AGENT_RUNBOOK.md](ENTERPRISE_AGENT_RUNBOOK.md) — follow that with
-a **≥ 2.0.0** tag (e.g. `mmorrisj/softpower-analytics:2.0.3`).
+a **≥ 2.0.0** tag (e.g. `mmorrisj/softpower-analytics:2.0.4`).
 
 Survey-specific points:
 

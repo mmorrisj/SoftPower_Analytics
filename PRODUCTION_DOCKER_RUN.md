@@ -156,10 +156,10 @@ docker start sp_prod_app 2>/dev/null || docker run -d \
     -e TIKTOKEN_CACHE_DIR=/app/.cache/tiktoken \
     -e TRANSFORMERS_OFFLINE=true \
     -e HF_HUB_OFFLINE=true \
-    mmorrisj/softpower-analytics:2.0.3
+    mmorrisj/softpower-analytics:2.0.4
 ```
 
-> **Image tag:** `2.0.3` is the release current when this guide was last updated —
+> **Image tag:** `2.0.4` is the release current when this guide was last updated —
 > always match the tag to the release you are deploying (deploy targets do not auto-pull).
 
 Important details:
@@ -201,7 +201,7 @@ DB_HOST=127.0.0.1 alembic upgrade head
 docker run --name sp_migrate_$(date +%s) --network host \
     --env-file .env \
     -e DB_HOST=127.0.0.1 -e POSTGRES_HOST=127.0.0.1 -e DB_PORT=5432 \
-    mmorrisj/softpower-analytics:2.0.3 \
+    mmorrisj/softpower-analytics:2.0.4 \
     alembic upgrade head
 # The container exits when migrations complete. You can ignore the stopped container
 # or `docker stop` it later. (Don't try docker rm — it'll fail with setns.)
@@ -356,7 +356,7 @@ docker run -d --name sp_prod_app_v2 --network host --restart unless-stopped \
     -e SENTENCE_TRANSFORMERS_HOME=/app/.cache/huggingface/hub \
     -e TIKTOKEN_CACHE_DIR=/app/.cache/tiktoken \
     -e TRANSFORMERS_OFFLINE=true -e HF_HUB_OFFLINE=true \
-    mmorrisj/softpower-analytics:2.0.3
+    mmorrisj/softpower-analytics:2.0.4
 
 # 4. Old sp_prod_app sits stopped. Ignore it (it can't be cleanly removed; setns blocks docker rm).
 docker ps -a --filter name=sp_prod_app
@@ -379,7 +379,7 @@ docker run -d --name sp_prod_app_v3 --network host --restart unless-stopped \
     -e API_URL=http://127.0.0.1:7001 \
     -v /opt/softpower/server/auth.py:/app/server/auth.py:ro \
     -v /opt/softpower/services/chat/rag_service.py:/app/services/chat/rag_service.py:ro \
-    mmorrisj/softpower-analytics:2.0.3
+    mmorrisj/softpower-analytics:2.0.4
 ```
 
 Use **absolute paths** for the host side of bind mounts. The mount overlays a single file; Python imports the patched version at startup.
@@ -409,7 +409,7 @@ docker run -d --name sp_prod_app_v4 ... \
     -e LITELLM_URL= -e LITELLM_API_KEY= -e LITELLM_MODEL= \
     -e OPENAI_PROJ_API= -e OPENAI_API_KEY= \
     -e AZURE_OPENAI_ENDPOINT= -e AZURE_OPENAI_API_KEY= \
-    mmorrisj/softpower-analytics:2.0.3
+    mmorrisj/softpower-analytics:2.0.4
 ```
 
 ### LLM configuration in `.env` (LiteLLM / Azure OpenAI)
