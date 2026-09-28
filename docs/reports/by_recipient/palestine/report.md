@@ -53,7 +53,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Palestine is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-30 peripheral events (where Palestine was only mentioned in
+27 peripheral events (where Palestine was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **2026 US-EU Gaza Reconstruction Funding Initiative in Brussels** — U.S., material 9.00 (2026-02)
@@ -61,9 +61,9 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **2026 Peace Council Meeting on Gaza Reconstruction in Washington** — Turkey, material 9.00 (2026-02)
 - **2026 Gaza Peace Council Initiative Launch with $10B US Commitment** — U.S., material 9.00 (2026-02)
 - **Turkey Hosts Gaza Peace Negotiations with Israel and Palestine, October 2025** — Turkey, material 9.00 (2025-10)
-- **Morocco Joins Gaza Stabilization Force as $7 Billion Reconstruction Pledges Back Ceasefire Roadmap** — Turkey, material 8.50 (2026-08)
-- **China-Palestine Humanitarian Aid and Diplomatic Engagement** — China, material 8.50 (2026-08)
-- **Sharm El-Sheikh Agreement** — Turkey, material 8.50 (2026-08)
+- **2026 US Gaza Recovery Plan Announcement at UN General Assembly** — U.S., material 8.50 (2026-09)
+- **Board of Peace Gaza Reconstruction Plan** — U.S., material 8.50 (2026-09)
+- **Morocco-Egypt-Qatar-Turkey Gaza Ceasefire Roadmap Agreement, August 2026** — Turkey, material 8.50 (2026-08)
 
 ---
 

@@ -53,7 +53,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Israel is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-53 peripheral events (where Israel was only mentioned in
+54 peripheral events (where Israel was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Turkey Hosts Gaza Peace Negotiations with Israel and Palestine, October 2025** — Turkey, material 9.00 (2025-10)

@@ -53,7 +53,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Jordan is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-43 peripheral events (where Jordan was only mentioned in
+54 peripheral events (where Jordan was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Hejaz Railway** — Turkey, material 8.50 (2026-04)

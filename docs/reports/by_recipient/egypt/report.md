@@ -52,17 +52,17 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Egypt is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-28 peripheral events (where Egypt was only mentioned in
+29 peripheral events (where Egypt was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Egypt-Russia El Dabaa Nuclear Power Collaboration** — Russia, material 9.00 (2026-04)
 - **El-Dabaa Nuclear Power Plant** — Russia, material 9.00 (2026-04)
 - **China-Egypt $10B Integrated Steel Production Complex Agreement** — China, material 9.00 (2026-01)
 - **Russia-Egypt El Dabaa Nuclear Power Plant Construction Agreement Signing** — Russia, material 9.00 (2025-08)
-- **Egypt 2030** — China, material 8.50 (2026-09)
-- **Belt and Road Initiative** — China, material 8.50 (2026-09)
-- **Eagles of Civilization 2026** — China, material 8.50 (2026-09)
-- **Xi Jinping Cairo Visit to Advance China-Egypt Strategic Partnership and Belt and Road Cooperation** — China, material 8.50 (2026-09)
+- **Egypt-Russia El Dabaa Nuclear Power Plant Cooperation Agreement at BRICS Summit 2026** — Russia, material 8.50 (2026-09)
+- **Launch of Third Phase Expansion of Chinese-Egyptian Industrial Zone in Suez Canal** — China, material 8.50 (2026-09)
+- **China-Egypt Central Business District Project Completion Ceremony, September 2026** — China, material 8.50 (2026-09)
+- **Hayat Egypt Factory** — Turkey, material 8.50 (2026-07)
 
 ---
 

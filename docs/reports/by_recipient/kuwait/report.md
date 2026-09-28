@@ -52,7 +52,7 @@ than going head-to-head across all four. **(H)**
 
 *Validated for alignment: only events where Kuwait is the **primary** recipient are shown — named in
 the title, holding ≥40% of the event's recipient mentions, or the sole top recipient.
-58 peripheral events (where Kuwait was only mentioned in
+59 peripheral events (where Kuwait was only mentioned in
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Kuwait-China Contract Signing for Mubarak Al-Kabeer Port Project, February 2025** — China, material 9.00 (2025-02)

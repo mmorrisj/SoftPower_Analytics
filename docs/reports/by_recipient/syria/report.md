@@ -57,13 +57,13 @@ the title, holding ≥40% of the event's recipient mentions, or the sole top rec
 passing on another country's initiative — e.g., regional spillover) were excluded.*
 
 - **Saudi Arabia, Qatar, Turkey Commit to $216B Syria Reconstruction Agreements** — Turkey, material 9.00 (2025-10)
-- **Telecommunications projects** — U.S., material 8.50 (2026-08)
-- **Saudi-Syrian airline** — U.S., material 8.50 (2026-08)
-- **desalination plants** — U.S., material 8.50 (2026-08)
+- **Damascus Airport rehabilitation agreement** — U.S., material 8.50 (2026-08)
+- **Damascus metro system** — U.S., material 8.50 (2026-08)
 - **Development of two airports in Aleppo** — U.S., material 8.50 (2026-08)
-- **US Delisting of Syria Spurs Saudi, Qatari, and UAE Reconstruction Commitments** — U.S., material 8.50 (2026-08)
-- **Turkey and Syria Sign Phosphate and Energy Cooperation MoU in Damascus** — Turkey, material 8.50 (2026-08)
-- **US-Brokered Secret Nuclear Material Removal Agreement** — U.S., material 8.50 (2026-08)
+- **Saudi-Syrian airline company** — U.S., material 8.50 (2026-08)
+- **Tartus Port rehabilitation** — U.S., material 8.50 (2026-08)
+- **telecommunications projects** — U.S., material 8.50 (2026-08)
+- **U.S. Delists Syria as Terror Sponsor, Unlocking Gulf-Led Reconstruction Commitments** — U.S., material 8.50 (2026-08)
 
 ---
 

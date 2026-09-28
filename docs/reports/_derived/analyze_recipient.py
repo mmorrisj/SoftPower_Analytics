@@ -108,7 +108,7 @@ def main():
         first_observed_date::text d0, count_by_recipient cbr
         FROM event_summaries WHERE initiating_country IN ('China','Iran','Russia','Turkey','United States')
         AND jsonb_exists(count_by_recipient, :r) AND material_score IS NOT NULL
-        ORDER BY material_score DESC, last_observed_date DESC LIMIT 120""", r=REC)
+        ORDER BY material_score DESC, last_observed_date DESC, event_name LIMIT 120""", r=REC)
     # name aliases so a literal title match counts (strongest alignment signal)
     ALIAS = {"United Arab Emirates": ["united arab emirates", "uae"], "Saudi Arabia": ["saudi arabia", "saudi"],
              "Palestine": ["palestin", "gaza", "west bank"], "Lebanon": ["lebanon", "lebanese", "beirut"]}

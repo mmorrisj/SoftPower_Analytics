@@ -21,6 +21,17 @@
 > Iran's Yemen re-entry reversal, Russia's successive record lows, the in-window Qatar flip
 > holding, Palestine passing Syria as Turkey's top file, Jordan passing Saudi as China's #3.
 
+> **2026-09-28 refresh:** 811K-doc corpus (extends to 2026-09-25; +6,968 from the 09-09 → 09-25
+> DSR export). Window unchanged (`date < 2026-09-01`) — September is still partial, so every
+> `stats.json` is byte-identical; charts regenerated (entity networks, instrument mixes,
+> initiative panels). Events extended incrementally (Stage-1 for 09-08 → 09-25 after a one-day
+> rollback of 09-08; Stage-2 windowed from 08-09; 1,346 groups validated, 978 split; live layer
+> **60,942** events, entities **17,806**, relationships **24,808**). Prose updates are post-window
+> only: Oman's Muscat channel went quiet in September (Iran→Oman 192 → 14) as the Iran–US track
+> moved to China's Islamabad-track mediation; Yemen's China/Turkey uptick is ceremonial; Lebanon
+> and Qatar notes refreshed. Generators fixed: stable tie order in recipient initiative lists;
+> by-recipient README count derived from the report set.
+
 All objects live in the **`analytics`** schema (created for this run). `public` was treated as
 read-only throughout — no app table was altered. Build scripts in this directory are
 reproducible: `build_analytics.py`, then `build_entities.py`. Charts/stats:

@@ -60,10 +60,10 @@ passing on another country's initiative — e.g., regional spillover) were exclu
 - **Imam Ali Hospital Najaf** — Iran, material 8.50 (2026-07)
 - **Development Road** — Turkey, material 8.50 (2026-07)
 - **Road to Development** — Turkey, material 8.50 (2026-07)
-- **Turkey-Iraq Diplomatic Engagement on Security and Energy Cooperation** — Turkey, material 8.50 (2026-07)
 - **Kirkuk–Ceyhan pipeline** — Turkey, material 8.50 (2026-07)
+- **Turkey-Iraq Diplomatic Engagement on Security and Energy Cooperation** — Turkey, material 8.50 (2026-07)
 - **Khosravi Border Infrastructure Development** — Iran, material 8.50 (2026-07)
-- **Kirkuk-Baniyas pipeline** — U.S., material 8.50 (2026-07)
+- **48 agreements** — U.S., material 8.50 (2026-07)
 
 ---
 
