@@ -24,6 +24,7 @@ import pandas as pd
 
 from shared.database.database import get_session
 from shared.models.models import EventSummary, EventSourceLink, PeriodType, EventStatus, Document as DocModel
+from shared.utils.narrative_fields import narrative_outcomes, narrative_overview
 import yaml
 
 
@@ -42,8 +43,8 @@ def get_monthly_summaries(session, country: str, start_date: date, end_date: dat
     for summary in summaries:
         # Extract narrative sections from JSONB
         narrative = summary.narrative_summary or {}
-        overview = narrative.get('monthly_overview', narrative.get('overview', ''))
-        outcome = narrative.get('key_outcomes', narrative.get('outcome', ''))
+        overview = narrative_overview(narrative)
+        outcome = narrative_outcomes(narrative)
         strategic_significance = narrative.get('strategic_significance', '')
 
         # Get source document IDs

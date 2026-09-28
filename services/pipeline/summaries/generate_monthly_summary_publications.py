@@ -19,6 +19,7 @@ from pathlib import Path
 
 from shared.database.database import get_session
 from shared.models.models import EventSummary, EventSourceLink, PeriodType, EventStatus
+from shared.utils.narrative_fields import narrative_outcomes, narrative_overview
 
 
 def load_config(config_path: str = 'shared/config/config.yaml') -> dict:
@@ -62,8 +63,8 @@ def get_monthly_summaries(
         # Extract overview and outcome from narrative_summary JSONB
         # The monthly summaries use different field names than daily/weekly
         narrative = summary.narrative_summary or {}
-        overview = narrative.get('monthly_overview', narrative.get('overview', ''))
-        outcome = narrative.get('key_outcomes', narrative.get('outcome', ''))
+        overview = narrative_overview(narrative)
+        outcome = narrative_outcomes(narrative)
         strategic_significance = narrative.get('strategic_significance', '')
 
         # Get source document IDs linked to this event summary
