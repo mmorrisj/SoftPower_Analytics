@@ -105,6 +105,8 @@ event_exports/
 full_db_export/
 embedding_backups/
 *.json
+# Claude Code project settings (shared plugin config)
+!.claude/settings.json
 *.csv
 *.docx
 *.zip
