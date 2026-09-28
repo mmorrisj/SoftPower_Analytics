@@ -30,7 +30,10 @@ batches (Tier 3 ≈ 40M ⇒ ~15–25 is safe; the default of 5 is always safe).
 - Check overlap: if the new export re-covers already-clustered dates with materially more
   docs, roll back Stage-1 event artifacts for those dates first (backup schema + delete
   clusters/fully-inside events/straddling mentions, null straddling material_score — recipe in
-  the 2026-08-24 run, `backup_20260824` schema).
+  the 2026-08-24 run, `backup_20260824` schema). `batch_cluster_events` skips any
+  (date, country) that already has clusters, so without a rollback new docs on those dates
+  load and embed but never reach the event layer; `--force` is not a substitute (it
+  re-inserts with ON CONFLICT DO NOTHING and duplicates events).
 
 ## 1. Ingest
 `DC python -m services.pipeline.ingestion.dsr --source local --no-embed`
@@ -74,8 +77,27 @@ recurring names.
 - `batch_prepare --job-type score_materiality --all-unprocessed` → queue → process
   (**not automatic** — skipping leaves new events with NULL material_score, silently gutting
   every high-material analysis).
+- **Event narratives** (`canonical_events.consolidated_description` — no other stage writes
+  it; the enterprise agent validates against it):
+  `batch_prepare --job-type event_narrative` → queue → process (LLM 2–4 sentence narratives
+  for masters with ≥3 articles and an empty description). Then fill the small masters free
+  from their best source document:
+  `UPDATE canonical_events ce SET consolidated_description = d.txt FROM (SELECT m.id,
+   (SELECT LEFT(TRIM(doc.distilled_text), 900) FROM daily_event_mentions dem
+    CROSS JOIN LATERAL unnest(dem.doc_ids) AS did(doc_id) JOIN documents doc USING (doc_id)
+    WHERE dem.canonical_event_id = m.id AND coalesce(doc.distilled_text,'') <> ''
+    ORDER BY length(doc.distilled_text) DESC LIMIT 1) AS txt
+   FROM canonical_events m WHERE m.master_event_id IS NULL AND m.total_articles <= 2
+     AND coalesce(m.consolidated_description,'') = '') d
+   WHERE ce.id = d.id AND d.txt IS NOT NULL;`
+  Verify: masters with an empty description ≈ 0.
 
 ## 6. Entities
+- **Extract entities first** — the DSR export carries no people/organization fields and ingest
+  never writes `raw_entities`; skip this and every step below silently processes nothing for
+  the window: `batch_prepare --job-type daily_entity_extract --country C --start-date … --end-date …`
+  per influencer (**`--country` is required** — without it the loader selects 0 documents)
+  → queue → process. Verify `raw_entities` rows exist for the window's dates.
 - `DC …/entities/cluster_daily_entities.py --country C --start-date … --end-date … --force` per influencer
 - `batch_prepare --job-type entity_deconflict --country C --start-date … --end-date …` → queue → process
 - Inline single-name sweep: `llm_deconflict_entity_clusters.py --country C --start-date … --end-date …`
@@ -91,8 +113,9 @@ recurring names.
 Delete summaries whose period overlaps the window (`period_end >= WINDOW_START`) so partial
 periods regenerate, then per level daily → weekly → monthly → yearly:
 `batch_prepare --job-type generate_X_summary --country C --start-date … --end-date …` → queue → process.
-Then `--job-type score_summary_materiality` (**requires `--country`** — silently selects
-nothing without it) → queue → process. Then
+Then `--job-type score_summary_materiality --country C --start-date … --end-date …`
+(**requires `--country`** — silently selects nothing without it — **and a date range**, which
+it errors on) → queue → process. Then
 `embed_event_summaries.py --yes --batch-size 8` (CPU is fine) and delete orphaned summary
 vectors (rows in the four `*_event_embeddings` collections whose summary_id no longer exists).
 
